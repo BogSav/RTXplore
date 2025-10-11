@@ -1,166 +1,148 @@
 {
   "version": 6,
+
   "configurePresets": [
     {
-      "name": "ninja-multi-msvc",
-      "generator": "Ninja Multi-Config",
-      "binaryDir": "build/nmc",
+      "name": "base-msvc-runtime",
+      "hidden": true,
+      "description": "Base preset with MSVC runtime and multi-config defaults. Defines Debug/RelWithDebInfo/Release and sets the static MSVC runtime (MT/MTd). Intended to be inherited by the concrete presets below.",
       "cacheVariables": {
-        "CMAKE_CXX_COMPILER": "clang-cl",
         "CMAKE_CONFIGURATION_TYPES": "Debug;RelWithDebInfo;Release",
         "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded$<IF:$<CONFIG:Debug>,Debug,>"
-      },
-      "environment": {
-        "PATH": "C:/Program Files (x86)/Windows Kits/10/bin/10.0.22621.0/x64;$penv{PATH}"
       }
     },
+
     {
-      "name": "ninja-msvc-x64",
+      "name": "vs2022-sln",
+      "displayName": "Visual Studio 2022 Solution",
+      "description": "Generates a Visual Studio 17 2022 (x64) multi-config solution. Best when working directly in the VS IDE with full MSBuild/MSVC toolchain integration, native CMake UI, per-config switching, IDE debugging, and CTest support. Output is placed under build/vs2022.",
+      "inherits": ["base-msvc-runtime"],
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64",
+      "binaryDir": "build/vs2022"
+    },
+
+    {
+      "name": "ninja-clangcl",
+      "displayName": "Ninja Multi-Config (clang-cl) - VS Code",
+      "description": "Ninja Multi-Config preset optimized for VS Code/CLI workflows. Uses clang-cl as the C/C++ compiler (can be overridden to clang or GCC). Not tied to the full Visual Studio toolchain. Exports compile_commands.json for IntelliSense. Output is placed under build/ninja-clang.",
+      "inherits": ["base-msvc-runtime"],
+      "generator": "Ninja Multi-Config",
+      "binaryDir": "build/ninja-clang",
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "clang-cl",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+      }
+    },
+
+    {
+      "name": "ninja-msvc",
+      "displayName": "Ninja Multi-Config (MSVC cl) - VS 2022",
+      "description": "Ninja Multi-Config preset using MSVC cl from the Visual Studio toolchain. Recommended with Visual Studio 17 2022 for fast multi-config builds from VS Code or the command line. Keeps full MSVC compatibility while exporting compile_commands.json for tooling. Output is placed under build/ninja-msvc.",
+      "inherits": ["base-msvc-runtime"],
       "generator": "Ninja Multi-Config",
       "binaryDir": "build/ninja-msvc",
       "cacheVariables": {
-        "CMAKE_CXX_COMPILER": "clang-cl",
-        "CMAKE_CONFIGURATION_TYPES": "Debug;RelWithDebInfo;Release",
-        "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded$<IF:$<CONFIG:Debug>,Debug,>"
-      },
-      "environment": {
-        "VCPKG_ROOT": "",
-        "CMAKE_TOOLCHAIN_FILE": ""
-      }
-    },
-    {
-      "name": "vs2022-x64",
-      "generator": "Visual Studio 17 2022",
-      "architecture": "x64",
-      "binaryDir": "build/vs2022",
-      "cacheVariables": {
-        "CMAKE_CONFIGURATION_TYPES": "Debug;RelWithDebInfo;Release",
-        "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded$<IF:$<CONFIG:Debug>,Debug,>"
+        "CMAKE_CXX_COMPILER": "cl",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
       }
     }
   ],
+
   "buildPresets": [
     {
-      "name": "nmc-debug",
-      "configurePreset": "ninja-multi-msvc",
+      "name": "vs2022-Debug",
+      "description": "Build Debug configuration using the Visual Studio 2022 solution preset (vs2022-sln). Best for stepping and validating debug assertions in the VS IDE.",
+      "configurePreset": "vs2022-sln",
       "configuration": "Debug",
       "jobs": 12
     },
     {
-      "name": "nmc-rel",
-      "configurePreset": "ninja-multi-msvc",
+      "name": "vs2022-RelWithDebInfo",
+      "description": "Build RelWithDebInfo using the Visual Studio 2022 solution preset. Optimized with symbols for profiling and mixed release-style debugging.",
+      "configurePreset": "vs2022-sln",
       "configuration": "RelWithDebInfo",
       "jobs": 12
     },
     {
-      "name": "nmc-rel2",
-      "configurePreset": "ninja-multi-msvc",
+      "name": "vs2022-Release",
+      "description": "Build Release using the Visual Studio 2022 solution preset. Optimized for distribution and performance testing.",
+      "configurePreset": "vs2022-sln",
       "configuration": "Release",
       "jobs": 12
     },
+
     {
-      "name": "ninja-msvc-debug",
-      "configurePreset": "ninja-msvc-x64",
+      "name": "ninja-clang-Debug",
+      "description": "Build Debug with the Ninja Multi-Config (clang-cl) toolchain. Suitable for VS Code or command-line workflows.",
+      "configurePreset": "ninja-clangcl",
       "configuration": "Debug",
       "jobs": 12
     },
     {
-      "name": "ninja-msvc-rel",
-      "configurePreset": "ninja-msvc-x64",
+      "name": "ninja-clang-RelWithDebInfo",
+      "description": "Build RelWithDebInfo with Ninja (clang-cl). Good balance of optimization and debug symbols.",
+      "configurePreset": "ninja-clangcl",
       "configuration": "RelWithDebInfo",
       "jobs": 12
     },
     {
-      "name": "ninja-msvc-release",
-      "configurePreset": "ninja-msvc-x64",
+      "name": "ninja-clang-Release",
+      "description": "Build Release with Ninja (clang-cl). Optimized binaries for performance.",
+      "configurePreset": "ninja-clangcl",
       "configuration": "Release",
       "jobs": 12
     },
+
     {
-      "name": "vs2022-debug",
-      "configurePreset": "vs2022-x64",
+      "name": "ninja-msvc-Debug",
+      "description": "Build Debug with Ninja using the MSVC cl compiler. Recommended when targeting the MSVC runtime from VS Code.",
+      "configurePreset": "ninja-msvc",
       "configuration": "Debug",
       "jobs": 12
     },
     {
-      "name": "vs2022-rel",
-      "configurePreset": "vs2022-x64",
+      "name": "ninja-msvc-RelWithDebInfo",
+      "description": "Build RelWithDebInfo with Ninja using MSVC cl. Useful for optimized debugging and profiling.",
+      "configurePreset": "ninja-msvc",
       "configuration": "RelWithDebInfo",
       "jobs": 12
     },
     {
-      "name": "vs2022-release",
-      "configurePreset": "vs2022-x64",
+      "name": "ninja-msvc-Release",
+      "description": "Build Release with Ninja using MSVC cl. Preferred for release testing and benchmarks.",
+      "configurePreset": "ninja-msvc",
       "configuration": "Release",
-      "jobs": 12
-    },
-    {
-      "name": "engine-core-debug",
-      "configurePreset": "ninja-multi-msvc",
-      "configuration": "Debug",
-      "targets": ["engine_core"],
-      "jobs": 12
-    },
-    {
-      "name": "engine-math-debug",
-      "configurePreset": "ninja-multi-msvc",
-      "configuration": "Debug",
-      "targets": ["engine_math"],
-      "jobs": 12
-    },
-    {
-      "name": "engine-platform-debug",
-      "configurePreset": "ninja-multi-msvc",
-      "configuration": "Debug",
-      "targets": ["engine_platform"],
-      "jobs": 12
-    },
-    {
-      "name": "engine-gfx-debug",
-      "configurePreset": "ninja-multi-msvc",
-      "configuration": "Debug",
-      "targets": ["engine_gfx"],
-      "jobs": 12
-    },
-    {
-      "name": "engine-core-release",
-      "configurePreset": "ninja-multi-msvc",
-      "configuration": "Release",
-      "targets": ["engine_core"],
-      "jobs": 12
-    },
-    {
-      "name": "engine-math-release",
-      "configurePreset": "ninja-multi-msvc",
-      "configuration": "Release",
-      "targets": ["engine_math"],
-      "jobs": 12
-    },
-    {
-      "name": "engine-platform-release",
-      "configurePreset": "ninja-multi-msvc",
-      "configuration": "Release",
-      "targets": ["engine_platform"],
-      "jobs": 12
-    },
-    {
-      "name": "engine-gfx-release",
-      "configurePreset": "ninja-multi-msvc",
-      "configuration": "Release",
-      "targets": ["engine_gfx"],
       "jobs": 12
     }
   ],
+
   "testPresets": [
     {
-      "name": "test-all-debug",
-      "configurePreset": "ninja-msvc-x64",
+      "name": "test-ninja-clang-Debug",
+      "description": "Run CTest for Debug built with the ninja-clangcl configure preset.",
+      "configurePreset": "ninja-clangcl",
       "configuration": "Debug",
       "output": { "outputOnFailure": true }
     },
     {
-      "name": "test-all-release",
-      "configurePreset": "ninja-msvc-x64",
+      "name": "test-ninja-clang-Release",
+      "description": "Run CTest for Release built with the ninja-clangcl configure preset.",
+      "configurePreset": "ninja-clangcl",
+      "configuration": "Release",
+      "output": { "outputOnFailure": true }
+    },
+    {
+      "name": "test-ninja-msvc-Debug",
+      "description": "Run CTest for Debug built with the ninja-msvc configure preset.",
+      "configurePreset": "ninja-msvc",
+      "configuration": "Debug",
+      "output": { "outputOnFailure": true }
+    },
+    {
+      "name": "test-ninja-msvc-Release",
+      "description": "Run CTest for Release built with the ninja-msvc configure preset.",
+      "configurePreset": "ninja-msvc",
       "configuration": "Release",
       "output": { "outputOnFailure": true }
     }

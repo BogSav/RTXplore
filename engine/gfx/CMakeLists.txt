@@ -3,6 +3,12 @@ message(STATUS "Configuring engine_gfx module")
 # Fetch DirectXTK12
 include(FetchContent)
 
+# Prefer legacy FXC over DXC for DirectXTK12 shaders by default, unless overridden
+# by a top-level detection or user cache setting.
+if(NOT DEFINED BUILD_DXIL_SHADERS)
+    set(BUILD_DXIL_SHADERS OFF CACHE BOOL "Use DXC Shader Model 6 for DirectXTK12 shaders")
+endif()
+
 FetchContent_Declare(
     directxtk12
     GIT_REPOSITORY https://github.com/microsoft/DirectXTK12.git
@@ -10,10 +16,29 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(directxtk12)
 
-# Organize DirectXTK12 targets in a folder
 set_target_properties(DirectXTK12 PROPERTIES FOLDER "External/DirectXTK12")
+
+# TODO: In future we might want to have audio support through DirectXTK12Audio
+# When this happens we can simply link DirectXTK12Audio to engine_gfx
 if(TARGET DirectXTK12Audio)
     set_target_properties(DirectXTK12Audio PROPERTIES FOLDER "External/DirectXTK12")
+endif()
+
+# Disable compiler warnings for third-party DirectXTK12 targets only
+# Since clang is more delicate, it will also display warnings for this library, we need to suppress them.
+if(TARGET DirectXTK12)
+    target_compile_options(DirectXTK12 PRIVATE
+        $<$<CXX_COMPILER_ID:MSVC>:/W0>
+        $<$<CXX_COMPILER_ID:Clang>:-w>
+        $<$<CXX_COMPILER_ID:GNU>:-w>
+    )
+endif()
+if(TARGET DirectXTK12Audio)
+    target_compile_options(DirectXTK12Audio PRIVATE
+        $<$<CXX_COMPILER_ID:MSVC>:/W0>
+        $<$<CXX_COMPILER_ID:Clang>:-w>
+        $<$<CXX_COMPILER_ID:GNU>:-w>
+    )
 endif()
 
 # Colectare fișiere
