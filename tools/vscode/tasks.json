@@ -1,0 +1,91 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "CMake: Build (Debug)",
+      "type": "shell",
+      "command": "cmake",
+      "args": ["--build", "--preset", "ninja-clang-Debug"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": { "kind": "build", "isDefault": false },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": ["$msCompile"],
+      "dependsOn": "CMake: Configure (VSCode Ninja Clang)"
+    },
+    {
+      "label": "CMake: Build (RelWithDebInfo)",
+      "type": "shell",
+      "command": "cmake",
+      "args": ["--build", "--preset", "ninja-clang-RelWithDebInfo"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": { "kind": "build", "isDefault": true },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": ["$msCompile"],
+      "dependsOn": "CMake: Configure (VSCode Ninja Clang)"
+    },
+    {
+      "label": "CMake: Build (Release)",
+      "type": "shell",
+      "command": "cmake",
+      "args": ["--build", "--preset", "ninja-clang-Release"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": ["$msCompile"],
+      "dependsOn": "CMake: Configure (VSCode Ninja Clang)"
+    },
+
+    {
+      "label": "CMake: Clean Build Folders",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Remove-Item -Path 'build/ninja-clang','build/ninja-msvc','build/vs2022','build/*' -Recurse -Force -ErrorAction SilentlyContinue; Write-Host 'Build directories cleaned.' -ForegroundColor Green"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": []
+    }
+  ]
+}
