@@ -16,6 +16,7 @@ assets/raw/
 
 # IDE-specific files
 .vscode/.vs/
+.vscode/
 imgui.ini
 
 #############################################

@@ -1,0 +1,29 @@
+// (C) 2003 ModuleWorks GmbH
+// Owner: ARB Library Structure
+
+#pragma once
+
+namespace misc
+{
+
+// Ultra precision timer
+// Se foloseste de frecventa la cpu si tick-uri
+template <typename T>
+class winCpuTickTimer
+{
+public:
+	winCpuTickTimer();
+	~winCpuTickTimer();
+
+	T GetTimeSinceStart();
+	T GetDeltaTime();
+
+	void StartClock();
+	void ResetStartTime();
+	void UpdateDeltaTime();
+
+private:
+	struct Data;
+	Data* pData;
+};
+}  // namespace misc
