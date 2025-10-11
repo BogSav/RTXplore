@@ -319,7 +319,7 @@ Mesh::Ptr GeometryGenerator::GenerateGeoSphere(float radius, const Math::Vector3
 		Mesh::Vertex vertex;
 
 		XMStoreFloat3(&vertex.position, position);
-		XMStoreFloat4(&vertex.color, {(float)position.GetX(), 0.5f, (float)position.GetY(), 1.0f});
+				XMStoreFloat4(&vertex.color, DirectX::XMVectorSet((float)position.GetX(), 0.5f, (float)position.GetY(), 1.0f));
 
 		vertices.push_back(vertex);
 	}

@@ -56,7 +56,7 @@ public:
 	inline Math::Matrix4 GetViewProjMatrix() const { return GetViewMatrix() * GetProjectionMatrix(); }
 
 	// Getters for components
-	inline const Math::Vector3& GetTargetPosition() const { return m_position + m_forward * m_distanceToTarget; }
+	inline Math::Vector3 GetTargetPosition() const { return m_position + m_forward * m_distanceToTarget; }
 	inline const Math::Matrix4& GetProjectionMatrix() const { return m_projectionMatrix; }
 	inline const Math::Matrix4& GetInverseViewMatrix() const { return m_invViewMatrix; }
 	inline const Math::Matrix4& GetViewMatrix() const { return m_viewMatrix; }

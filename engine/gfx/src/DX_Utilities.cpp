@@ -165,6 +165,13 @@ void PrintStateObjectDesc(const D3D12_STATE_OBJECT_DESC* desc)
 		wstr << L"| [" << i << L"]: ";
 		switch (desc->pSubobjects[i].Type)
 		{
+		case D3D12_STATE_SUBOBJECT_TYPE_STATE_OBJECT_CONFIG:
+		{
+			wstr << L"State Object Config\n";
+			auto config = static_cast<const D3D12_STATE_OBJECT_CONFIG*>(desc->pSubobjects[i].pDesc);
+			wstr << L"|  [0]: Flags: 0x" << std::hex << static_cast<UINT>(config->Flags) << std::dec << L"\n";
+			break;
+		}
 		case D3D12_STATE_SUBOBJECT_TYPE_GLOBAL_ROOT_SIGNATURE:
 			wstr << L"Global Root Signature 0x" << desc->pSubobjects[i].pDesc << L"\n";
 			break;
@@ -230,6 +237,14 @@ void PrintStateObjectDesc(const D3D12_STATE_OBJECT_DESC* desc)
 			wstr << L"|  [0]: Max Recursion Depth: " << config->MaxTraceRecursionDepth << L"\n";
 			break;
 		}
+		case D3D12_STATE_SUBOBJECT_TYPE_RAYTRACING_PIPELINE_CONFIG1:
+		{
+			wstr << L"Raytracing Pipeline Config1\n";
+			auto config = static_cast<const D3D12_RAYTRACING_PIPELINE_CONFIG1*>(desc->pSubobjects[i].pDesc);
+			wstr << L"|  [0]: Max Recursion Depth: " << config->MaxTraceRecursionDepth << L"\n";
+			wstr << L"|  [1]: Flags: 0x" << std::hex << static_cast<UINT>(config->Flags) << std::dec << L"\n";
+			break;
+		}
 		case D3D12_STATE_SUBOBJECT_TYPE_HIT_GROUP:
 		{
 			wstr << L"Hit Group (";
@@ -243,6 +258,12 @@ void PrintStateObjectDesc(const D3D12_STATE_OBJECT_DESC* desc)
 				 << (hitGroup->IntersectionShaderImport ? hitGroup->IntersectionShaderImport : L"[none]") << L"\n";
 			break;
 		}
+		case D3D12_STATE_SUBOBJECT_TYPE_MAX_VALID:
+			wstr << L"State Subobject MaxValid (sentinel)\n";
+			break;
+		default:
+			wstr << L"Unknown subobject type (" << static_cast<UINT>(desc->pSubobjects[i].Type) << L")\n";
+			break;
 		}
 		wstr << L"|--------------------------------------------------------------------\n";
 	}

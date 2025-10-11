@@ -8,10 +8,7 @@ void DisplayMessageBox(Window* window, const char* what, const char* type)
 	MessageBoxA(hWnd, what, type, MB_OK | MB_ICONEXCLAMATION);
 }
 
-#pragma warning(push)
-#pragma warning(disable : 28251)
-int CALLBACK main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
-#pragma warning(pop)
+int main()
 {
 #ifdef DEBUG
 	// _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);

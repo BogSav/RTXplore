@@ -24,7 +24,7 @@ GraphicsPSO::Ptr PSO_Loader::LoadDefaultPSO(const ShadersManager& shadersManager
 			 0,
 			 DXGI_FORMAT_R32G32B32A32_FLOAT,
 			 0,
-			 offsetof(Mesh::Vertex, Mesh::Vertex::color),
+			 offsetof(Mesh::Vertex, color),
 			 D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,
 			 0},
 		 D3D12_INPUT_ELEMENT_DESC{
@@ -32,7 +32,7 @@ GraphicsPSO::Ptr PSO_Loader::LoadDefaultPSO(const ShadersManager& shadersManager
 			 0,
 			 DXGI_FORMAT_R32G32B32_FLOAT,
 			 0,
-			 offsetof(Mesh::Vertex, Mesh::Vertex::normal),
+			 offsetof(Mesh::Vertex, normal),
 			 D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,
 			 0},
 		 D3D12_INPUT_ELEMENT_DESC{
@@ -40,7 +40,7 @@ GraphicsPSO::Ptr PSO_Loader::LoadDefaultPSO(const ShadersManager& shadersManager
 			 0,
 			 DXGI_FORMAT_R32G32B32_FLOAT,
 			 0,
-			 offsetof(Mesh::Vertex, Mesh::Vertex::tangent),
+			 offsetof(Mesh::Vertex, tangent),
 			 D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,
 			 0},
 		 D3D12_INPUT_ELEMENT_DESC{
@@ -48,7 +48,7 @@ GraphicsPSO::Ptr PSO_Loader::LoadDefaultPSO(const ShadersManager& shadersManager
 			 0,
 			 DXGI_FORMAT_R32G32_FLOAT,
 			 0,
-			 offsetof(Mesh::Vertex, Mesh::Vertex::texC),
+			 offsetof(Mesh::Vertex, texC),
 			 D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,
 			 0}});
 
@@ -112,7 +112,7 @@ GraphicsPSO::Ptr PSO_Loader::LoadSkyBoxPSO(const ShadersManager& shadersManager)
 			 0,
 			 DXGI_FORMAT_R32G32_FLOAT,
 			 0,
-			 offsetof(Mesh::Vertex, Mesh::Vertex::texC),
+			 offsetof(Mesh::Vertex, texC),
 			 D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,
 			 0}});
 
@@ -149,7 +149,7 @@ GraphicsPSO::Ptr PSO_Loader::LoadTerrainPSO(const ShadersManager& shadersManager
 			 0,
 			 DXGI_FORMAT_R32G32B32_FLOAT,
 			 0,
-			 offsetof(Mesh::Vertex, Mesh::Vertex::normal),
+			 offsetof(Mesh::Vertex, normal),
 			 D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,
 			 0},
 		 D3D12_INPUT_ELEMENT_DESC{
@@ -157,7 +157,7 @@ GraphicsPSO::Ptr PSO_Loader::LoadTerrainPSO(const ShadersManager& shadersManager
 			 0,
 			 DXGI_FORMAT_R32G32B32_FLOAT,
 			 0,
-			 offsetof(Mesh::Vertex, Mesh::Vertex::tangent),
+			 offsetof(Mesh::Vertex, tangent),
 			 D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,
 			 0},
 		 D3D12_INPUT_ELEMENT_DESC{
@@ -165,7 +165,7 @@ GraphicsPSO::Ptr PSO_Loader::LoadTerrainPSO(const ShadersManager& shadersManager
 			 0,
 			 DXGI_FORMAT_R32G32_FLOAT,
 			 0,
-			 offsetof(Mesh::Vertex, Mesh::Vertex::texC),
+			 offsetof(Mesh::Vertex, texC),
 			 D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,
 			 0}});
 
@@ -199,7 +199,7 @@ GraphicsPSO::Ptr PSO_Loader::LoadWaterPSO(const ShadersManager& shadersManager)
 			 0,
 			 DXGI_FORMAT_R32G32_FLOAT,
 			 0,
-			 offsetof(Mesh::Vertex, Mesh::Vertex::texC),
+			 offsetof(Mesh::Vertex, texC),
 			 D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,
 			 0}});
 
@@ -243,7 +243,7 @@ GraphicsPSO::Ptr PSO_Loader::LoadCubeMapTerrainPSO(const ShadersManager& shaders
 			 0,
 			 DXGI_FORMAT_R32G32B32_FLOAT,
 			 0,
-			 offsetof(Mesh::Vertex, Mesh::Vertex::normal),
+			 offsetof(Mesh::Vertex, normal),
 			 D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,
 			 0},
 		 D3D12_INPUT_ELEMENT_DESC{
@@ -251,7 +251,7 @@ GraphicsPSO::Ptr PSO_Loader::LoadCubeMapTerrainPSO(const ShadersManager& shaders
 			 0,
 			 DXGI_FORMAT_R32G32B32_FLOAT,
 			 0,
-			 offsetof(Mesh::Vertex, Mesh::Vertex::tangent),
+			 offsetof(Mesh::Vertex, tangent),
 			 D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,
 			 0},
 		 D3D12_INPUT_ELEMENT_DESC{
@@ -259,7 +259,7 @@ GraphicsPSO::Ptr PSO_Loader::LoadCubeMapTerrainPSO(const ShadersManager& shaders
 			 0,
 			 DXGI_FORMAT_R32G32_FLOAT,
 			 0,
-			 offsetof(Mesh::Vertex, Mesh::Vertex::texC),
+			 offsetof(Mesh::Vertex, texC),
 			 D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,
 			 0}});
 
@@ -327,7 +327,7 @@ GraphicsPSO::Ptr PSO_Loader::LoadTexturePSO(const ShadersManager& shadersManager
 			 0,
 			 DXGI_FORMAT_R32G32_FLOAT,
 			 0,
-			 offsetof(Mesh::Vertex, Mesh::Vertex::texC),
+			 offsetof(Mesh::Vertex, texC),
 			 D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,
 			 0}});
 

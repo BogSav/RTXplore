@@ -9,10 +9,10 @@ public:
 
 	static TextureRenderer::Ptr CreateTextureRenderer(misc::render_descriptors::DX_TEXTURE_DESCRIPTOR& descriptor);
 
-	void Render(misc::rasterization::RenderLayer::Value renderLayer) const;
-	void BuildAccelerationStructures();
-	void FrustumCulling(const CameraController& cameraController);
-	void Update(float deltaTime);
+	void Render(misc::rasterization::RenderLayer::Value renderLayer) const override;
+	void BuildAccelerationStructures() override;
+	void FrustumCulling(const CameraController& cameraController) override;
+	void Update(float deltaTime) override;
 
 	void SetTextureSRVHandle(const misc::DescriptorHandle& textureSRVHandle);
 
