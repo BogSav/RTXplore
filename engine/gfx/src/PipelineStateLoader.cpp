@@ -1,13 +1,13 @@
-#include "PSO_Loader.hpp"
+#include "PipelineStateLoader.hpp"
 
-#include "RS_Manager.hpp"
+#include "RootSignatureManager.hpp"
 #include "ShadersManager.hpp"
 #include "RayTracingGraphics.hpp"
 
 #define GET_SHADER_DATA(name) shadersManager.GetBufferPointer(name), shadersManager.GetBufferSize(name)
 #define GET_RT_SHADER_DATA(name) (void*)shadersManager.GetBufferPointer(name), shadersManager.GetBufferSize(name)
 
-GraphicsPSO::Ptr PSO_Loader::LoadDefaultPSO(const ShadersManager& shadersManager)
+GraphicsPSO::Ptr PipelineStateLoader::LoadDefaultPipelineState(const ShadersManager& shadersManager)
 {
 	GraphicsPSO::Ptr pso = GraphicsPSO::CreateEmptyPSO();
 
@@ -96,9 +96,9 @@ GraphicsPSO::Ptr PSO_Loader::LoadDefaultPSO(const ShadersManager& shadersManager
 	return pso;
 }
 
-GraphicsPSO::Ptr PSO_Loader::LoadSkyBoxPSO(const ShadersManager& shadersManager)
+GraphicsPSO::Ptr PipelineStateLoader::LoadSkyBoxPipelineState(const ShadersManager& shadersManager)
 {
-	GraphicsPSO::Ptr pso = LoadDefaultPSO(shadersManager);
+	GraphicsPSO::Ptr pso = LoadDefaultPipelineState(shadersManager);
 
 	pso->SetVertexShader(GET_SHADER_DATA("SkyBoxVS"));
 	pso->SetPixelShader(GET_SHADER_DATA("SkyBoxPS"));
@@ -131,9 +131,9 @@ GraphicsPSO::Ptr PSO_Loader::LoadSkyBoxPSO(const ShadersManager& shadersManager)
 	return pso;
 }
 
-GraphicsPSO::Ptr PSO_Loader::LoadTerrainPSO(const ShadersManager& shadersManager)
+GraphicsPSO::Ptr PipelineStateLoader::LoadTerrainPipelineState(const ShadersManager& shadersManager)
 {
-	GraphicsPSO::Ptr pso = LoadDefaultPSO(shadersManager);
+	GraphicsPSO::Ptr pso = LoadDefaultPipelineState(shadersManager);
 
 	pso->SetVertexShader(GET_SHADER_DATA("TerrainVS"));
 	pso->SetHullShader(GET_SHADER_DATA("TerrainHS"));
@@ -181,9 +181,9 @@ GraphicsPSO::Ptr PSO_Loader::LoadTerrainPSO(const ShadersManager& shadersManager
 	return pso;
 }
 
-GraphicsPSO::Ptr PSO_Loader::LoadWaterPSO(const ShadersManager& shadersManager)
+GraphicsPSO::Ptr PipelineStateLoader::LoadWaterPipelineState(const ShadersManager& shadersManager)
 {
-	GraphicsPSO::Ptr pso = LoadDefaultPSO(shadersManager);
+	GraphicsPSO::Ptr pso = LoadDefaultPipelineState(shadersManager);
 
 	pso->SetVertexShader(GET_SHADER_DATA("WaterVS"));
 	pso->SetHullShader(GET_SHADER_DATA("WaterHS"));
@@ -230,9 +230,9 @@ GraphicsPSO::Ptr PSO_Loader::LoadWaterPSO(const ShadersManager& shadersManager)
 	return pso;
 }
 
-GraphicsPSO::Ptr PSO_Loader::LoadCubeMapTerrainPSO(const ShadersManager& shadersManager)
+GraphicsPSO::Ptr PipelineStateLoader::LoadCubeMapTerrainPipelineState(const ShadersManager& shadersManager)
 {
-	GraphicsPSO::Ptr pso = LoadDefaultPSO(shadersManager);
+	GraphicsPSO::Ptr pso = LoadDefaultPipelineState(shadersManager);
 
 	pso->SetInputLayout(
 		4,
@@ -278,9 +278,9 @@ GraphicsPSO::Ptr PSO_Loader::LoadCubeMapTerrainPSO(const ShadersManager& shaders
 	return pso;
 }
 
-GraphicsPSO::Ptr PSO_Loader::LoadShadowMapPSO(const ShadersManager& shadersManager)
+GraphicsPSO::Ptr PipelineStateLoader::LoadShadowMapPipelineState(const ShadersManager& shadersManager)
 {
-	GraphicsPSO::Ptr pso = LoadDefaultPSO(shadersManager);
+	GraphicsPSO::Ptr pso = LoadDefaultPipelineState(shadersManager);
 
 	pso->SetVertexShader(GET_SHADER_DATA("ShadowRenderVS"));
 	pso->SetPixelShader(GET_SHADER_DATA("ShadowRenderPS"));
@@ -314,9 +314,9 @@ GraphicsPSO::Ptr PSO_Loader::LoadShadowMapPSO(const ShadersManager& shadersManag
 	return pso;
 }
 
-GraphicsPSO::Ptr PSO_Loader::LoadTexturePSO(const ShadersManager& shadersManager)
+GraphicsPSO::Ptr PipelineStateLoader::LoadTexturePipelineState(const ShadersManager& shadersManager)
 {
-	GraphicsPSO::Ptr pso = LoadDefaultPSO(shadersManager);
+	GraphicsPSO::Ptr pso = LoadDefaultPipelineState(shadersManager);
 
 	pso->SetInputLayout(
 		2,
@@ -346,7 +346,7 @@ GraphicsPSO::Ptr PSO_Loader::LoadTexturePSO(const ShadersManager& shadersManager
 	return pso;
 }
 
-ComputePSO::Ptr PSO_Loader::LoadWavesCPSO(const ShadersManager& shadersManager)
+ComputePSO::Ptr PipelineStateLoader::LoadWavesComputePipelineState(const ShadersManager& shadersManager)
 {
 	ComputePSO::Ptr pso = ComputePSO::CreateEmptyPSO();
 
@@ -358,8 +358,8 @@ ComputePSO::Ptr PSO_Loader::LoadWavesCPSO(const ShadersManager& shadersManager)
 }
 
 
-RayTracingPSO::Ptr PSO_Loader::LoadDefaultRTPSO(
-	ID3D12Device10* pDevice, const RS_Manager& rsManager, const ShadersManager& shadersManager)
+RayTracingPSO::Ptr PipelineStateLoader::LoadDefaultRayTracingPipelineState(
+	ID3D12Device10* pDevice, const RootSignatureManager& rsManager, const ShadersManager& shadersManager)
 {
 	RayTracingPSO::Ptr pso = RayTracingPSO::CreateEmptyPSO();
 

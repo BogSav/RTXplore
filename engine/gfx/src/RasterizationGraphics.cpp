@@ -12,8 +12,9 @@ RasterizationGraphics::RasterizationGraphics(GraphicsResources& graphicsResorurc
 	GraphicsContext& graphicsContext = m_graphicsResources.GetGraphicsContext();
 	graphicsContext.Reset();
 
-	// Compilare shadere, setare RS-uri si PSO-uri, creare materiale
-	m_graphicsPSOsManager.LoadPSOs(m_RSManager, m_shaderManager, GraphicsResources::GetDevice());
+	// Compilare shadere, setare RS-uri si pipeline state-uri, creare materiale
+	m_graphicsPipelineStateManager.LoadPipelineStates(
+		m_rootSignatureManager, m_shaderManager, GraphicsResources::GetDevice());
 	m_materialManager.LoadDefaultMaterials();
 
 	// Incarcare texturi
@@ -42,11 +43,11 @@ RasterizationGraphics::RasterizationGraphics(GraphicsResources& graphicsResorurc
 		objectDesc.materialCB_ID = m_materialManager.GetMaterialCB_ID("Default");
 		objectDesc.isStatic = true;
 
-		desc.basePSO = m_graphicsPSOsManager.GetPSO("Terrain");
+	desc.basePSO = m_graphicsPipelineStateManager.GetPipelineState("Terrain");
 		desc.baseToplogy = D3D_PRIMITIVE_TOPOLOGY_3_CONTROL_POINT_PATCHLIST;
 
-		desc.shadowPSO = m_graphicsPSOsManager.GetPSO("ShadowMap");
-		desc.cubePSO = m_graphicsPSOsManager.GetPSO("TerrainCubeMap");
+	desc.shadowPSO = m_graphicsPipelineStateManager.GetPipelineState("ShadowMap");
+	desc.cubePSO = m_graphicsPipelineStateManager.GetPipelineState("TerrainCubeMap");
 		desc.cubeShadowToplogy = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
 		desc.length = 400.f;
@@ -73,7 +74,7 @@ RasterizationGraphics::RasterizationGraphics(GraphicsResources& graphicsResorurc
 		objectDesc.color = engine::math::Vector4(50 / 255.f, 77 / 255.f, 80 / 255.f, 0.6f);
 		objectDesc.isStatic = true;
 
-		desc.basePSO = m_graphicsPSOsManager.GetPSO("Water");
+	desc.basePSO = m_graphicsPipelineStateManager.GetPipelineState("Water");
 		desc.baseToplogy = D3D_PRIMITIVE_TOPOLOGY_3_CONTROL_POINT_PATCHLIST;
 
 		desc.waveProperties[0].amplitude = 0.7f;  // 0.7
@@ -108,10 +109,10 @@ RasterizationGraphics::RasterizationGraphics(GraphicsResources& graphicsResorurc
 		objectDesc.objectCB_ID = FrameResources::GetObjectCB_ID();
 		objectDesc.isStatic = false;
 
-		desc.basePSO = m_graphicsPSOsManager.GetPSO("SkyBox");
+	desc.basePSO = m_graphicsPipelineStateManager.GetPipelineState("SkyBox");
 		desc.baseToplogy = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
-		desc.dynamicCubeMapPSO = m_graphicsPSOsManager.GetPSO("SkyBox");
+	desc.dynamicCubeMapPSO = m_graphicsPipelineStateManager.GetPipelineState("SkyBox");
 		desc.dynamicCubeMapToplogy = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
 		desc.rotationAxis = engine::math::Vector3(0, -1, 0);
@@ -126,7 +127,7 @@ RasterizationGraphics::RasterizationGraphics(GraphicsResources& graphicsResorurc
 	{
 		DX_TEXTURE_DESCRIPTOR desc;
 
-		desc.basePSO = m_graphicsPSOsManager.GetPSO("Texture");
+	desc.basePSO = m_graphicsPipelineStateManager.GetPipelineState("Texture");
 		desc.baseTopology = D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
 		desc.textureSRVHandle = m_shadowMap->GetTextureSRVHandle();
 
@@ -158,16 +159,16 @@ RasterizationGraphics::RasterizationGraphics(GraphicsResources& graphicsResorurc
 			desc.objectDescriptors.push_back(objectDesc);
 		}
 
-		desc.basePSO = m_graphicsPSOsManager.GetPSO("Default");
+	desc.basePSO = m_graphicsPipelineStateManager.GetPipelineState("Default");
 		desc.baseToplogy = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
-		desc.dynamicCubeMapPSO = m_graphicsPSOsManager.GetPSO("Default");
+	desc.dynamicCubeMapPSO = m_graphicsPipelineStateManager.GetPipelineState("Default");
 		desc.dynamicCubeMapToplogy = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
-		desc.shadowPSO = m_graphicsPSOsManager.GetPSO("ShadowMap");
+	desc.shadowPSO = m_graphicsPipelineStateManager.GetPipelineState("ShadowMap");
 		desc.shadowTopology = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
-		// desc.debugShadowPSO = m_graphicsPSOsManager.GetPSO("Debug");
+		// desc.debugShadowPipelineState = m_graphicsPipelineStateManager.GetPipelineState("Debug");
 
 		m_objectRenderer = ObjectRenderer::CreateObjectRenderer(desc);
 	}
@@ -303,7 +304,7 @@ void RasterizationGraphics::PopulateCommandList()
 	GraphicsContext& graphicsContext = m_graphicsResources.GetGraphicsContext();
 	FrameResources& frameResources = m_graphicsResources.GetFrameResources();
 
-	graphicsContext.SetRootSignature(*m_RSManager.GetRootSignature("Default"));
+	graphicsContext.SetRootSignature(*m_rootSignatureManager.GetRootSignature("Default"));
 	graphicsContext.SetDescriptorHeap(
 		D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV,
 		m_graphicsResources.GetDescriptorHeap(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV).GetHeapPointer());

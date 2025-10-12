@@ -1,14 +1,14 @@
 #pragma once
 
-#include "RS.hpp"
+#include "RootSignature.hpp"
 
 #include <unordered_map>
 #include <functional>
 
-class RS_Manager
+class RootSignatureManager
 {
 public:
-	RS_Manager();
+	RootSignatureManager();
 
 	bool AddRootSiganture(std::string name, RootSignature::Ptr rootSignture);
 	RootSignature::Ptr GetRootSignature(std::string name) const;

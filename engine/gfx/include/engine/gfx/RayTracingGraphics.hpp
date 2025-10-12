@@ -21,7 +21,7 @@ private:
 	void CreateShaderTable();
 
 private:
-	PSO_Manager<RayTracingPSO> m_rayTracingPSOManager;
+	PipelineStateManager<RayTracingPSO> m_rayTracingPipelineStateManager;
 
 	Microsoft::WRL::ComPtr<ID3D12Resource> m_missShaderTable;
 	Microsoft::WRL::ComPtr<ID3D12Resource> m_hitGroupShaderTable;
@@ -29,7 +29,7 @@ private:
 
 	TopLevelAccelerationStructure m_topLevelAccelerationStructure;
 
-	RayTracingPSO::Ptr pRTPSOStateObject;
+	RayTracingPSO::Ptr m_rayTracingPipelineState;
 	RootSignature::Ptr pGlobalRTRS;
 
 	UINT64 m_missShaderTableStride;

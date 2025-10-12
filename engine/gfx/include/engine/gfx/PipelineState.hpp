@@ -1,13 +1,13 @@
 #pragma once
 
-#include "RS.hpp"
+#include "RootSignature.hpp"
 #include "d3dx12.h"
 
 class GraphicsPSO;
 class ComputePSO;
 class RayTracingPSO;
 
-class PSO
+class PipelineState
 {
 public:
 	ID3D12PipelineState* GetID3D12PipelineState() const { return m_pipelineState.Get(); }
@@ -21,9 +21,9 @@ public:
 	void SetRootSignature(RootSignature::Ptr rootSiganture) { m_rootSignature = rootSiganture; }
 
 protected:
-	PSO() = default;
-	PSO(const PSO&) = delete;
-	PSO operator=(const PSO&) = delete;
+	PipelineState() = default;
+	PipelineState(const PipelineState&) = delete;
+	PipelineState& operator=(const PipelineState&) = delete;
 
 protected:
 	Microsoft::WRL::ComPtr<ID3D12PipelineState> m_pipelineState;
@@ -33,7 +33,7 @@ protected:
 };
 
 
-class GraphicsPSO : public PSO
+class GraphicsPSO : public PipelineState
 {
 public:
 	using Ptr = std::shared_ptr<GraphicsPSO>;
@@ -82,7 +82,7 @@ private:
 };
 
 
-class ComputePSO : public PSO
+class ComputePSO : public PipelineState
 {
 public:
 	using Ptr = std::shared_ptr<ComputePSO>;
@@ -105,7 +105,7 @@ private:
 };
 
 
-class RayTracingPSO : public PSO
+class RayTracingPSO : public PipelineState
 {
 public:
 	using Ptr = std::shared_ptr<RayTracingPSO>;

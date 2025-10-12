@@ -2,8 +2,8 @@
 
 #include "FrameResources.hpp"
 #include "GPUBuffers.hpp"
-#include "PSO.hpp"
-#include "RS.hpp"
+#include "PipelineState.hpp"
+#include "RootSignature.hpp"
 #include "Texture.hpp"
 #include "d3dx12.h"
 
@@ -41,7 +41,7 @@ public:
 	void BindDescriptorHeaps();
 	void SetDescriptorHeap(D3D12_DESCRIPTOR_HEAP_TYPE Type, ID3D12DescriptorHeap* HeapPtr);
 	void SetDescriptorHeaps(UINT HeapCount, D3D12_DESCRIPTOR_HEAP_TYPE Type[], ID3D12DescriptorHeap* HeapPtrs[]);
-	void SetPipelineState(const PSO& PSO);
+	void SetPipelineState(const PipelineState& pipelineState);
 
 	void Finish(ID3D12CommandQueue* pCommandQueue);
 	void End(ID3D12CommandQueue* pCommandQueue);
@@ -124,7 +124,7 @@ public:
 	using Ptr = std::unique_ptr<ComputeContext>;
 
 	void SetRootSignature(const RootSignature& RootSig);
-	void SetPipelineStateObject(const PSO& pso);
+	void SetPipelineStateObject(const PipelineState& pipelineState);
 
 	void SetDescriptorTable(UINT RootIndex, D3D12_GPU_DESCRIPTOR_HANDLE FirstHandle);
 	void SetDescriptorTable(UINT RootIndex, D3D12_DESCRIPTOR_HEAP_TYPE type);
@@ -171,14 +171,14 @@ private:
 
 ////////////////////////////////////////////////////////////////////////////////
 // Definire inline-uri
-inline void CommandContext::SetPipelineState(const PSO& pso)
+inline void CommandContext::SetPipelineState(const PipelineState& pipelineState)
 {
-	ID3D12PipelineState* PipelineState = pso.GetID3D12PipelineState();
-	if (PipelineState == m_CurPipelineState)
+	ID3D12PipelineState* nativeState = pipelineState.GetID3D12PipelineState();
+	if (nativeState == m_CurPipelineState)
 		return;
 
-	pCommandList->SetPipelineState(PipelineState);
-	m_CurPipelineState = PipelineState;
+	pCommandList->SetPipelineState(nativeState);
+	m_CurPipelineState = nativeState;
 }
 
 inline void CommandContext::FlushResourceBarriers(void)
@@ -206,9 +206,9 @@ inline void ComputeContext::SetRootSignature(const RootSignature& rs)
 	pCommandList->SetComputeRootSignature(m_CurComputeRootSignature = rs.GetID3D12RootSignature());
 }
 
-inline void ComputeContext::SetPipelineStateObject(const PSO& pso)
+inline void ComputeContext::SetPipelineStateObject(const PipelineState& pipelineState)
 {
-	pCommandList->SetPipelineState1(pso.GetID3D12StateObject());
+	pCommandList->SetPipelineState1(pipelineState.GetID3D12StateObject());
 }
 
 inline void CommandContext::SetDescriptorHeap(D3D12_DESCRIPTOR_HEAP_TYPE Type, ID3D12DescriptorHeap* HeapPtr)

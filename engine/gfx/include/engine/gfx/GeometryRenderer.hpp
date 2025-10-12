@@ -2,7 +2,7 @@
 
 #include "CameraController.hpp"
 #include "AccelerationStructures.hpp"
-#include "PSO.hpp"
+#include "PipelineState.hpp"
 #include "Utilities.hpp"
 #include "GraphicsResources.hpp"
 #include "engine/math/Frustum.hpp"

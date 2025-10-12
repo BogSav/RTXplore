@@ -1,4 +1,4 @@
-#include "RS_Manager.hpp"
+#include "RootSignatureManager.hpp"
 
 #include "Utilities.hpp"
 #include "engine/core/CustomException.hpp"
@@ -18,27 +18,27 @@
 
 using namespace engine::gfx::RSBinding;
 
-RS_Manager::RS_Manager()
+RootSignatureManager::RootSignatureManager()
 {
 	if (engine::core::Settings::UseRayTracing())
 	{
-		m_loadFunctions["Global"] = &RS_Manager::CreateGlobalRTRS;
-		m_loadFunctions["Triangle_Hit"] = &RS_Manager::CreateTriangleHitRS;
-		m_loadFunctions["AABB_Hit"] = &RS_Manager::CreateAABBHitRS;
-		m_loadFunctions["Miss"] = &RS_Manager::CreateMissRS;
-		m_loadFunctions["RayGen"] = &RS_Manager::CreateRayGenRS;
+	m_loadFunctions["Global"] = &RootSignatureManager::CreateGlobalRTRS;
+	m_loadFunctions["Triangle_Hit"] = &RootSignatureManager::CreateTriangleHitRS;
+	m_loadFunctions["AABB_Hit"] = &RootSignatureManager::CreateAABBHitRS;
+	m_loadFunctions["Miss"] = &RootSignatureManager::CreateMissRS;
+	m_loadFunctions["RayGen"] = &RootSignatureManager::CreateRayGenRS;
 	}
 	else
 	{
-		m_loadFunctions["Default"] = &RS_Manager::CreateDefaultRS;
-		m_loadFunctions["Water"] = &RS_Manager::CreateWaterRS;
-		m_loadFunctions["Texture"] = &RS_Manager::CreateTextureRS;
+		m_loadFunctions["Default"] = &RootSignatureManager::CreateDefaultRS;
+		m_loadFunctions["Water"] = &RootSignatureManager::CreateWaterRS;
+		m_loadFunctions["Texture"] = &RootSignatureManager::CreateTextureRS;
 	}
 
-	m_loadFunctions["Waves"] = &RS_Manager::CreateWavesRS;
+	m_loadFunctions["Waves"] = &RootSignatureManager::CreateWavesRS;
 }
 
-bool RS_Manager::AddRootSiganture(std::string name, RootSignature::Ptr rootSignture)
+bool RootSignatureManager::AddRootSiganture(std::string name, RootSignature::Ptr rootSignture)
 {
 	auto it = m_rootSignatures.find(name);
 	if (it != m_rootSignatures.end())
@@ -49,7 +49,7 @@ bool RS_Manager::AddRootSiganture(std::string name, RootSignature::Ptr rootSignt
 	return true;
 }
 
-RootSignature::Ptr RS_Manager::GetRootSignature(std::string name) const
+RootSignature::Ptr RootSignatureManager::GetRootSignature(std::string name) const
 {
 	auto it = m_rootSignatures.find(name);
 	if (it == m_rootSignatures.end())
@@ -58,12 +58,12 @@ RootSignature::Ptr RS_Manager::GetRootSignature(std::string name) const
 	return it->second;
 }
 
-ID3D12RootSignature* RS_Manager::GetID3D12RootSignature(std::string name) const
+ID3D12RootSignature* RootSignatureManager::GetID3D12RootSignature(std::string name) const
 {
 	return GetRootSignature(name)->GetID3D12RootSignature();
 }
 
-void RS_Manager::LoadRootSignatures(ID3D12Device10* pDevice)
+void RootSignatureManager::LoadRootSignatures(ID3D12Device10* pDevice)
 {
 	if (!firstLoad)
 		return;
@@ -83,7 +83,7 @@ void RS_Manager::LoadRootSignatures(ID3D12Device10* pDevice)
 ////////////////////////////////////////////////////////////////////////////////////
 // Root sigantures pentru rasterizare
 ////////////////////////////////////////////////////////////////////////////////////
-RootSignature::Ptr RS_Manager::CreateDefaultRS(ID3D12Device10* pDevice)
+RootSignature::Ptr RootSignatureManager::CreateDefaultRS(ID3D12Device10* pDevice)
 {
 	RootSignature::Ptr rs = RootSignature::CreateEmptyRootSignature(DefaultRSBindings::Count);
 
@@ -121,7 +121,7 @@ RootSignature::Ptr RS_Manager::CreateDefaultRS(ID3D12Device10* pDevice)
 	return rs;
 }
 
-RootSignature::Ptr RS_Manager::CreateWaterRS(ID3D12Device10* pDevice)
+RootSignature::Ptr RootSignatureManager::CreateWaterRS(ID3D12Device10* pDevice)
 {
 	RootSignature::Ptr rs = RootSignature::CreateEmptyRootSignature(WaterRSParams::Count);
 
@@ -162,7 +162,7 @@ RootSignature::Ptr RS_Manager::CreateWaterRS(ID3D12Device10* pDevice)
 	return rs;
 }
 
-RootSignature::Ptr RS_Manager::CreateTextureRS(ID3D12Device10* pDevice)
+RootSignature::Ptr RootSignatureManager::CreateTextureRS(ID3D12Device10* pDevice)
 {
 	RootSignature::Ptr rs = RootSignature::CreateEmptyRootSignature(1);
 
@@ -190,7 +190,7 @@ RootSignature::Ptr RS_Manager::CreateTextureRS(ID3D12Device10* pDevice)
 ////////////////////////////////////////////////////////////////////////////////////
 // Root sigantures pentru ray tracing
 ////////////////////////////////////////////////////////////////////////////////////
-RootSignature::Ptr RS_Manager::CreateGlobalRTRS(ID3D12Device10* pDevice)
+RootSignature::Ptr RootSignatureManager::CreateGlobalRTRS(ID3D12Device10* pDevice)
 {
 	RootSignature::Ptr rs = RootSignature::CreateEmptyRootSignature(GlobalRTRSBinding::Count);
 
@@ -209,7 +209,7 @@ RootSignature::Ptr RS_Manager::CreateGlobalRTRS(ID3D12Device10* pDevice)
 	return rs;
 }
 
-RootSignature::Ptr RS_Manager::CreateTriangleHitRS(ID3D12Device10* pDevice)
+RootSignature::Ptr RootSignatureManager::CreateTriangleHitRS(ID3D12Device10* pDevice)
 {
 	RootSignature::Ptr rs = RootSignature::CreateEmptyRootSignature(4);
 
@@ -231,7 +231,7 @@ RootSignature::Ptr RS_Manager::CreateTriangleHitRS(ID3D12Device10* pDevice)
 	return rs;
 }
 
-RootSignature::Ptr RS_Manager::CreateAABBHitRS(ID3D12Device10* pDevice)
+RootSignature::Ptr RootSignatureManager::CreateAABBHitRS(ID3D12Device10* pDevice)
 {
 	RootSignature::Ptr rs = RootSignature::CreateEmptyRootSignature(5);
 
@@ -253,7 +253,7 @@ RootSignature::Ptr RS_Manager::CreateAABBHitRS(ID3D12Device10* pDevice)
 }
 
 
-RootSignature::Ptr RS_Manager::CreateMissRS(ID3D12Device10* pDevice)
+RootSignature::Ptr RootSignatureManager::CreateMissRS(ID3D12Device10* pDevice)
 {
 	RootSignature::Ptr rs = RootSignature::CreateEmptyRootSignature(1);
 
@@ -270,7 +270,7 @@ RootSignature::Ptr RS_Manager::CreateMissRS(ID3D12Device10* pDevice)
 	return rs;
 }
 
-RootSignature::Ptr RS_Manager::CreateRayGenRS(ID3D12Device10* pDevice)
+RootSignature::Ptr RootSignatureManager::CreateRayGenRS(ID3D12Device10* pDevice)
 {
 	RootSignature::Ptr rs = RootSignature::CreateEmptyRootSignature(0);
 
@@ -285,7 +285,7 @@ RootSignature::Ptr RS_Manager::CreateRayGenRS(ID3D12Device10* pDevice)
 ////////////////////////////////////////////////////////////////////////////////////
 // Root sigantures pentru compute
 ////////////////////////////////////////////////////////////////////////////////////
-RootSignature::Ptr RS_Manager::CreateWavesRS(ID3D12Device10* pDevice)
+RootSignature::Ptr RootSignatureManager::CreateWavesRS(ID3D12Device10* pDevice)
 {
 	RootSignature::Ptr rs = RootSignature::CreateEmptyRootSignature(1);
 

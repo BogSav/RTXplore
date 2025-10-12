@@ -13,10 +13,11 @@ RayTracingGraphics::RayTracingGraphics(GraphicsResources& resources) : Graphics(
 	GraphicsContext& graphicsContext = m_graphicsResources.GetGraphicsContext();
 	graphicsContext.Reset();
 
-	// Load PSO si cache
-	m_rayTracingPSOManager.LoadPSOs(m_RSManager, m_shaderManager, GraphicsResources::GetDevice());
-	pGlobalRTRS = m_rayTracingPSOManager.GetPSO("DefaultRTPSO")->GetRootSignaturePtr();
-	pRTPSOStateObject = m_rayTracingPSOManager.GetPSO("DefaultRTPSO");
+	// Load pipeline state and cache the necessary objects for ray tracing
+	m_rayTracingPipelineStateManager.LoadPipelineStates(
+		m_rootSignatureManager, m_shaderManager, GraphicsResources::GetDevice());
+	pGlobalRTRS = m_rayTracingPipelineStateManager.GetPipelineState("DefaultRTPSO")->GetRootSignaturePtr();
+	m_rayTracingPipelineState = m_rayTracingPipelineStateManager.GetPipelineState("DefaultRTPSO");
 
 	m_materialManager.LoadDefaultMaterials();
 
@@ -225,7 +226,7 @@ void RayTracingGraphics::PopulateCommandList()
 		GlobalRTRSBinding::AccelerationStrcuture, m_topLevelAccelerationStructure.GetGpuVirtualAddress());
 	commandContext.SetConstantBuffer(GlobalRTRSBinding::PassCB, frameResources.m_perPassCB.GetGpuVirtualAdress());
 
-	commandContext.SetPipelineStateObject(*pRTPSOStateObject);
+	commandContext.SetPipelineStateObject(*m_rayTracingPipelineState);
 
 	m_graphicsResources.SetRenderTarget();
 
@@ -257,7 +258,7 @@ void RayTracingGraphics::CreateShaderTable()
 	};
 
 	Microsoft::WRL::ComPtr<ID3D12StateObjectProperties> stateObjectProperties;
-	m_rayTracingPSOManager.GetPSO("DefaultRTPSO")
+	m_rayTracingPipelineStateManager.GetPipelineState("DefaultRTPSO")
 		->GetID3D12StateObject()
 		->QueryInterface(IID_PPV_ARGS(&stateObjectProperties));
 

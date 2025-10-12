@@ -3,7 +3,7 @@
 #include "Camera.hpp"
 #include "CameraController.hpp"
 #include "DynamicCubeMap.hpp"
-#include "PSO.hpp"
+#include "PipelineState.hpp"
 #include "ShadowMap.hpp"
 #include "engine/core/DxgiInfoManager.hpp"
 #include "GraphicsResources.hpp"

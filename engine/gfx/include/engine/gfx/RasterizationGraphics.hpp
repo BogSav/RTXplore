@@ -26,7 +26,7 @@ private:
 	void PopulateCommandList() override;
 
 private:
-	PSO_Manager<GraphicsPSO> m_graphicsPSOsManager;
+	PipelineStateManager<GraphicsPSO> m_graphicsPipelineStateManager;
 
 	engine::core::TickTimer<float> m_timer;
 

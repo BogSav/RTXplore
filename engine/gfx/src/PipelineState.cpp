@@ -1,4 +1,4 @@
-#include "PSO.hpp"
+#include "PipelineState.hpp"
 
 #include "engine/core/DxgiInfoManager.hpp"
 #include "engine/core/Utilities.hpp"
@@ -31,7 +31,7 @@ void GraphicsPSO::SetSampleMask(UINT SampleMask)
 void GraphicsPSO::SetPrimitiveTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE TopologyType)
 {
 	if (TopologyType == D3D12_PRIMITIVE_TOPOLOGY_TYPE_UNDEFINED)
-		throw engine::core::CustomException("Nu se poate crea PSO cu topologie undefined");
+		throw engine::core::CustomException("Nu se poate crea pipeline state cu topologie undefined");
 	m_PSODesc.PrimitiveTopologyType = TopologyType;
 }
 

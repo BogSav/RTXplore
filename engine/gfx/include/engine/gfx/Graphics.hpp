@@ -1,8 +1,8 @@
 #pragma once
 
 #include "CameraController.hpp"
-#include "PSO_Manager.hpp"
-#include "RS_Manager.hpp"
+#include "PipelineStateManager.hpp"
+#include "RootSignatureManager.hpp"
 #include "GraphicsResources.hpp"
 #include "LightSource.hpp"
 #include "MaterialManager.hpp"
@@ -20,9 +20,10 @@ public:
 
 	Graphics(GraphicsResources& resorurces) : m_graphicsResources(resorurces), m_cameraController(m_camera)
 	{
-		m_shaderManager.CompileShaders();
-		m_RSManager.LoadRootSignatures(GraphicsResources::GetDevice());
-		m_computePSOManager.LoadPSOs(m_RSManager, m_shaderManager, GraphicsResources::GetDevice());
+	m_shaderManager.CompileShaders();
+	m_rootSignatureManager.LoadRootSignatures(GraphicsResources::GetDevice());
+	m_computePipelineStateManager.LoadPipelineStates(
+		m_rootSignatureManager, m_shaderManager, GraphicsResources::GetDevice());
 
 		//m_camera = PerspectiveCamera(
 		//	engine::math::Vector3(0, 15, 0),
@@ -63,7 +64,7 @@ private:
 protected:
 	GraphicsResources& m_graphicsResources;
 
-	PSO_Manager<ComputePSO> m_computePSOManager;
+	PipelineStateManager<ComputePSO> m_computePipelineStateManager;
 
 	ObjectRenderer::Ptr m_objectRenderer;
 	TerrainRenderer::Ptr m_terrainRender;
@@ -71,7 +72,7 @@ protected:
 	SkyBoxRenderer::Ptr m_skyBoxRenderer;
 
 	ShadersManager m_shaderManager;
-	RS_Manager m_RSManager;
+	RootSignatureManager m_rootSignatureManager;
 
 	LightSource::Vec m_lightSources;
 
