@@ -4,7 +4,7 @@
 
 using namespace DirectX;
 
-namespace Math {
+namespace engine::math {
 
 class alignas(16) Scalar {
 public:
@@ -76,4 +76,4 @@ INLINE Scalar operator-(float a, Scalar b) noexcept { return Scalar(XMVectorSubt
 INLINE Scalar operator*(float a, Scalar b) noexcept { return Scalar(XMVectorScale(b, a)); }
 INLINE Scalar operator/(float a, Scalar b) noexcept { return Scalar(XMVectorDivide(XMVectorReplicate(a), b)); }
 
-} // namespace Math
+} // namespace engine::math

@@ -13,7 +13,7 @@
 
 #include "Matrix3.hpp"
 
-namespace Math
+namespace engine::math
 {
 
 Matrix3 Matrix3::Inverse(const Matrix3& m)
@@ -22,4 +22,4 @@ Matrix3 Matrix3::Inverse(const Matrix3& m)
 	return Matrix3(XMMatrixInverse(&determinant, m));
 }
 
-}  // namespace Math
+}  // namespace engine::math

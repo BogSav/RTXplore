@@ -64,9 +64,9 @@ public:
 		return &m_indices[0];
 	}
 
-	Math::AABB GetAABB() const
+	engine::math::AABB GetAABB() const
 	{
-		Math::AABB bbox;
+		engine::math::AABB bbox;
 
 		for (auto& vertex : m_vertices)
 		{

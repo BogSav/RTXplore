@@ -15,7 +15,7 @@
 
 #include "Quaternion.hpp"
 
-namespace Math
+namespace engine::math
 {
 // Represents a 3x3 matrix while occuping a 3x4 memory footprint.  The unused row and column are undefined but
 // implicitly (0, 0, 0, 1).  Constructing a Matrix4 will make those values explicit.
@@ -89,4 +89,4 @@ private:
 	Vector3 m_mat[3];
 };
 
-}  // namespace Math
+}  // namespace engine::math

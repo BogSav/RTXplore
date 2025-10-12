@@ -30,12 +30,12 @@ protected:
 		using ChunkVec = std::vector<Chunk>;
 
 		Chunk() = delete;
-		Chunk(const SubMesh& subMesh, const Math::AABB& aabb)
+		Chunk(const SubMesh& subMesh, const engine::math::AABB& aabb)
 			: m_subMesh(subMesh), m_boundingBox(aabb), m_isVisible(true)
 		{
 		}
 
-		inline const Math::AABB& GetAABB() const { return m_boundingBox; }
+		inline const engine::math::AABB& GetAABB() const { return m_boundingBox; }
 		inline const SubMesh& GetSubMesh() const { return m_subMesh; }
 		inline const bool IsVisible() const { return m_isVisible; }
 
@@ -44,7 +44,7 @@ protected:
 	private:
 		bool m_isVisible;
 
-		const Math::AABB m_boundingBox;
+		const engine::math::AABB m_boundingBox;
 		const SubMesh m_subMesh;
 	};
 

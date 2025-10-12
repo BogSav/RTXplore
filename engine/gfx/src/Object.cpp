@@ -7,7 +7,7 @@ using namespace misc::render_descriptors;
 using namespace misc::RSBinding;
 
 Object::Object(
-	const misc::render_descriptors::DX_OBJECT_DESCRIPTOR& descriptor, const SubMesh& subMesh, const Math::AABB& aabb)
+	const misc::render_descriptors::DX_OBJECT_DESCRIPTOR& descriptor, const SubMesh& subMesh, const engine::math::AABB& aabb)
 	: Object(descriptor)
 {
 	m_objectSpaceAABB = aabb;
@@ -33,8 +33,8 @@ Object::Object(const DX_OBJECT_DESCRIPTOR& descriptor)
 
 	if (m_isStatic)
 	{
-		m_transform = Math::Matrix4::MakeScale(m_scale) * Math::Matrix4::MakeMatrixRotationQuaternion(m_rotation)
-			* Math::Matrix4::MakeTranslation(m_position);
+		m_transform = engine::math::Matrix4::MakeScale(m_scale) * engine::math::Matrix4::MakeMatrixRotationQuaternion(m_rotation)
+			* engine::math::Matrix4::MakeTranslation(m_position);
 
 		m_dirtyCount = 0;
 	}
@@ -81,14 +81,14 @@ void Object::Update(float deltaTime)
 	if (m_isStatic)
 		return;
 
-	m_transform = Math::Matrix4::MakeMatrixRotationQuaternion(m_rotation) * Math::Matrix4::MakeScale(m_scale)
-		* Math::Matrix4::MakeTranslation(m_position);
+	m_transform = engine::math::Matrix4::MakeMatrixRotationQuaternion(m_rotation) * engine::math::Matrix4::MakeScale(m_scale)
+		* engine::math::Matrix4::MakeTranslation(m_position);
 	m_worldSpaceAABB = m_objectSpaceAABB.Transformed(m_transform);
 
 	SetDirty();
 }
 
-void Object::SetTransform(const Math::Matrix4& toSet)
+void Object::SetTransform(const engine::math::Matrix4& toSet)
 {
 	assert(!m_isStatic);
 
@@ -96,13 +96,13 @@ void Object::SetTransform(const Math::Matrix4& toSet)
 	SetDirty();
 }
 
-void Object::SetTextureTransform(const Math::Matrix4& toSet)
+void Object::SetTextureTransform(const engine::math::Matrix4& toSet)
 {
 	m_textureTransform = toSet;
 	SetDirty();
 }
 
-void Object::SetPosition(const Math::Vector3& toSet)
+void Object::SetPosition(const engine::math::Vector3& toSet)
 {
 	assert(!m_isStatic);
 
@@ -110,7 +110,7 @@ void Object::SetPosition(const Math::Vector3& toSet)
 	SetDirty();
 }
 
-void Object::SetScale(const Math::Vector3& toSet)
+void Object::SetScale(const engine::math::Vector3& toSet)
 {
 	assert(!m_isStatic);
 
@@ -118,7 +118,7 @@ void Object::SetScale(const Math::Vector3& toSet)
 	SetDirty();
 }
 
-void Object::SetRotation(const Math::Quaternion& toSet)
+void Object::SetRotation(const engine::math::Quaternion& toSet)
 {
 	assert(!m_isStatic);
 
@@ -126,7 +126,7 @@ void Object::SetRotation(const Math::Quaternion& toSet)
 	SetDirty();
 }
 
-void Object::SeColor(const Math::Vector4& toSet)
+void Object::SeColor(const engine::math::Vector4& toSet)
 {
 	assert(!m_isStatic);
 

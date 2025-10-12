@@ -13,14 +13,14 @@ public:
 	void Create();
 	void Update();
 
-	void SetDirection(Math::Vector3 direction);
+	void SetDirection(engine::math::Vector3 direction);
 
 	void Setup(GraphicsContext& graphicsContext);
 	void Finish(GraphicsContext& graphicsContext);
 
 	inline const misc::DescriptorHandle& GetTextureSRVHandle() { return m_depthTexture->GetSrvHandle(); }
 
-	inline const Math::Vector3& GetLightDirection() const { return m_lightDirection; }
+	inline const engine::math::Vector3& GetLightDirection() const { return m_lightDirection; }
 	inline const OrthograficCamera& GetCamera() const { return m_camera; }
 
 	inline void SetRenderDirty(bool toSet) { m_isRenderDirty = toSet; }
@@ -43,7 +43,7 @@ private:
 
 	OrthograficCamera m_camera;
 	float m_distanceFromCamera;
-	Math::Vector3 m_lightDirection;
+	engine::math::Vector3 m_lightDirection;
 };
 
 inline void ShadowMap::SetDirty()

@@ -2,7 +2,7 @@
 
 #include "AxisAllignedBBox.hpp"
 
-namespace Math
+namespace engine::math
 {
 class OBB
 {
@@ -72,4 +72,4 @@ public:
 	Vector3 m_extension;
 };
 
-}  // namespace Math
+}  // namespace engine::math

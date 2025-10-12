@@ -4,7 +4,7 @@
 
 #include <cmath>
 
-namespace Math
+namespace engine::math
 {
 
 class BoundingPlane
@@ -63,4 +63,4 @@ private:
 	Vector4 planeData;
 };
 
-}  // namespace Math
+}  // namespace engine::math

@@ -25,11 +25,11 @@ public:
 	void Finish(GraphicsContext& graphicsContext);
 
 	inline float GetCubeMapSphereRadius() const { return m_cubeMapSphereRadius; }
-	inline Math::Vector3 GetCubeMapCenter() const { return m_center; }
+	inline engine::math::Vector3 GetCubeMapCenter() const { return m_center; }
 
 	inline void SetRenderDirty(bool toSet) { m_isRenderDirty = toSet; }
 	inline bool IsRenderDirty() const { return m_isRenderDirty; }
-	void SetCenter(Math::Vector3 center);
+	void SetCenter(engine::math::Vector3 center);
 
 	inline void DecreaseDirtyCount();
 	inline bool IsDirty() const;
@@ -40,7 +40,7 @@ private:
 	UINT8 m_framesDirty;
 
 	float m_cubeMapSphereRadius;
-	Math::Vector3 m_center;
+	engine::math::Vector3 m_center;
 
 	const UINT m_height;
 	const UINT m_width;

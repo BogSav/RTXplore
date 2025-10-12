@@ -3,7 +3,7 @@
 Mesh::Ptr GeometryGenerator::GenerateCylinder(
 	const float bottomRadius, const float topRadius, const float height, const int stackCount, const int sliceCount)
 {
-	using namespace Math;
+	using namespace engine::math;
 
 	Mesh::Ptr mesh;
 
@@ -21,7 +21,7 @@ Mesh::Ptr GeometryGenerator::GenerateCylinder(
 		const Scalar y = Scalar(i) * stackHeight - height / 2.0f;
 		const Scalar r = Scalar(bottomRadius) + i * radiusStep;
 
-		const float dtheta = Math::XM_2PI / sliceCount;
+		const float dtheta = engine::math::XM_2PI / sliceCount;
 		for (int j = 0; j <= sliceCount; j++)
 		{
 			const float c = cosf(j * dtheta);
@@ -30,7 +30,7 @@ Mesh::Ptr GeometryGenerator::GenerateCylinder(
 			Mesh::Vertex vertex;
 
 			// Pozitia
-			Math::Vector3 position;
+			engine::math::Vector3 position;
 			position.SetX(r * c);
 			position.SetY(y);
 			position.SetZ(r * s);
@@ -46,7 +46,7 @@ Mesh::Ptr GeometryGenerator::GenerateCylinder(
 
 			// Le salvam
 			DirectX::XMStoreFloat3(&vertex.position, position);
-			DirectX::XMStoreFloat4(&vertex.color, Vector4(j * dtheta < Math::XM_PI ? 1.f : 0.f, 1.f, 1.f, 1.f));
+			DirectX::XMStoreFloat4(&vertex.color, Vector4(j * dtheta < engine::math::XM_PI ? 1.f : 0.f, 1.f, 1.f, 1.f));
 			DirectX::XMStoreFloat3(&vertex.normal, normal);
 			DirectX::XMStoreFloat3(&vertex.tangent, tangenta);
 
@@ -97,7 +97,7 @@ Mesh::Ptr GeometryGenerator::GenerateCylinder(
 
 Mesh::Ptr GeometryGenerator::GenerateCube(float sideLength)
 {
-	using namespace Math;
+	using namespace engine::math;
 
 	Mesh::Ptr mesh;
 	std::vector<Mesh::Vertex> vertices;
@@ -162,7 +162,7 @@ Mesh::Ptr GeometryGenerator::GenerateCube(float sideLength)
 
 Mesh::Ptr GeometryGenerator::GenerateSimpleCube(float sideLength)
 {
-	using namespace Math;
+	using namespace engine::math;
 
 	Mesh::Ptr mesh;
 	std::vector<Mesh::Vertex> vertices;
@@ -192,7 +192,7 @@ Mesh::Ptr GeometryGenerator::GenerateSimpleCube(float sideLength)
 
 Mesh::Ptr GeometryGenerator::GenerateSimpleQuad(float sideLength)
 {
-	using namespace Math;
+	using namespace engine::math;
 
 	Mesh::Ptr mesh;
 	std::vector<Mesh::Vertex> vertices;
@@ -217,7 +217,7 @@ Mesh::Ptr GeometryGenerator::GenerateSimpleQuad(float sideLength)
 
 Mesh::Ptr GeometryGenerator::GenerateGrid(float width, float length, int columns, int rows)
 {
-	using namespace Math;
+	using namespace engine::math;
 
 	Mesh::Ptr mesh;
 	std::vector<Mesh::Vertex> vertices;
@@ -279,9 +279,9 @@ Mesh::Ptr GeometryGenerator::GenerateGrid(float width, float length, int columns
 }
 
 // Incompleta
-Mesh::Ptr GeometryGenerator::GenerateGeoSphere(float radius, const Math::Vector3 center, int nrOfSubDivisions)
+Mesh::Ptr GeometryGenerator::GenerateGeoSphere(float radius, const engine::math::Vector3 center, int nrOfSubDivisions)
 {
-	using namespace Math;
+	using namespace engine::math;
 
 	Mesh::Ptr mesh;
 	std::vector<Mesh::Vertex> vertices;
@@ -289,7 +289,7 @@ Mesh::Ptr GeometryGenerator::GenerateGeoSphere(float radius, const Math::Vector3
 
 	float t = (1.0f + sqrt(5.0f)) / 2.0f;
 
-	std::vector<Math::Vector3> positions = {
+	std::vector<engine::math::Vector3> positions = {
 		{-1, t, 0},
 		{1, t, 0},
 		{-1, -t, 0},
@@ -336,7 +336,7 @@ Mesh::Ptr GeometryGenerator::GenerateGeoSphere(float radius, const Math::Vector3
 
 Mesh::Ptr GeometryGenerator::GenerateTriangle()
 {
-	using namespace Math;
+	using namespace engine::math;
 
 	std::vector<Mesh::Vertex> vertices;
 	std::vector<Mesh::Index> indices;
@@ -417,7 +417,7 @@ Mesh::Ptr GeometryGenerator::GenerateTerrainWithBezierCurves(float width, float 
 #endif
 
 Mesh::Ptr GeometryGenerator::GenerateChunk(
-	const Math::Vector3& position,
+	const engine::math::Vector3& position,
 	float chunkWidth,
 	float chunkLength,
 	float terrainWidth,
@@ -425,7 +425,7 @@ Mesh::Ptr GeometryGenerator::GenerateChunk(
 	std::function<float(float, float)> heightFunction,
 	int subdivideCount)
 {
-	using namespace Math;
+	using namespace engine::math;
 
 	Mesh::Ptr mesh = GenerateGrid(chunkWidth, chunkLength, 2, 2);
 
@@ -439,7 +439,7 @@ Mesh::Ptr GeometryGenerator::GenerateChunk(
 }
 
 Mesh::Ptr GeometryGenerator::GenerateChunks(
-	std::vector<Math::AABB>& aabbs,
+	std::vector<engine::math::AABB>& aabbs,
 	std::vector<SubMesh>& submeshs,
 	std::function<float(float, float)> heightFunction,
 	const float gridWidth,
@@ -447,7 +447,7 @@ Mesh::Ptr GeometryGenerator::GenerateChunks(
 	const int chunkKernelSize,
 	const int chunkCountPerSide)
 {
-	using namespace Math;
+	using namespace engine::math;
 
 	const int sidePointCount =
 		2 * chunkKernelSize + chunkCountPerSide - 3 + (chunkKernelSize - 2) * (chunkCountPerSide - 2);
@@ -515,7 +515,7 @@ Mesh::Ptr GeometryGenerator::GenerateChunks(
 			subMesh.indexCount = 6 * (size_t)pow(chunkKernelSize - 1, 2);
 			subMesh.startIndexLocation = indices.size() - subMesh.indexCount;
 
-			Math::AABB aabb;
+			engine::math::AABB aabb;
 			for (int i = 0; i < subMesh.indexCount; i++)
 			{
 				aabb.EnlargeForPoint(vertices[indices[i + subMesh.startIndexLocation]].position);

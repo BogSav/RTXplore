@@ -8,12 +8,12 @@ class MaterialManager
 public:
 	struct ShlickCoefficients
 	{
-		static Math::Vector3 Water;
-		static Math::Vector3 Glass;
-		static Math::Vector3 Plastic;
-		static Math::Vector3 Gold;
-		static Math::Vector3 Silver;
-		static Math::Vector3 Copper;
+		static engine::math::Vector3 Water;
+		static engine::math::Vector3 Glass;
+		static engine::math::Vector3 Plastic;
+		static engine::math::Vector3 Gold;
+		static engine::math::Vector3 Silver;
+		static engine::math::Vector3 Copper;
 	};
 
 	class Material

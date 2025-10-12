@@ -22,8 +22,8 @@ WaterRenderer::Ptr WaterRenderer::CreateWaterRenderer(misc::render_descriptors::
 	water->m_textureMoveSpeed = descriptor.textureMoveSpeed;
 	water->m_textureScale = descriptor.textureScale;
 
-	water->m_texturePosition = Math::Vector3(Math::kOrigin);
-	water->m_cubeMapCenter = Math::Vector3(Math::kOrigin);
+	water->m_texturePosition = engine::math::Vector3(engine::math::kOrigin);
+	water->m_cubeMapCenter = engine::math::Vector3(engine::math::kOrigin);
 	water->m_cubeMapSphereRadius = descriptor.cubeMapSphereRadius;
 
 	water->LoadGeometry(descriptor);
@@ -46,7 +46,7 @@ void WaterRenderer::LoadGeometry(DescriptorVariant descriptor)
 
 	if (!Settings::UseRayTracing())
 	{
-		std::vector<Math::AABB> aabbs;
+		std::vector<engine::math::AABB> aabbs;
 		std::vector<SubMesh> submeshs;
 
 		m_mesh = GeometryGenerator::GenerateChunks(
@@ -69,7 +69,7 @@ void WaterRenderer::LoadGeometry(DescriptorVariant descriptor)
 	}
 	else
 	{
-		const auto convertMathAABBtoRTAABB = [](const Math::AABB& aabb)
+		const auto convertMathAABBtoRTAABB = [](const engine::math::AABB& aabb)
 		{
 			D3D12_RAYTRACING_AABB rtaabb;
 
@@ -84,11 +84,11 @@ void WaterRenderer::LoadGeometry(DescriptorVariant descriptor)
 			return rtaabb;
 		};
 
-		Math::AABB aabb;
+		engine::math::AABB aabb;
 
 		aabb.SetCorners(
-			Math::Vector3(-waterDesc.width / 2., -4, -waterDesc.length / 2),
-			Math::Vector3(waterDesc.width / 2, 4, waterDesc.length / 2));
+			engine::math::Vector3(-waterDesc.width / 2., -4, -waterDesc.length / 2),
+			engine::math::Vector3(waterDesc.width / 2, 4, waterDesc.length / 2));
 
 		m_AABBs.push_back(convertMathAABBtoRTAABB(aabb));
 
@@ -99,7 +99,7 @@ void WaterRenderer::LoadGeometry(DescriptorVariant descriptor)
 
 void WaterRenderer::Update(float deltaTime)
 {
-	using namespace Math;
+	using namespace engine::math;
 
 	m_texturePosition += m_textureDirection * deltaTime * m_textureMoveSpeed;
 

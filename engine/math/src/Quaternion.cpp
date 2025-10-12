@@ -13,7 +13,7 @@
 
 #include "Quaternion.hpp"
 
-namespace Math
+namespace engine::math
 {
 
 Quaternion UnsafeNormalize(Quaternion q)
@@ -31,4 +31,4 @@ Quaternion Lerp(Quaternion a, Quaternion b, float t)
 	return UnsafeNormalize(Quaternion(XMVectorLerp(a, b, t)));
 }
 
-}  // namespace Math
+}  // namespace engine::math

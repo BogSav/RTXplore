@@ -15,7 +15,7 @@ public:
 	void FrustumCulling(const CameraController& cameraController) override;
 	void Update(float delatTime) override;
 
-	inline const Math::Vector3& GetLightDirection() const { return m_lightDirection; }
+	inline const engine::math::Vector3& GetLightDirection() const { return m_lightDirection; }
 
 	~SkyBoxRenderer();
 
@@ -25,7 +25,7 @@ private:
 
 	void LoadGeometry(DescriptorVariant descriptor) override;
 
-	Math::Vector3 m_lightDirection = {};
-	Math::Vector3 m_rotationAxis = {};
+	engine::math::Vector3 m_lightDirection = {};
+	engine::math::Vector3 m_rotationAxis = {};
 	float m_rotationSpeed = 0.f;
 };

@@ -269,7 +269,7 @@ void GraphicsResources::LoadSizeDependentResoruces(UINT width, UINT height)
 
 	if (Settings::UseRayTracing())
 	{
-		Math::Color clearColor(0.25f, 0.25f, 0.25f, 1.f);
+		engine::math::Color clearColor(0.25f, 0.25f, 0.25f, 1.f);
 
 		m_renderTexture.reset(new ColorTexture(clearColor));
 		m_renderTexture->Create(
@@ -291,7 +291,7 @@ void GraphicsResources::LoadSizeDependentResoruces(UINT width, UINT height)
 
 		if (Settings::GetGraphicsSettings().GetIsMSAAEnabled())
 		{
-			Math::Color clearColor = Math::Color(0x87, 0xCE, 0xEB, 1.f);
+			engine::math::Color clearColor = engine::math::Color(0x87, 0xCE, 0xEB, 1.f);
 
 			m_renderTexture.reset(new ColorTexture(clearColor));
 			m_renderTexture->Create(

@@ -13,7 +13,7 @@
 
 #include "AxisAllignedBBox.hpp"
 
-namespace Math
+namespace engine::math
 {
 
 std::string AABB::ToString() const
@@ -59,4 +59,4 @@ AABB& AABB::Transform(const Matrix4& m)
 	return *this;
 }
 
-}  // namespace Math
+}  // namespace engine::math

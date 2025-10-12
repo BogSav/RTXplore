@@ -2,25 +2,25 @@
 
 #include "FrameResources.hpp"
 
-Math::Vector3 MaterialManager::ShlickCoefficients::Water = Math::Vector3(0.02, 0.02, 0.02);
-Math::Vector3 MaterialManager::ShlickCoefficients::Glass = Math::Vector3(0.08, 0.08, 0.08);
-Math::Vector3 MaterialManager::ShlickCoefficients::Plastic = Math::Vector3(0.05, 0.05, 0.05);
-Math::Vector3 MaterialManager::ShlickCoefficients::Gold = Math::Vector3(1.0, 0.71, 0.29);
-Math::Vector3 MaterialManager::ShlickCoefficients::Silver = Math::Vector3(0.95, 0.93, 0.88);
-Math::Vector3 MaterialManager::ShlickCoefficients::Copper = Math::Vector3(0.95, 0.64, 0.54);
+engine::math::Vector3 MaterialManager::ShlickCoefficients::Water = engine::math::Vector3(0.02, 0.02, 0.02);
+engine::math::Vector3 MaterialManager::ShlickCoefficients::Glass = engine::math::Vector3(0.08, 0.08, 0.08);
+engine::math::Vector3 MaterialManager::ShlickCoefficients::Plastic = engine::math::Vector3(0.05, 0.05, 0.05);
+engine::math::Vector3 MaterialManager::ShlickCoefficients::Gold = engine::math::Vector3(1.0, 0.71, 0.29);
+engine::math::Vector3 MaterialManager::ShlickCoefficients::Silver = engine::math::Vector3(0.95, 0.93, 0.88);
+engine::math::Vector3 MaterialManager::ShlickCoefficients::Copper = engine::math::Vector3(0.95, 0.64, 0.54);
 
 void MaterialManager::LoadDefaultMaterials()
 {
-	Math::Vector3 identityVector = Math::Vector3(Math::kIdentity);
-	Math::Vector3 nullVector = Math::Vector3(Math::kZero);
+	engine::math::Vector3 identityVector = engine::math::Vector3(engine::math::kIdentity);
+	engine::math::Vector3 nullVector = engine::math::Vector3(engine::math::kZero);
 
 	MaterialProperties materialProps;
 	materialProps.illumType = 0;
 
 	// Default material, something basic
 	{
-		materialProps.Ka = Math::Vector3(0.02, 0.02, 0.02);
-		materialProps.Kd = Math::Vector3(1, 0, 0);
+		materialProps.Ka = engine::math::Vector3(0.02, 0.02, 0.02);
+		materialProps.Kd = engine::math::Vector3(1, 0, 0);
 		materialProps.Ks = identityVector;
 
 		materialProps.Transparency = 0;

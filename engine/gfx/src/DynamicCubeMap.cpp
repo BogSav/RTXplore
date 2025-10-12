@@ -31,7 +31,7 @@ DynamicCubeMap::DynamicCubeMap(UINT width, UINT height) : m_width(width), m_heig
 
 void DynamicCubeMap::Create()
 {
-	m_cubeMapTexture.reset(new ColorTexture(Math::Color(0.f, 0.f, 0.f), true));
+	m_cubeMapTexture.reset(new ColorTexture(engine::math::Color(0.f, 0.f, 0.f), true));
 	m_cubeMapTexture->Create(
 		m_width, m_height, DXGI_FORMAT_R8G8B8A8_UNORM, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET, L"DynamicCubeMap");
 	m_cubeMapTexture->AllocateRtvHandle();
@@ -68,7 +68,7 @@ void DynamicCubeMap::Update()
 	m_isRenderDirty = true;
 }
 
-void DynamicCubeMap::SetCenter(Math::Vector3 center)
+void DynamicCubeMap::SetCenter(engine::math::Vector3 center)
 {
 	m_center = center;
 

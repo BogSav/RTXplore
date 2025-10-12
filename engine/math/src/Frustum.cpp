@@ -1,8 +1,8 @@
 #include "Frustum.hpp"
 
-using namespace Math;
+using namespace engine::math;
 
-bool Math::Frustum::IntersectBoundingBox(const AABB& aabb) const
+bool engine::math::Frustum::IntersectBoundingBox(const AABB& aabb) const
 {
 	for (int i = 0; i < 6; ++i)
 	{
@@ -18,7 +18,7 @@ bool Math::Frustum::IntersectBoundingBox(const AABB& aabb) const
 }
 
 // Se fac transformarile din view space in world space ale planelor si ale pucntelor de frustum
-Frustum Math::Frustum::GetTransformedFrustum(const Matrix4& invViewMatrix) const
+Frustum engine::math::Frustum::GetTransformedFrustum(const Matrix4& invViewMatrix) const
 {
 	Frustum result;
 
@@ -40,7 +40,7 @@ BoundingPlane& Frustum::GetBoundingPlane(size_t index)
 	return m_frustumPlanes[index];
 }
 
-Math::Point3& Frustum::GetCorner(size_t index)
+engine::math::Point3& Frustum::GetCorner(size_t index)
 {
 	return m_frustumCorners[index];
 }

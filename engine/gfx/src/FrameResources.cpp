@@ -151,13 +151,13 @@ void FrameResources::UpdateCameraAndTransferToGPUPassCB(const BaseCamera& camera
 	// Proj si invProj
 	XMStoreFloat4x4(&m_perPassCB->projMatrix, XMMatrixTranspose(camera.GetProjectionMatrix()));
 	XMStoreFloat4x4(
-		&m_perPassCB->invProjMatrix, XMMatrixTranspose(Math::Matrix4::Inverse(camera.GetProjectionMatrix())));
+		&m_perPassCB->invProjMatrix, XMMatrixTranspose(engine::math::Matrix4::Inverse(camera.GetProjectionMatrix())));
 
 	// ViewProj si invViewProj
-	Math::Matrix4 viewProj = camera.GetViewMatrix() * camera.GetProjectionMatrix();
+	engine::math::Matrix4 viewProj = camera.GetViewMatrix() * camera.GetProjectionMatrix();
 
 	XMStoreFloat4x4(&m_perPassCB->viewProjMatrix, XMMatrixTranspose(viewProj));
-	XMStoreFloat4x4(&m_perPassCB->invViewProjMatrix, XMMatrixTranspose(Math::Matrix4::Inverse(viewProj)));
+	XMStoreFloat4x4(&m_perPassCB->invViewProjMatrix, XMMatrixTranspose(engine::math::Matrix4::Inverse(viewProj)));
 
 	// EyePosition
 	XMStoreFloat3(&m_perPassCB->eyePosition, camera.GetPosition());

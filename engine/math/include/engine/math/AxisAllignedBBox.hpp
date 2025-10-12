@@ -7,7 +7,7 @@
 #include <stdexcept>
 #include <string>
 
-namespace Math
+namespace engine::math
 {
 
 class AABB
@@ -361,4 +361,4 @@ INLINE AABB::Iterator::Iterator(const AABB* bb, int idx) : m_bb(bb), m_idx(idx)
 {
 }
 
-}  // namespace Math
+}  // namespace engine::math

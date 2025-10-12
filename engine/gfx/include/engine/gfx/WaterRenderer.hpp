@@ -17,8 +17,8 @@ public:
 
 	inline const WaveProperties& GetWaveParameters(int index) const { return m_waveProperties[index]; }
 	inline const float GetCubeMapSphereRadius() const { return m_cubeMapSphereRadius; }
-	inline const Math::Vector3& GetCubeMapCenter() const { return m_cubeMapCenter; }
-	inline void SetCubeMapCenter(Math::Vector3 toSet) { m_cubeMapCenter = toSet; };
+	inline const engine::math::Vector3& GetCubeMapCenter() const { return m_cubeMapCenter; }
+	inline void SetCubeMapCenter(engine::math::Vector3 toSet) { m_cubeMapCenter = toSet; };
 
 	~WaterRenderer();
 
@@ -34,11 +34,11 @@ private:
 	std::vector<D3D12_RAYTRACING_AABB> m_AABBs;
 	GpuResource m_AABBsResource;
 
-	Math::Vector3 m_texturePosition;
-	Math::Vector3 m_textureDirection;
-	Math::Vector3 m_textureScale;
+	engine::math::Vector3 m_texturePosition;
+	engine::math::Vector3 m_textureDirection;
+	engine::math::Vector3 m_textureScale;
 	float m_textureMoveSpeed;
 
-	Math::Vector3 m_cubeMapCenter;
+	engine::math::Vector3 m_cubeMapCenter;
 	float m_cubeMapSphereRadius;
 };

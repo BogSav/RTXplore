@@ -13,7 +13,7 @@
 
 #include "Color.hpp"
 
-namespace Math
+namespace engine::math
 {
 
 Color::Color(FXMVECTOR vec)
@@ -99,4 +99,4 @@ uint32_t Color::R8G8B8A8() const
 	return a << 24 | b << 16 | g << 8 | r;
 }
 
-}  // namespace Math
+}  // namespace engine::math

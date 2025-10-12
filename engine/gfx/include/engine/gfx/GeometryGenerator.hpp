@@ -15,11 +15,11 @@ public:
 	static Mesh::Ptr GenerateSimpleCube(float sideLength);
 	static Mesh::Ptr GenerateSimpleQuad(float sideLength);
 	static Mesh::Ptr GenerateGrid(float width, float length, int columns, int rows);
-	static Mesh::Ptr GenerateGeoSphere(float radius, const Math::Vector3 center, int nrOfSubDivisions = 0);
+	static Mesh::Ptr GenerateGeoSphere(float radius, const engine::math::Vector3 center, int nrOfSubDivisions = 0);
 	static Mesh::Ptr GenerateTriangle();
 	static Mesh::Ptr GenerateTerrainWithBezierCurves(float width, float length, int subdivideCount = 5);
 	static Mesh::Ptr GenerateChunk(
-		const Math::Vector3& position,
+		const engine::math::Vector3& position,
 		float chunkWidth,
 		float chunkLength,
 		float terrainWidth,
@@ -27,7 +27,7 @@ public:
 		std::function<float(float, float)> heightFunction,
 		int subdivideCount = 5);
 	static Mesh::Ptr GenerateChunks(
-		std::vector<Math::AABB>& aabbs,
+		std::vector<engine::math::AABB>& aabbs,
 		std::vector<SubMesh>& submeshs,
 		std::function<float(float, float)> heightFunction,
 		const float gridWidth,

@@ -15,7 +15,7 @@
 
 #include "Matrix3.hpp"
 
-namespace Math
+namespace engine::math
 {
 __declspec(align(16)) class Matrix4
 {
@@ -157,4 +157,4 @@ public:
 private:
 	XMMATRIX m_mat;
 };
-}  // namespace Math
+}  // namespace engine::math

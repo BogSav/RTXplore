@@ -393,7 +393,7 @@ D3D12_RESOURCE_DESC Texture::CeeateTextureDescriptor(
 	return textureDesc;
 }
 
-ColorTexture::ColorTexture(Math::Color color, bool isCubeMap, bool isNonPixelShaderResource)
+ColorTexture::ColorTexture(engine::math::Color color, bool isCubeMap, bool isNonPixelShaderResource)
 	: Texture(isNonPixelShaderResource, isCubeMap), m_clearColor()
 {
 }

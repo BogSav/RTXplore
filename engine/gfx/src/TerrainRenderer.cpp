@@ -40,7 +40,7 @@ void TerrainRenderer::LoadGeometry(DescriptorVariant descriptor)
 	///////////////////////////////////////////////
 	DX_TERRAIN_DESCRIPTOR& terrainDesc = std::get<DX_TERRAIN_DESCRIPTOR>(descriptor);
 
-	SimplexNoise flatHillNoise(
+	engine::math::SimplexNoise flatHillNoise(
 		terrainDesc.simplexProperties.frequency,
 		terrainDesc.simplexProperties.amplitude,
 		terrainDesc.simplexProperties.lacunarity,
@@ -58,7 +58,7 @@ void TerrainRenderer::LoadGeometry(DescriptorVariant descriptor)
 		return amplitudeFactor * flatHillNoise.fractal(terrainDesc.simplexProperties.octaveCount, x, z);
 	};
 
-	std::vector<Math::AABB> aabbs;
+	std::vector<engine::math::AABB> aabbs;
 	std::vector<SubMesh> submeshs;
 
 	m_mesh = GeometryGenerator::GenerateChunks(
@@ -70,7 +70,7 @@ void TerrainRenderer::LoadGeometry(DescriptorVariant descriptor)
 		terrainDesc.chunkKernelSize,
 		terrainDesc.chunkCountPerSide);
 
-	GeometryHelper::ChnageColor(m_mesh, Math::Vector4(1, 0, 0, 0));
+	GeometryHelper::ChnageColor(m_mesh, engine::math::Vector4(1, 0, 0, 0));
 
 	for (int i = 0; i < submeshs.size(); i++)
 	{

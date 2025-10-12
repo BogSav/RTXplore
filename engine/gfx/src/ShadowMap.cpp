@@ -19,10 +19,10 @@ ShadowMap::ShadowMap(UINT width, UINT height) : m_width(width), m_height(height)
 	m_scissorRect.top = 0;
 
 	m_distanceFromCamera = 150.f;
-	m_lightDirection = Math::Vector3(Math::kZero);
+	m_lightDirection = engine::math::Vector3(engine::math::kZero);
 
 	m_camera = OrthograficCamera(
-		Math::Vector3(0, 100, 0), Math::Vector3(Math::kZero), Math::Vector3(0, 0, 1), -200, 200, -200, 200, 400, 10);
+		engine::math::Vector3(0, 100, 0), engine::math::Vector3(engine::math::kZero), engine::math::Vector3(0, 0, 1), -200, 200, -200, 200, 400, 10);
 }
 
 void ShadowMap::Create()
@@ -33,7 +33,7 @@ void ShadowMap::Create()
 	m_depthTexture->AllocateSrvHandle();
 }
 
-void ShadowMap::SetDirection(Math::Vector3 direction)
+void ShadowMap::SetDirection(engine::math::Vector3 direction)
 {
 	m_lightDirection = direction;
 
@@ -55,7 +55,7 @@ void ShadowMap::Finish(GraphicsContext& graphicsContext)
 
 void ShadowMap::Update()
 {
-	m_camera.SetViewCoordinateSystem(-m_lightDirection * m_distanceFromCamera, Math::Vector3(Math::kZero));
+	m_camera.SetViewCoordinateSystem(-m_lightDirection * m_distanceFromCamera, engine::math::Vector3(engine::math::kZero));
 
 	m_isRenderDirty = true;
 }

@@ -18,7 +18,7 @@ public:
 	void FrustumCulling(const CameraController& cameraController) override;
 	void Update(float delatTime) override;
 
-	inline const Math::AABB& GetAABB(std::string name) const { return m_boundingBoxes.at(name); }
+	inline const engine::math::AABB& GetAABB(std::string name) const { return m_boundingBoxes.at(name); }
 	inline const SubMesh& GetSubMesh(std::string name) const { return m_subMeshes.at(name); }
 	inline const Object::Vec& GetObjects() const { return m_objects; }
 
@@ -33,7 +33,7 @@ private:
 	GraphicsPSO::Ptr m_shadowDebugPSO;
 	Texture::Ptr m_shadowTexture;
 
-	std::unordered_map<std::string, Math::AABB> m_boundingBoxes;
+	std::unordered_map<std::string, engine::math::AABB> m_boundingBoxes;
 	std::unordered_map<std::string, SubMesh> m_subMeshes;
 
 	std::vector<Object::Ptr> m_objects;

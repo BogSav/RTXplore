@@ -33,8 +33,8 @@ public:
 	// Update the camera and the world space frustrum
 	void Update();
 
-	const inline Math::Frustum& GetViewSpaceFrustum() const { return m_viewSpaceFrustum; }
-	const inline Math::Frustum& GetWorldSpaceFrustum() const { return m_worldSpaceFrustum; }
+	const inline engine::math::Frustum& GetViewSpaceFrustum() const { return m_viewSpaceFrustum; }
+	const inline engine::math::Frustum& GetWorldSpaceFrustum() const { return m_worldSpaceFrustum; }
 	const inline PerspectiveCamera& GetCamera() const { return m_camera; }
 
 
@@ -47,8 +47,8 @@ private:
 
 	UINT8 m_framesDirty;
 
-	Math::Frustum m_viewSpaceFrustum;
-	Math::Frustum m_worldSpaceFrustum;
+	engine::math::Frustum m_viewSpaceFrustum;
+	engine::math::Frustum m_worldSpaceFrustum;
 };
 
 class CubeMapCameraController
@@ -56,18 +56,18 @@ class CubeMapCameraController
 public:
 	CubeMapCameraController();
 
-	void Update(const Math::Vector3 pos);
+	void Update(const engine::math::Vector3 pos);
 
-	inline const Math::Frustum& GetFrustum(int index) const { return m_worldSpaceFrustums[index]; }
-	inline const Math::Vector3 GetPosition() const { return m_cameras[0].GetPosition(); }
+	inline const engine::math::Frustum& GetFrustum(int index) const { return m_worldSpaceFrustums[index]; }
+	inline const engine::math::Vector3 GetPosition() const { return m_cameras[0].GetPosition(); }
 	inline const float GetZFar(int index) const { return m_cameras[index].GetZFar(); }
 	inline const PerspectiveCamera& GetCamera(int index) const { return m_cameras[index]; }
 
 private:
 	std::array<PerspectiveCamera, 6> m_cameras;
 
-	std::array<Math::Frustum, 6> m_viewSpaceFrustums;
-	std::array<Math::Frustum, 6> m_worldSpaceFrustums;
+	std::array<engine::math::Frustum, 6> m_viewSpaceFrustums;
+	std::array<engine::math::Frustum, 6> m_worldSpaceFrustums;
 };
 
 inline const bool CameraController::IsDirty() const

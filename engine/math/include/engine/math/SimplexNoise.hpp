@@ -11,6 +11,8 @@
 
 #include <cstddef>  // size_t
 
+namespace engine::math
+{
 /**
  * @brief A Perlin Simplex Noise C++ Implementation (1D, 2D, 3D, 4D).
  */
@@ -51,3 +53,4 @@ private:
 	float mLacunarity;  ///< Lacunarity specifies the frequency multiplier between successive octaves (default to 2.0).
 	float mPersistence;  ///< Persistence is the loss of amplitude between successive octaves (usually 1/lacunarity)
 };
+}  // namespace engine::math

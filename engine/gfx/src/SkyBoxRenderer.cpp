@@ -69,7 +69,7 @@ void SkyBoxRenderer::Render(misc::rasterization::RenderLayer::Value renderLayer)
 
 void SkyBoxRenderer::Update(float deltaTime)
 {
-	using namespace Math;
+	using namespace engine::math;
 
 	Quaternion rot(m_rotationAxis, Scalar(m_rotationSpeed * deltaTime));
 

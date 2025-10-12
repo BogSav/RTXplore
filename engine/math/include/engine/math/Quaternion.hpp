@@ -15,7 +15,7 @@
 
 #include "Vector.hpp"
 
-namespace Math
+namespace engine::math
 {
 class Quaternion
 {
@@ -54,4 +54,4 @@ Quaternion UnsafeNormalize(Quaternion q);
 Quaternion Slerp(Quaternion a, Quaternion b, float t);
 Quaternion Lerp(Quaternion a, Quaternion b, float t);
 
-}  // namespace Math
+}  // namespace engine::math

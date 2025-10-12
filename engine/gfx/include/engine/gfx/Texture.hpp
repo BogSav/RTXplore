@@ -60,7 +60,7 @@ class ColorTexture : public Texture
 public:
 	using Ptr = std::unique_ptr<ColorTexture>;
 
-	ColorTexture(Math::Color color = Math::Color(0.f, 0.f, 0.f), bool isCubeMap = false, bool isNonPixelShaderResource = false);
+	ColorTexture(engine::math::Color color = engine::math::Color(0.f, 0.f, 0.f), bool isCubeMap = false, bool isNonPixelShaderResource = false);
 	ColorTexture(std::wstring path, std::wstring name, bool isCubeMap = false, bool isNonPixelShaderResource = false);
 
 	void Create(UINT width, UINT height, DXGI_FORMAT format, D3D12_RESOURCE_FLAGS flags, std::wstring name);
@@ -74,12 +74,12 @@ public:
 	INLINE const misc::DescriptorHandle& GetRtvHandle(size_t index) const { return m_RtvHandle[index]; };
 	INLINE const misc::DescriptorHandle& GetRtvHandle() const { return m_RtvHandle[0]; };
 	INLINE const misc::DescriptorHandle& GetUavHandle() const { return m_UavHandle; };
-	INLINE const Math::Color& GetClearColor() const { return m_clearColor; }
+	INLINE const engine::math::Color& GetClearColor() const { return m_clearColor; }
 
 	friend class TextureManager;
 
 private:
-	Math::Color m_clearColor;
+	engine::math::Color m_clearColor;
 
 	misc::DescriptorHandle m_UavHandle;
 	misc::DescriptorHandle m_RtvHandle[6];

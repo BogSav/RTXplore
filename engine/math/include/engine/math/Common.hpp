@@ -46,7 +46,7 @@
 
 #define INLINE __forceinline
 
-namespace Math
+namespace engine::math
 {
 constexpr float MATH_TOL_FLOAT = 1e-6f;
 constexpr float MATH_TOL_FLOAT_SQRT = 1e-3f;
@@ -352,4 +352,4 @@ enum EWUnitVector
 	kWUnitVector
 };
 
-}  // namespace Math
+}  // namespace engine::math

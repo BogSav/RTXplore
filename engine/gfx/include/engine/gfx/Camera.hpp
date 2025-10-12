@@ -13,9 +13,9 @@ public:
 
 	BaseCamera() = default;
 	BaseCamera(
-		const Math::Vector3 position,
-		const Math::Vector3 center,
-		const Math::Vector3 up,
+		const engine::math::Vector3 position,
+		const engine::math::Vector3 center,
+		const engine::math::Vector3 up,
 		const float zFar,
 		const float zNear)
 		: m_zFar(zFar), m_zNear(zNear)
@@ -23,7 +23,7 @@ public:
 		SetViewCoordinateSystem(position, center, up);
 	};
 
-	void SetViewCoordinateSystem(const Math::Vector3 position, const Math::Vector3 center, const Math::Vector3 up)
+	void SetViewCoordinateSystem(const engine::math::Vector3 position, const engine::math::Vector3 center, const engine::math::Vector3 up)
 	{
 		m_position = position;
 		m_forward = (center - position).GetNormalized();
@@ -34,18 +34,18 @@ public:
 		ConstructViewMatrix();
 	}
 
-	void SetViewCoordinateSystem(const Math::Vector3 position, const Math::Vector3 center)
+	void SetViewCoordinateSystem(const engine::math::Vector3 position, const engine::math::Vector3 center)
 	{
 		m_position = position;
 		m_distanceToTarget = ~(center - position);
 		SetViewCoordinateSystem((center - position).GetNormalized());
 	}
 
-	void SetViewCoordinateSystem(const Math::Vector3 direction)
+	void SetViewCoordinateSystem(const engine::math::Vector3 direction)
 	{
 		m_forward = direction;
 
-		m_up = Math::Vector3(0, 1, 0);
+		m_up = engine::math::Vector3(0, 1, 0);
 		m_right = (m_up % m_forward).GetNormalized();
 
 		m_up = (m_forward % m_right).GetNormalized();
@@ -53,16 +53,16 @@ public:
 		ConstructViewMatrix();
 	}
 
-	inline Math::Matrix4 GetViewProjMatrix() const { return GetViewMatrix() * GetProjectionMatrix(); }
+	inline engine::math::Matrix4 GetViewProjMatrix() const { return GetViewMatrix() * GetProjectionMatrix(); }
 
 	// Getters for components
-	inline Math::Vector3 GetTargetPosition() const { return m_position + m_forward * m_distanceToTarget; }
-	inline const Math::Matrix4& GetProjectionMatrix() const { return m_projectionMatrix; }
-	inline const Math::Matrix4& GetInverseViewMatrix() const { return m_invViewMatrix; }
-	inline const Math::Matrix4& GetViewMatrix() const { return m_viewMatrix; }
-	inline const Math::Vector3& GetPosition() const { return m_position; };
-	inline const Math::Vector3& GetForward() const { return m_forward; }
-	inline const Math::Vector3 GetUp() const { return m_up; }
+	inline engine::math::Vector3 GetTargetPosition() const { return m_position + m_forward * m_distanceToTarget; }
+	inline const engine::math::Matrix4& GetProjectionMatrix() const { return m_projectionMatrix; }
+	inline const engine::math::Matrix4& GetInverseViewMatrix() const { return m_invViewMatrix; }
+	inline const engine::math::Matrix4& GetViewMatrix() const { return m_viewMatrix; }
+	inline const engine::math::Vector3& GetPosition() const { return m_position; };
+	inline const engine::math::Vector3& GetForward() const { return m_forward; }
+	inline const engine::math::Vector3 GetUp() const { return m_up; }
 
 	inline float GetZNear() const { return m_zNear; }
 	inline float GetZFar() const { return m_zFar; }
@@ -74,23 +74,23 @@ private:
 	void ConstructViewMatrix()
 	{
 		// Matricea de view
-		m_viewMatrix = Math::Matrix4::MakeMatrixLookAtLH(m_position, DirectX::XMVectorAdd(m_position, m_forward), m_up);
-		m_invViewMatrix = Math::Matrix4::Inverse(m_viewMatrix);
+		m_viewMatrix = engine::math::Matrix4::MakeMatrixLookAtLH(m_position, DirectX::XMVectorAdd(m_position, m_forward), m_up);
+		m_invViewMatrix = engine::math::Matrix4::Inverse(m_viewMatrix);
 	}
 	virtual void ConstructProjectionMatrix() = 0;
 
 protected:
-	Math::Matrix4 m_projectionMatrix = Math::Matrix4();
-	Math::Matrix4 m_viewMatrix = Math::Matrix4();
-	Math::Matrix4 m_invViewMatrix = Math::Matrix4();
+	engine::math::Matrix4 m_projectionMatrix = engine::math::Matrix4();
+	engine::math::Matrix4 m_viewMatrix = engine::math::Matrix4();
+	engine::math::Matrix4 m_invViewMatrix = engine::math::Matrix4();
 
-	Math::Vector3 m_position = Math::Vector3();
+	engine::math::Vector3 m_position = engine::math::Vector3();
 
-	Math::Vector3 m_forward = Math::Vector3();
-	Math::Vector3 m_right = Math::Vector3();
-	Math::Vector3 m_up = Math::Vector3();
+	engine::math::Vector3 m_forward = engine::math::Vector3();
+	engine::math::Vector3 m_right = engine::math::Vector3();
+	engine::math::Vector3 m_up = engine::math::Vector3();
 
-	Math::Scalar m_distanceToTarget = {};
+	engine::math::Scalar m_distanceToTarget = {};
 
 	float m_zNear = 0.f;
 	float m_zFar = 0.f;
@@ -103,9 +103,9 @@ public:
 
 	PerspectiveCamera() = default;
 	PerspectiveCamera(
-		const Math::Vector3 position,
-		const Math::Vector3 center,
-		const Math::Vector3 up,
+		const engine::math::Vector3 position,
+		const engine::math::Vector3 center,
+		const engine::math::Vector3 up,
 		const float aspectRatio,
 		const float fovY = DirectX::XMConvertToRadians(60.f),
 		const float zFar = 250.f,
@@ -129,9 +129,9 @@ public:
 		ConstructProjectionMatrix();
 	}
 
-	static Math::Frustum ConstructFrustum(const PerspectiveCamera& camera)
+	static engine::math::Frustum ConstructFrustum(const PerspectiveCamera& camera)
 	{
-		Math::Frustum frustrum;
+		engine::math::Frustum frustrum;
 		const float farHalfWidth = camera.GetFarWindowWidth() / 2.f;
 		const float nearHalfWidth = camera.GetNearWindowWidth() / 2.f;
 
@@ -142,40 +142,40 @@ public:
 		// 1 - Near Jos Stanga
 		// 2 - Near Sus Stanga
 		// 3 - Near Sus Dreapta
-		frustrum.GetCorner(0) = Math::Point3(nearHalfWidth, -nearHalfHeight, camera.GetZNear());
-		frustrum.GetCorner(1) = Math::Point3(-nearHalfWidth, -nearHalfHeight, camera.GetZNear());
-		frustrum.GetCorner(2) = Math::Point3(-nearHalfWidth, nearHalfHeight, camera.GetZNear());
-		frustrum.GetCorner(3) = Math::Point3(nearHalfWidth, nearHalfHeight, camera.GetZNear());
+		frustrum.GetCorner(0) = engine::math::Point3(nearHalfWidth, -nearHalfHeight, camera.GetZNear());
+		frustrum.GetCorner(1) = engine::math::Point3(-nearHalfWidth, -nearHalfHeight, camera.GetZNear());
+		frustrum.GetCorner(2) = engine::math::Point3(-nearHalfWidth, nearHalfHeight, camera.GetZNear());
+		frustrum.GetCorner(3) = engine::math::Point3(nearHalfWidth, nearHalfHeight, camera.GetZNear());
 
 		// 4 - Far Jos Dreapta
 		// 5 - Far Jos Stanga
 		// 6 - Far Sus Stanga
 		// 7 - Far Sus Dreapta
-		frustrum.GetCorner(4) = Math::Point3(farHalfWidth, -farHalfHeight, camera.GetZFar());
-		frustrum.GetCorner(5) = Math::Point3(farHalfWidth, -farHalfHeight, camera.GetZFar());
-		frustrum.GetCorner(6) = Math::Point3(farHalfWidth, -farHalfHeight, camera.GetZFar());
-		frustrum.GetCorner(7) = Math::Point3(farHalfWidth, -farHalfHeight, camera.GetZFar());
+		frustrum.GetCorner(4) = engine::math::Point3(farHalfWidth, -farHalfHeight, camera.GetZFar());
+		frustrum.GetCorner(5) = engine::math::Point3(farHalfWidth, -farHalfHeight, camera.GetZFar());
+		frustrum.GetCorner(6) = engine::math::Point3(farHalfWidth, -farHalfHeight, camera.GetZFar());
+		frustrum.GetCorner(7) = engine::math::Point3(farHalfWidth, -farHalfHeight, camera.GetZFar());
 
 		// 0 - Near plane
 		// 1 - Far plane
 		frustrum.GetBoundingPlane(0) =
-			Math::BoundingPlane(Math::Vector3(0, 0, 1), Math::Point3(0, 0, camera.GetZNear()));
+			engine::math::BoundingPlane(engine::math::Vector3(0, 0, 1), engine::math::Point3(0, 0, camera.GetZNear()));
 		frustrum.GetBoundingPlane(1) =
-			Math::BoundingPlane(Math::Vector3(0, 0, -1), Math::Point3(0, 0, camera.GetZFar()));
+			engine::math::BoundingPlane(engine::math::Vector3(0, 0, -1), engine::math::Point3(0, 0, camera.GetZFar()));
 
 		// 2 - Right plane
 		// 3 - Left plane
 		frustrum.GetBoundingPlane(2) =
-			Math::BoundingPlane(Math::Vector3(-camera.GetZFar(), 0, farHalfWidth), Math::Scalar(0));
+			engine::math::BoundingPlane(engine::math::Vector3(-camera.GetZFar(), 0, farHalfWidth), engine::math::Scalar(0));
 		frustrum.GetBoundingPlane(3) =
-			Math::BoundingPlane(Math::Vector3(camera.GetZFar(), 0, farHalfWidth), Math::Scalar(0));
+			engine::math::BoundingPlane(engine::math::Vector3(camera.GetZFar(), 0, farHalfWidth), engine::math::Scalar(0));
 
 		// 4 - Upper plane
 		// 5 - Bottom plane
 		frustrum.GetBoundingPlane(4) =
-			Math::BoundingPlane(Math::Vector3(0, -camera.GetZFar(), farHalfHeight), Math::Scalar(0));
+			engine::math::BoundingPlane(engine::math::Vector3(0, -camera.GetZFar(), farHalfHeight), engine::math::Scalar(0));
 		frustrum.GetBoundingPlane(5) =
-			Math::BoundingPlane(Math::Vector3(0, camera.GetZFar(), farHalfHeight), Math::Scalar(0));
+			engine::math::BoundingPlane(engine::math::Vector3(0, camera.GetZFar(), farHalfHeight), engine::math::Scalar(0));
 
 		return frustrum;
 	}
@@ -183,7 +183,7 @@ public:
 	void UpdateAspectRatio(float aspectRatio)
 	{
 		m_aspectRatio = aspectRatio;
-		m_projectionMatrix = Math::Matrix4::MakeMatrixPerspectiveFovLH(m_fovY, aspectRatio, m_zNear, m_zFar);
+		m_projectionMatrix = engine::math::Matrix4::MakeMatrixPerspectiveFovLH(m_fovY, aspectRatio, m_zNear, m_zFar);
 		m_fovX = 2.f * atanf(GetNearWindowWidth() / (2.0f * m_zNear));
 	}
 
@@ -198,7 +198,7 @@ public:
 private:
 	void ConstructProjectionMatrix() override
 	{
-		m_projectionMatrix = Math::Matrix4::MakeMatrixPerspectiveFovLH(m_fovY, m_aspectRatio, m_zNear, m_zFar);
+		m_projectionMatrix = engine::math::Matrix4::MakeMatrixPerspectiveFovLH(m_fovY, m_aspectRatio, m_zNear, m_zFar);
 	}
 
 private:
@@ -218,9 +218,9 @@ public:
 
 	OrthograficCamera() = default;
 	OrthograficCamera(
-		const Math::Vector3 position,
-		const Math::Vector3 center,
-		const Math::Vector3 up,
+		const engine::math::Vector3 position,
+		const engine::math::Vector3 center,
+		const engine::math::Vector3 up,
 		const float leftOrtho = -100.f,
 		const float rightOrtho = 100.f,
 		const float bottomOrtho = -100.f,
@@ -239,7 +239,7 @@ public:
 private:
 	void ConstructProjectionMatrix() override
 	{
-		m_projectionMatrix = Math::Matrix4::MakeMatrixOrthographicOffCenterLH(
+		m_projectionMatrix = engine::math::Matrix4::MakeMatrixOrthographicOffCenterLH(
 			m_leftOrtho, m_rightOrtho, m_bottomOrtho, m_topOrtho, m_zNear, m_zFar);
 	}
 

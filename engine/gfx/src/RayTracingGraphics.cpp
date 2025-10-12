@@ -34,7 +34,7 @@ RayTracingGraphics::RayTracingGraphics(GraphicsResources& resources) : Graphics(
 		objectDesc.objectCB_ID = FrameResources::GetObjectCB_ID();
 		objectDesc.materialCB_ID = m_materialManager.GetMaterialCB_ID("Default");
 
-		objectDesc.textureTransform = Math::Matrix4::MakeScale(Math::Vector3(40.f, 40.f, 1));
+		objectDesc.textureTransform = engine::math::Matrix4::MakeScale(engine::math::Vector3(40.f, 40.f, 1));
 		objectDesc.isStatic = true;
 
 		desc.length = 400.f;
@@ -58,7 +58,7 @@ RayTracingGraphics::RayTracingGraphics(GraphicsResources& resources) : Graphics(
 
 		objectDesc.objectCB_ID = FrameResources::GetObjectCB_ID();
 		objectDesc.materialCB_ID = m_materialManager.GetMaterialCB_ID("Water");
-		objectDesc.color = Math::Vector4(50 / 255.f, 77 / 255.f, 80 / 255.f, 0.6f);
+		objectDesc.color = engine::math::Vector4(50 / 255.f, 77 / 255.f, 80 / 255.f, 0.6f);
 		objectDesc.isStatic = false;
 
 		desc.waveProperties[0].amplitude = 0.7f;  // 0.7
@@ -78,8 +78,8 @@ RayTracingGraphics::RayTracingGraphics(GraphicsResources& resources) : Graphics(
 		desc.chunkKernelSize = 10;
 		desc.chunkCountPerSide = 20;
 
-		desc.textureScale = Math::Vector3(10, 10, 10);
-		desc.textureDirection = Math::Vector3(-0.3f, 1.f, 0.45f);
+		desc.textureScale = engine::math::Vector3(10, 10, 10);
+		desc.textureDirection = engine::math::Vector3(-0.3f, 1.f, 0.45f);
 		desc.textureMoveSpeed = 0.02f;
 		desc.cubeMapSphereRadius = 200.f;
 
@@ -93,11 +93,11 @@ RayTracingGraphics::RayTracingGraphics(GraphicsResources& resources) : Graphics(
 		objectDesc.objectCB_ID = FrameResources::GetObjectCB_ID();
 		objectDesc.isStatic = false;
 
-		desc.rotationAxis = Math::Vector3(0, -1, 0);
+		desc.rotationAxis = engine::math::Vector3(0, -1, 0);
 		desc.rotationSpeed = 0.06f;
 
 		constexpr float angle = DirectX::XMConvertToRadians(55.f);
-		desc.lightDirection = Math::Vector3(-cosf(angle), -sinf(angle), 0.f);
+		desc.lightDirection = engine::math::Vector3(-cosf(angle), -sinf(angle), 0.f);
 
 		m_skyBoxRenderer = SkyBoxRenderer::CreateSkyBoxRenderer(desc);
 	}
@@ -109,10 +109,10 @@ RayTracingGraphics::RayTracingGraphics(GraphicsResources& resources) : Graphics(
 		{
 			DX_OBJECT_DESCRIPTOR objectDesc;
 			objectDesc.subGeometryName = "Sphere";
-			objectDesc.scale = Math::Vector3(2.f, 2.f, 2.f);
-			objectDesc.position = Math::Vector3(20.f, 10.f, 20.f);
+			objectDesc.scale = engine::math::Vector3(2.f, 2.f, 2.f);
+			objectDesc.position = engine::math::Vector3(20.f, 10.f, 20.f);
 			objectDesc.objectCB_ID = FrameResources::GetObjectCB_ID();
-			objectDesc.color = Math::Vector4(1, 0, 0, 1);
+			objectDesc.color = engine::math::Vector4(1, 0, 0, 1);
 			objectDesc.isStatic = true;
 
 			desc.objectDescriptors.push_back(objectDesc);
@@ -156,8 +156,8 @@ void RayTracingGraphics::LoadAssets()
 	}
 
 	LightSource lightSource(LightSource::Type::DIRECTIONAL_LIGHT);
-	lightSource.m_lightProperties.Strength = Math::Vector3(1.0f, 1.0f, 1.0f) * 1.5;
-	lightSource.m_lightProperties.Direction = Math::Vector3(0.0f, -1.0f, 0.0f);
+	lightSource.m_lightProperties.Strength = engine::math::Vector3(1.0f, 1.0f, 1.0f) * 1.5;
+	lightSource.m_lightProperties.Direction = engine::math::Vector3(0.0f, -1.0f, 0.0f);
 	m_lightSources.push_back(lightSource);
 }
 

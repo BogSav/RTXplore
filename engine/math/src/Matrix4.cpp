@@ -13,7 +13,7 @@
 
 #include "Matrix4.hpp"
 
-namespace Math
+namespace engine::math
 {
 
 Matrix4 Matrix4::Transpose(const Matrix4& m)
@@ -27,4 +27,4 @@ Matrix4 Matrix4::Inverse(const Matrix4& m)
 	return Matrix4(XMMatrixInverse(&determinant, m));
 }
 
-}  // namespace Math
+}  // namespace engine::math

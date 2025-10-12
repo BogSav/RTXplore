@@ -79,7 +79,7 @@ void GeometryHelper::ProjectVerticesOntoSphere(Mesh::Ptr mesh, float radius)
 	}
 }
 
-void GeometryHelper::MoveVerticesToPosition(Mesh::Ptr mesh, Math::Vector3 position)
+void GeometryHelper::MoveVerticesToPosition(Mesh::Ptr mesh, engine::math::Vector3 position)
 {
 	using namespace DirectX;
 
@@ -197,7 +197,7 @@ void GeometryHelper::TransformTextureCoordinates(Mesh::Ptr mesh, float terrainWi
 	}
 }
 
-void GeometryHelper::ChnageColor(Mesh::Ptr mesh, Math::Vector4 color)
+void GeometryHelper::ChnageColor(Mesh::Ptr mesh, engine::math::Vector4 color)
 {
 	using namespace DirectX;
 

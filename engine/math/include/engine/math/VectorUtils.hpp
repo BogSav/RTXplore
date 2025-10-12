@@ -3,7 +3,7 @@
 #include "Vector.hpp"
 #include <vector>
 
-namespace Math
+namespace engine::math
 {
 
 Vector3 GetMaxPoint(const Vector3& first, const Vector3& second);

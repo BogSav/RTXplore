@@ -6,7 +6,7 @@
 #include <string>
 #include <stdexcept>
 
-namespace Math
+namespace engine::math
 {
 class Vector4;
 
@@ -261,4 +261,4 @@ protected:
 typedef Vector3 Point3;
 typedef Vector4 Point4;
 
-}  // namespace Math
+}  // namespace engine::math

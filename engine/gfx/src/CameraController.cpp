@@ -24,20 +24,20 @@ void CameraController::InstantiateFrustum()
 // Rotation functions - first person
 void CameraController::RotateFirstPerson_OX(float angle)
 {
-	m_camera.m_forward = Math::Quaternion(m_camera.m_right, Math::Scalar(angle)) * m_camera.m_forward;
+	m_camera.m_forward = engine::math::Quaternion(m_camera.m_right, engine::math::Scalar(angle)) * m_camera.m_forward;
 	m_camera.m_forward.UnsafeNormalize();
 
-	m_camera.m_up = Math::Quaternion(m_camera.m_right, Math::Scalar(angle)) * m_camera.m_up;
+	m_camera.m_up = engine::math::Quaternion(m_camera.m_right, engine::math::Scalar(angle)) * m_camera.m_up;
 	m_camera.m_up.UnsafeNormalize();
 
 	SetDirty();
 }
 void CameraController::RotateFirstPerson_OY(float angle)
 {
-	m_camera.m_right = Math::Quaternion(Math::Vector3{0, 1, 0},  Math::Scalar(angle)) * m_camera.m_right;
+	m_camera.m_right = engine::math::Quaternion(engine::math::Vector3{0, 1, 0},  engine::math::Scalar(angle)) * m_camera.m_right;
 	m_camera.m_right.UnsafeNormalize();
 
-	m_camera.m_forward = Math::Quaternion(Math::Vector3{0, 1, 0},  Math::Scalar(angle)) * m_camera.m_forward;
+	m_camera.m_forward = engine::math::Quaternion(engine::math::Vector3{0, 1, 0},  engine::math::Scalar(angle)) * m_camera.m_forward;
 	m_camera.m_forward.UnsafeNormalize();
 
 	m_camera.m_up = m_camera.m_right % m_camera.m_forward;
@@ -49,29 +49,29 @@ void CameraController::RotateFirstPerson_OY(float angle)
 // Rotation functions - third person
 void CameraController::RotateThirdPerson_OX(float angle)
 {
-	Math::Matrix4 modelMatrix = Math::Matrix4(Math::kIdentity);
+	engine::math::Matrix4 modelMatrix = engine::math::Matrix4(engine::math::kIdentity);
 
-	modelMatrix = Math::Matrix4::MakeTranslation(m_camera.m_forward * m_camera.m_distanceToTarget);
-	m_camera.m_position = Math::Vector4(m_camera.m_position,  Math::Scalar(1)) * modelMatrix;
+	modelMatrix = engine::math::Matrix4::MakeTranslation(m_camera.m_forward * m_camera.m_distanceToTarget);
+	m_camera.m_position = engine::math::Vector4(m_camera.m_position,  engine::math::Scalar(1)) * modelMatrix;
 
 	RotateFirstPerson_OX(angle);
 
-	modelMatrix = Math::Matrix4::MakeTranslation(-m_camera.m_forward * m_camera.m_distanceToTarget);
-	m_camera.m_position = Math::Vector4(m_camera.m_position,  Math::Scalar(1)) * modelMatrix;
+	modelMatrix = engine::math::Matrix4::MakeTranslation(-m_camera.m_forward * m_camera.m_distanceToTarget);
+	m_camera.m_position = engine::math::Vector4(m_camera.m_position,  engine::math::Scalar(1)) * modelMatrix;
 
 	SetDirty();
 }
 void CameraController::RotateThirdPerson_OY(float angle)
 {
-	Math::Matrix4 modelMatrix = Math::Matrix4(Math::kIdentity);
+	engine::math::Matrix4 modelMatrix = engine::math::Matrix4(engine::math::kIdentity);
 
-	modelMatrix = Math::Matrix4::MakeTranslation(m_camera.m_forward * m_camera.m_distanceToTarget);
-	m_camera.m_position = Math::Vector4(m_camera.m_position,  Math::Scalar(1)) * modelMatrix;
+	modelMatrix = engine::math::Matrix4::MakeTranslation(m_camera.m_forward * m_camera.m_distanceToTarget);
+	m_camera.m_position = engine::math::Vector4(m_camera.m_position,  engine::math::Scalar(1)) * modelMatrix;
 
 	RotateFirstPerson_OY(angle);
 
-	modelMatrix = Math::Matrix4::MakeTranslation(-m_camera.m_forward * m_camera.m_distanceToTarget);
-	m_camera.m_position = Math::Vector4(m_camera.m_position,  Math::Scalar(1)) * modelMatrix;
+	modelMatrix = engine::math::Matrix4::MakeTranslation(-m_camera.m_forward * m_camera.m_distanceToTarget);
+	m_camera.m_position = engine::math::Vector4(m_camera.m_position,  engine::math::Scalar(1)) * modelMatrix;
 
 	SetDirty();
 }
@@ -84,33 +84,33 @@ void CameraController::TranslateForward(float distance)
 }
 void CameraController::MoveForward(float distance)
 {
-	Math::Vector3 dir = (Math::Vector3(m_camera.m_forward.GetX(),  Math::Scalar(0), m_camera.m_forward.GetZ())).GetNormalized();
+	engine::math::Vector3 dir = (engine::math::Vector3(m_camera.m_forward.GetX(),  engine::math::Scalar(0), m_camera.m_forward.GetZ())).GetNormalized();
 	m_camera.m_position += dir * distance;
 	SetDirty();
 }
 void CameraController::TranslateUpward(float distance)
 {
-	m_camera.m_position += Math::Vector3{0, 1, 0} * distance;
+	m_camera.m_position += engine::math::Vector3{0, 1, 0} * distance;
 	SetDirty();
 }
 void CameraController::TranslateRight(float distance)
 {
-	m_camera.m_position += (Math::Vector3{0, 1, 0} % (m_camera.m_right % Math::Vector3{0, 1, 0})) * distance;
+	m_camera.m_position += (engine::math::Vector3{0, 1, 0} % (m_camera.m_right % engine::math::Vector3{0, 1, 0})) * distance;
 	SetDirty();
 }
 
 void CameraController::Update()
 {
-	m_camera.m_viewMatrix = Math::Matrix4::MakeMatrixLookAtLH(
+	m_camera.m_viewMatrix = engine::math::Matrix4::MakeMatrixLookAtLH(
 		m_camera.m_position, DirectX::XMVectorAdd(m_camera.m_position, m_camera.m_forward), m_camera.m_up);
-	m_camera.m_invViewMatrix = Math::Matrix4::Inverse(m_camera.m_viewMatrix);
+	m_camera.m_invViewMatrix = engine::math::Matrix4::Inverse(m_camera.m_viewMatrix);
 
 	m_worldSpaceFrustum = m_viewSpaceFrustum.GetTransformedFrustum(m_camera.m_invViewMatrix);
 }
 
 CubeMapCameraController::CubeMapCameraController()
 {
-	using namespace Math;
+	using namespace engine::math;
 
 	// positive - x, negative - x, positive - y, negative - y, positive - z, negative - z.
 	const Vector3 position = Vector3(kZero);
@@ -136,14 +136,14 @@ CubeMapCameraController::CubeMapCameraController()
 	}
 }
 
-void CubeMapCameraController::Update(const Math::Vector3 center)
+void CubeMapCameraController::Update(const engine::math::Vector3 center)
 {
 	for (int i = 0; i < 6; i++)
 	{
 		m_cameras[i].m_position = center;
-		m_cameras[i].m_viewMatrix = Math::Matrix4::MakeMatrixLookAtLH(
+		m_cameras[i].m_viewMatrix = engine::math::Matrix4::MakeMatrixLookAtLH(
 			center, DirectX::XMVectorAdd(center, m_cameras[i].m_forward), m_cameras[i].m_up);
-		m_cameras[i].m_invViewMatrix = Math::Matrix4::Inverse(m_cameras[i].m_viewMatrix);
+		m_cameras[i].m_invViewMatrix = engine::math::Matrix4::Inverse(m_cameras[i].m_viewMatrix);
 
 		m_worldSpaceFrustums[i] = m_viewSpaceFrustums[i].GetTransformedFrustum(m_cameras[i].m_invViewMatrix);
 	}

@@ -3,7 +3,7 @@
 #include <cmath>
 #include <algorithm>
 
-namespace Math
+namespace engine::math
 {
 Vector3 GetMaxPoint(const Vector3& first, const Vector3& second)
 {
@@ -61,4 +61,4 @@ Vector3 CubicBezier(const std::vector<std::vector<Vector3>>& m, float u, float v
 }
 #endif
 
-}  // namespace Math
+}  // namespace engine::math

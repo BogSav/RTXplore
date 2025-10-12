@@ -203,12 +203,12 @@ struct DX_OBJECT_DESCRIPTOR
 
 	bool isStatic = true;
 
-	Math::Quaternion rotation = Math::Quaternion(Math::kIdentity);
-	Math::Vector3 position = Math::Vector3(Math::kOrigin);
-	Math::Vector3 scale = Math::Vector3(Math::kIdentity);
-	Math::Vector4 color = Math::Vector4(1, 0, 0, 1);
+	engine::math::Quaternion rotation = engine::math::Quaternion(engine::math::kIdentity);
+	engine::math::Vector3 position = engine::math::Vector3(engine::math::kOrigin);
+	engine::math::Vector3 scale = engine::math::Vector3(engine::math::kIdentity);
+	engine::math::Vector4 color = engine::math::Vector4(1, 0, 0, 1);
 
-	Math::Matrix4 textureTransform = Math::Matrix4(Math::kIdentity);
+	engine::math::Matrix4 textureTransform = engine::math::Matrix4(engine::math::kIdentity);
 };
 struct DX_TERRAIN_DESCRIPTOR
 {
@@ -245,8 +245,8 @@ struct DX_WATER_DESCRIPTOR
 	GraphicsPSO::Ptr basePSO;
 	D3D12_PRIMITIVE_TOPOLOGY baseToplogy;
 
-	Math::Vector3 textureDirection = {};
-	Math::Vector3 textureScale = {};
+	engine::math::Vector3 textureDirection = {};
+	engine::math::Vector3 textureScale = {};
 	float textureMoveSpeed = 0.f;
 	float cubeMapSphereRadius = 0.f;
 
@@ -267,8 +267,8 @@ struct DX_SKYBOX_DESCRIPTOR
 	GraphicsPSO::Ptr dynamicCubeMapPSO;
 	D3D12_PRIMITIVE_TOPOLOGY dynamicCubeMapToplogy;
 
-	Math::Vector3 rotationAxis;
-	Math::Vector3 lightDirection;
+	engine::math::Vector3 rotationAxis;
+	engine::math::Vector3 lightDirection;
 	float rotationSpeed;
 };
 struct DX_TEXTURE_DESCRIPTOR
