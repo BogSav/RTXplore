@@ -1,7 +1,7 @@
 #pragma once
 
 #include "engine/platform/Window.hpp"
-#include "engine/core/winCPUTickTimer.hpp"
+#include "engine/core/TickTimer.hpp"
 
 #include "engine/gfx/RasterizationGraphics.hpp"
 #include "engine/gfx/RayTracingGraphics.hpp"
@@ -20,5 +20,5 @@ private:
 	Window& window;
 	Graphics::Ptr pGraphics;
 
-	misc::winCpuTickTimer<float> m_timer;
+	misc::TickTimer<float> m_timer;
 };

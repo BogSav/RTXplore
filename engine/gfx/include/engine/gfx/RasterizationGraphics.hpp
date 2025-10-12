@@ -3,7 +3,7 @@
 #include "Graphics.hpp"
 #include "DynamicCubeMap.hpp"
 #include "ShadowMap.hpp"
-#include "engine/core/winCPUTickTimer.hpp"
+#include "engine/core/TickTimer.hpp"
 
 class RasterizationGraphics : public Graphics
 {
@@ -28,7 +28,7 @@ private:
 private:
 	PSO_Manager<GraphicsPSO> m_graphicsPSOsManager;
 
-	misc::winCpuTickTimer<float> m_timer;
+	misc::TickTimer<float> m_timer;
 
 	Object::Vec m_dynamicGameComponents;
 

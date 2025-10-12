@@ -1,20 +1,20 @@
-#include "winCPUTickTimer.hpp"
+#include "TickTimer.hpp"
 
 #include "WinInclude.hpp"
 
-#define GENERATE_SPECIALIZED_TEMPLATE_DEFINITIONS(type)     \
-	template winCpuTickTimer<type>::winCpuTickTimer();      \
-	template winCpuTickTimer<type>::~winCpuTickTimer();     \
-	template void winCpuTickTimer<type>::StartClock();      \
-	template void winCpuTickTimer<type>::ResetStartTime();  \
-	template void winCpuTickTimer<type>::UpdateDeltaTime(); \
-	template type winCpuTickTimer<type>::GetDeltaTime();   \
-	template type winCpuTickTimer<type>::GetTimeSinceStart()
+#define GENERATE_SPECIALIZED_TEMPLATE_DEFINITIONS(type)  \
+	template TickTimer<type>::TickTimer();                 \
+	template TickTimer<type>::~TickTimer();                \
+	template void TickTimer<type>::StartClock();           \
+	template void TickTimer<type>::ResetStartTime();       \
+	template void TickTimer<type>::UpdateDeltaTime();      \
+	template type TickTimer<type>::GetDeltaTime();         \
+	template type TickTimer<type>::GetTimeSinceStart()
 
 namespace misc
 {
 template <typename T>
-struct winCpuTickTimer<T>::Data
+struct TickTimer<T>::Data
 {
 	LARGE_INTEGER m_frequency;
 
@@ -28,7 +28,7 @@ struct winCpuTickTimer<T>::Data
 };
 
 template <typename T>
-winCpuTickTimer<T>::winCpuTickTimer() : pData(new Data)
+TickTimer<T>::TickTimer() : pData(new Data)
 {
 	// set frequency
 	QueryPerformanceFrequency(&pData->m_frequency);
@@ -36,13 +36,13 @@ winCpuTickTimer<T>::winCpuTickTimer() : pData(new Data)
 }
 
 template <typename T>
-winCpuTickTimer<T>::~winCpuTickTimer()
+TickTimer<T>::~TickTimer()
 {
 	delete pData;
 }
 
 template <typename T>
-void winCpuTickTimer<T>::StartClock()
+void TickTimer<T>::StartClock()
 {
 	pData->m_deltaTime = T(0);
 
@@ -55,13 +55,13 @@ void winCpuTickTimer<T>::StartClock()
 }
 
 template <typename T>
-void winCpuTickTimer<T>::ResetStartTime()
+void TickTimer<T>::ResetStartTime()
 {
 	QueryPerformanceCounter(&pData->m_starttime);
 }
 
 template <typename T>
-T winCpuTickTimer<T>::GetTimeSinceStart()
+T TickTimer<T>::GetTimeSinceStart()
 {
 	QueryPerformanceCounter(&pData->m_endtime);
 	double difference = (double)(pData->m_endtime.QuadPart - pData->m_starttime.QuadPart);
@@ -70,13 +70,13 @@ T winCpuTickTimer<T>::GetTimeSinceStart()
 }
 
 template <typename T>
-T winCpuTickTimer<T>::GetDeltaTime()
+T TickTimer<T>::GetDeltaTime()
 {
 	return pData->m_deltaTime;
 }
 
 template <typename T>
-void winCpuTickTimer<T>::UpdateDeltaTime()
+void TickTimer<T>::UpdateDeltaTime()
 {
 	LARGE_INTEGER aux = pData->m_currentTime;
 	QueryPerformanceCounter(&pData->m_currentTime);

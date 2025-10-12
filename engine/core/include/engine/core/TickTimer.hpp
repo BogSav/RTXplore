@@ -9,11 +9,11 @@ namespace misc
 // Ultra precision timer
 // Se foloseste de frecventa la cpu si tick-uri
 template <typename T>
-class winCpuTickTimer
+class TickTimer
 {
 public:
-	winCpuTickTimer();
-	~winCpuTickTimer();
+	TickTimer();
+	~TickTimer();
 
 	T GetTimeSinceStart();
 	T GetDeltaTime();
