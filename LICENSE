@@ -1,0 +1,56 @@
+RTXplore Source-Available License (ESAL) v1.1
+Copyright (c) 2025 Sava Nicolae-Bogdan
+Initial Publication Date: 2025-10-11
+License Version Date: 2025-10-12
+
+1. Definitions
+   "Software" means all source code, configuration, assets, and documentation in this repository named "RTXplore".
+   "Maintainer" means the copyright holder listed above.
+   "User" means any individual or entity accessing the Software.
+
+2. Grant
+   Subject to the terms below, the Maintainer grants User a limited, revocable, non-exclusive, non-transferable right to:
+   a. View and locally clone the Software for personal evaluation.
+   b. Run the Software privately for non-commercial, non-public testing.
+   c. Submit issues or propose contributions only after Maintainer approval.
+
+3. Restrictions
+   Unless prior written permission is granted by the Maintainer, User MUST NOT:
+   a. Modify, adapt, translate, or create derivative works.
+   b. Publish, distribute, sublicense, sell, rent, or host the Software (or any substantial portion) publicly.
+   c. Use the Software (or derivatives) in any commercial, client, academic, or production context.
+   d. Remove or alter copyright, authorship, or attribution notices.
+   e. Use names, branding, or "RTXplore" project identity to market other software.
+
+4. Contributions
+   No contribution is accepted by default. Upon explicit written approval:
+   a. User certifies the contribution is original and grants the Maintainer a perpetual, worldwide, irrevocable right to use, modify, relicense, and distribute it as part of the Software.
+   b. User waives any claim to compensation or ownership in combined works.
+
+5. Trademarks & Branding
+   All project names, logos, and branding remain the exclusive property of the Maintainer. No license to any trademark is granted.
+
+6. No Warranty
+   THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANsY KIND. THE MAINTAINER DISCLAIMS ALL IMPLIED WARRANTIES INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+
+7. Limitation of Liability
+   IN NO EVENT SHALL THE MAINTAINER BE LIABLE FOR ANY CLAIM, LOSS, OR DAMAGES (INCLUDING INDIRECT OR CONSEQUENTIAL) ARISING FROM USE OR INABILITY TO USE THE SOFTWARE.
+
+8. Termination
+   Any breach of this license automatically terminates all rights granted. Upon termination User must permanently delete all local copies (except as required by law). The Maintainer may revoke this license at any time for any reason.
+
+9. No Patent License
+   No patent rights are granted, implied, or waived.
+
+10. Governing Law
+    Jurisdiction and venue are determined by the Maintainer’s principal location unless otherwise required by applicable law.
+
+11. Entire Agreement
+    This document constitutes the entire agreement regarding the Software. If any part is invalid, the remainder remains in effect.
+
+12. Historical Record
+    The repository commit history (initial commit 81480b4c89748ae1795e3a68a1952736f0d00b58 dated 2025-10-11) serves as authoritative evidence of authorship and chronology. Any later claims conflicting with that history are invalid without written consent of the Maintainer.
+
+To request additional permissions (e.g., limited excerpt reproduction), contact the Maintainer directly.
+
+END OF TERMS
