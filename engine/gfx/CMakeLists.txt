@@ -90,6 +90,12 @@ target_link_libraries(engine_gfx
         engine_core
 )
 
+# Define the shader and texture directory paths
+target_compile_definitions(engine_gfx PRIVATE 
+    SHADER_DIR="${CMAKE_SOURCE_DIR}/engine/shaders/"
+    TEXTURE_DIR="${CMAKE_SOURCE_DIR}/assets/processed/"
+)
+
 # Standardul C++
 if(ENGINE_GFX_HEADER_ONLY)
     target_compile_features(engine_gfx INTERFACE cxx_std_20)
