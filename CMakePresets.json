@@ -38,12 +38,11 @@
     {
       "name": "ninja-msvc",
       "displayName": "Ninja Multi-Config (MSVC cl) - VS 2022",
-      "description": "Ninja Multi-Config preset using MSVC cl from the Visual Studio toolchain. Recommended with Visual Studio 17 2022 for fast multi-config builds from VS Code or the command line. Keeps full MSVC compatibility while exporting compile_commands.json for tooling. Output is placed under build/ninja-msvc.",
+      "description": "Ninja Multi-Config preset using MSVC (via VsDevCmd).",
       "inherits": ["base-msvc-runtime"],
       "generator": "Ninja Multi-Config",
       "binaryDir": "build/ninja-msvc",
       "cacheVariables": {
-        "CMAKE_CXX_COMPILER": "cl",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
       }
     }

@@ -1,4 +1,4 @@
-message(STATUS "Configuring sandbox application")
+message(STATUS "Configuring sample application")
 
 file(GLOB APP_SRC CONFIGURE_DEPENDS src/*.cpp)
 
