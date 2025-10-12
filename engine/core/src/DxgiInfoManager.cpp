@@ -2,7 +2,7 @@
 
 #include "WindowsThrowMacros.hpp"
 
-#ifdef DEBUG
+#ifdef _DEBUG
 DxgiInfoManager::Ptr DxgiInfoManager::instance = nullptr;
 
 DxgiInfoManager::DxgiInfoManager()

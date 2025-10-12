@@ -11,12 +11,12 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
 # Global compile definitions
-add_compile_definitions(DEBUG)
+# You can enable debug features from here, by uncomenting the line below
+#add_compile_definitions(_DEBUG)
 
 # For Windows builds, enable UNICODE - this will enable wide-char support in WinAPI
 # Currently, the entire engine is using wide-char strings
 add_compile_definitions(UNICODE _UNICODE)
-
 
 # --- DXC/FXC discovery (prefer DXC/SM6, fallback FXC/SM5.1, else FATAL) ---
 

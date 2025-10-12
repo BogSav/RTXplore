@@ -8,7 +8,7 @@
 	if (FAILED(hr = (hrcall)))   \
 	throw misc::HrException(__LINE__, __FILE__, hr)
 
-#ifndef NDEBUG
+#ifdef _DEBUG
 #define GFX_EXCEPT(hr) misc::HrException(__LINE__, __FILE__, (hr), DxgiInfoManager::GetInstance().GetMessages())
 
 #define GFX_THROW_INFO(hrcall)					\

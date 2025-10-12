@@ -10,7 +10,7 @@ void DisplayMessageBox(Window* window, const char* what, const char* type)
 
 int main()
 {
-#ifdef DEBUG
+#ifdef _DEBUG
 	// _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	_CrtMemState sOld;
 	_CrtMemState sNew;
@@ -44,7 +44,7 @@ int main()
 
 	GraphicsResources::DestroyInstance();
 
-#ifdef DEBUG
+#ifdef _DEBUG
 	DxgiInfoManager::DestroyInstance();
 
 	_CrtMemCheckpoint(&sNew);

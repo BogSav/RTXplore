@@ -7,7 +7,7 @@
 #include <vector>
 
 // Singleton global, se creaza static direct in .cpp
-#ifdef DEBUG
+#ifdef _DEBUG
 class DxgiInfoManager
 {
 private:
