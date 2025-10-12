@@ -63,7 +63,7 @@ void SkyBoxRenderer::Render(misc::rasterization::RenderLayer::Value renderLayer)
 		break;
 	case misc::rasterization::RenderLayer::ShadowMap:
 	case misc::rasterization::RenderLayer::DebugShadowMap:
-	default: throw misc::customException("Tip de randare inexistent!!");
+	default: throw misc::CustomException("Tip de randare inexistent!!");
 	}
 }
 

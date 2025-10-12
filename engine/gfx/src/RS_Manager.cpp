@@ -1,7 +1,7 @@
 #include "RS_Manager.hpp"
 
 #include "Utilities.hpp"
-#include "engine/core/customException.hpp"
+#include "engine/core/CustomException.hpp"
 #include "engine/core/Settings.hpp"
 
 // Ocuparea registrilor:
@@ -53,7 +53,7 @@ RootSignature::Ptr RS_Manager::GetRootSignature(std::string name) const
 {
 	auto it = m_rootSignatures.find(name);
 	if (it == m_rootSignatures.end())
-		throw misc::customException("Root siganture nu exista sau nu a fost creat inca");
+		throw misc::CustomException("Root siganture nu exista sau nu a fost creat inca");
 
 	return it->second;
 }

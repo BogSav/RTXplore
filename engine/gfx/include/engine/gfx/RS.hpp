@@ -1,6 +1,6 @@
 #pragma once
 
-#include "engine/core/customException.hpp"
+#include "engine/core/CustomException.hpp"
 #include "d3dx12.h"
 
 class RootSignature

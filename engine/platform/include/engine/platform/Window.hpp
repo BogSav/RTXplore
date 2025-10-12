@@ -3,7 +3,7 @@
 #include "engine/gfx/GraphicsResources.hpp"
 #include "Keyboard.hpp"
 #include "Mouse.hpp"
-#include "engine/core/customException.hpp"
+#include "engine/core/CustomException.hpp"
 
 class WindowClass
 {
@@ -29,9 +29,9 @@ private:
 class Window
 {
 public:
-	class Exception : public misc::customException
+	class Exception : public misc::CustomException
 	{
-		using misc::customException::customException;
+		using misc::CustomException::CustomException;
 
 	public:
 		static std::string TranslateErrorCode(HRESULT hr) noexcept;

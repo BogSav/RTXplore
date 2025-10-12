@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include "engine/math/AxisAllignedBBox.hpp"
-#include "engine/core/customException.hpp"
+#include "engine/core/CustomException.hpp"
 
 #include <vector>
 
@@ -52,14 +52,14 @@ public:
 	const Vertex* GetVerticesData() const
 	{
 		if (m_vertices.empty())
-			throw misc::customException("Nu exista vertexi in mesh");
+			throw misc::CustomException("Nu exista vertexi in mesh");
 
 		return &m_vertices[0];
 	}
 	const Index* GetIndicesData() const
 	{
 		if (m_indices.empty())
-			throw misc::customException("Nu exista indecsi in mesh");
+			throw misc::CustomException("Nu exista indecsi in mesh");
 
 		return &m_indices[0];
 	}

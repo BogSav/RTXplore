@@ -140,7 +140,7 @@ void RootSignature::Finalize(ID3D12Device5* pDevice)
 	if (FAILED(D3DX12SerializeVersionedRootSignature(&m_descriptor, featureData.HighestVersion, &signature, &error)))
 	{
 		const std::string msg = misc::convertBlobToString(error.Get());
-		throw misc::customException(msg);
+		throw misc::CustomException(msg);
 	}
 
 	GFX_THROW_INFO(pDevice->CreateRootSignature(

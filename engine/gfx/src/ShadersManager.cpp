@@ -151,14 +151,14 @@ ShadersManager::ShaderPtr ShadersManager::CompileShader(
 	const auto dxCompilerLib = LoadLibraryEx(L"dxcompiler.dll", nullptr, LOAD_LIBRARY_SEARCH_SYSTEM32);
 	if (dxCompilerLib == nullptr)
 	{
-		throw misc::customException("Nu a fost gasit fisierul .dll");
+		throw misc::CustomException("Nu a fost gasit fisierul .dll");
 	}
 
 	const auto DxcCreateInstance = reinterpret_cast<DxcCreateInstanceDefinition>(
 		reinterpret_cast<void*>(GetProcAddress(dxCompilerLib, "DxcCreateInstance")));
 	if (DxcCreateInstance == nullptr)
 	{
-		throw misc::customException("Nu a fost gasita functia DxcCreateInstance in .dll");
+		throw misc::CustomException("Nu a fost gasita functia DxcCreateInstance in .dll");
 	}
 
 	// Creem libraria (obiect ajutator) si creem si compilatorul
@@ -219,12 +219,12 @@ ShadersManager::ShaderPtr ShadersManager::CompileShader(
 	if (SUCCEEDED(pResult->GetOutput(DXC_OUT_ERRORS, IID_PPV_ARGS(&pErrors), nullptr)) && pErrors != nullptr
 		&& pErrors->GetStringLength() != 0)
 	{
-		throw misc::customException(pErrors->GetStringPointer());
+		throw misc::CustomException(pErrors->GetStringPointer());
 	}
 
 	if (FAILED(pResult->GetStatus(&hr)) || FAILED(hr))
 	{
-		throw misc::customException("Compilation failed");
+		throw misc::CustomException("Compilation failed");
 	}
 
 	// pResult->GetStatus(&hr);

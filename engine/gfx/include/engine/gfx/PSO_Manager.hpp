@@ -36,7 +36,7 @@ inline PSOType::Ptr PSO_Manager<PSOType>::GetPSO(std::string PSOname)
 {
 	auto it = PSOs.find(PSOname);
 	if (it == PSOs.end())
-		throw misc::customException("PSO-ul nu exista sau nu a fost creat");
+		throw misc::CustomException("PSO-ul nu exista sau nu a fost creat");
 
 	return it->second;
 }

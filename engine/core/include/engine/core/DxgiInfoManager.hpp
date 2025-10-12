@@ -1,6 +1,6 @@
 #pragma once
 
-#include "customException.hpp"
+#include "CustomException.hpp"
 
 #include <dxgidebug.h>
 #include <wrl/client.h>

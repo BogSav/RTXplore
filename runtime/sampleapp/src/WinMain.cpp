@@ -25,7 +25,7 @@ int main()
 		App app(*window);
 		app.Run();
 	}
-	catch (const misc::customException& e)
+	catch (const misc::CustomException& e)
 	{
 		OutputDebugStringA(e.what());
 		DisplayMessageBox(window.get(), e.what(), e.GetType());

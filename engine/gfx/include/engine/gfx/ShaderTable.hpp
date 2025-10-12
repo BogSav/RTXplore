@@ -72,7 +72,7 @@ public:
 	void push_back(const ShaderRecord& shaderRecord)
 	{
 		if (m_shaderRecords.size() >= m_shaderRecords.capacity())
-			throw misc::customException("Shader table capacity exceeded");
+			throw misc::CustomException("Shader table capacity exceeded");
 		
 		m_shaderRecords.push_back(shaderRecord);
 		shaderRecord.CopyTo(m_mappedShaderRecords);

@@ -7,11 +7,11 @@
 namespace misc
 {
 
-class customException : public std::exception
+class CustomException : public std::exception
 {
 public:
-	customException(std::string what) noexcept;
-	customException(int line, const char* file) noexcept;
+	CustomException(std::string what) noexcept;
+	CustomException(int line, const char* file) noexcept;
 
 	const char* what() const noexcept override;
 	

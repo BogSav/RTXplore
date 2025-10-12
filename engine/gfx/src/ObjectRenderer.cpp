@@ -159,7 +159,7 @@ void ObjectRenderer::Render(misc::rasterization::RenderLayer::Value renderLayer)
 	//	(*std::prev(m_objects.end()))->Render(pGraphicsResources, renderLayer);
 
 	//	break;
-	default: throw misc::customException("Tip de randare inexistent!!");
+	default: throw misc::CustomException("Tip de randare inexistent!!");
 	}
 }
 

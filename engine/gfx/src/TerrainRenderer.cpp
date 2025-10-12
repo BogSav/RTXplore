@@ -135,7 +135,7 @@ void TerrainRenderer::Render(misc::rasterization::RenderLayer::Value renderLayer
 
 		break;
 	case RenderLayer::DebugShadowMap:
-	default: throw misc::customException("Tip de randare inexistent!!");
+	default: throw misc::CustomException("Tip de randare inexistent!!");
 	}
 }
 

@@ -160,7 +160,7 @@ void GraphicsResources::CreateDeviceResources()
 		misc::GetHardwareAdapter(pFactory.Get(), &hardwareAdapter, m_featureLevel, m_minimalFeatureLevel);
 
 		if (!misc::IsRayTracingSupported(hardwareAdapter.Get(), m_featureLevel) && Settings::UseRayTracing())
-			throw misc::customException("RayTracing is not supported");
+			throw misc::CustomException("RayTracing is not supported");
 
 		GFX_THROW_INFO(D3D12CreateDevice(hardwareAdapter.Get(), m_featureLevel, IID_PPV_ARGS(&pDevice)));
 	}

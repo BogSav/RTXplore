@@ -127,7 +127,7 @@ void GetHardwareAdapter(
 	outMaxFeatureLevel = maxSupportedFeatureLevel;
 
 	if (outMaxFeatureLevel < minimalFeatureLevel)
-		throw misc::customException("Incomaptible feature level");
+		throw misc::CustomException("Incomaptible feature level");
 }
 
 void PrintStateObjectDesc(const D3D12_STATE_OBJECT_DESC* desc)

@@ -31,7 +31,7 @@ void GraphicsPSO::SetSampleMask(UINT SampleMask)
 void GraphicsPSO::SetPrimitiveTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE TopologyType)
 {
 	if (TopologyType == D3D12_PRIMITIVE_TOPOLOGY_TYPE_UNDEFINED)
-		throw misc::customException("Nu se poate crea PSO cu topologie undefined");
+		throw misc::CustomException("Nu se poate crea PSO cu topologie undefined");
 	m_PSODesc.PrimitiveTopologyType = TopologyType;
 }
 

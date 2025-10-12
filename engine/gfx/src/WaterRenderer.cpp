@@ -168,8 +168,8 @@ void WaterRenderer::Render(misc::rasterization::RenderLayer::Value renderLayer) 
 		break;
 	case RenderLayer::CubeMap:
 	case RenderLayer::ShadowMap:
-	case RenderLayer::DebugShadowMap: throw misc::customException("Tip de randare nesuportat");
-	default: throw misc::customException("Tip de randare inexistent!!");
+	case RenderLayer::DebugShadowMap: throw misc::CustomException("Tip de randare nesuportat");
+	default: throw misc::CustomException("Tip de randare inexistent!!");
 	}
 }
 

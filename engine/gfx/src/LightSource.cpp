@@ -10,7 +10,7 @@ LightSource::LightSource(Type type) : m_type(type)
 {
 	switch (m_type)
 	{
-	case LightSource::Type::NONE: throw misc ::customException("Sursa de lumina nu trebuei sa fie None"); break;
+	case LightSource::Type::NONE: throw misc ::CustomException("Sursa de lumina nu trebuei sa fie None"); break;
 	case LightSource::Type::DIRECTIONAL_LIGHT: m_id = nrOfDirectionalLights++; break;
 	case LightSource::Type::POINT_LIGHT:
 		m_id = Settings ::GetGameSettings().GetMaxNumberOfDirectionalLights() + nrOfPointLights++;
@@ -19,7 +19,7 @@ LightSource::LightSource(Type type) : m_type(type)
 		m_id = Settings::GetGameSettings().GetMaxNumberOfDirectionalLights()
 			+ Settings::GetGameSettings().GetMaxNumberOfPointLights() + nrOfSpotLights++;
 		break;
-	default: throw misc::customException("Type of LightSource not supported"); break;
+	default: throw misc::CustomException("Type of LightSource not supported"); break;
 	}
 
 	assert(nrOfDirectionalLights <= Settings::GetGameSettings().GetMaxNumberOfDirectionalLights());

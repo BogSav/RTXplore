@@ -1,16 +1,16 @@
 #pragma once
 
 #include "WinInclude.hpp"
-#include "customException.hpp"
+#include "CustomException.hpp"
 
 #include <vector>
 
 namespace misc
 {
 
-class Exception : public misc::customException
+class Exception : public misc::CustomException
 {
-	using misc::customException::customException;
+	using misc::CustomException::CustomException;
 };
 
 class HrException : public Exception
