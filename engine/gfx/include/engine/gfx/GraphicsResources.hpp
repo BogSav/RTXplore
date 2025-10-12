@@ -9,6 +9,9 @@
 #include "engine/core/DxgiInfoManager.hpp"
 #include "Texture.hpp"
 
+namespace engine::gfx
+{
+
 class GraphicsResources
 {
 public:
@@ -97,3 +100,5 @@ inline const engine::gfx::DescriptorHeap& GraphicsResources::GetDescriptorHeap(D
 {
 	return m_descriptorHeaps[heapType];
 }
+
+}  // namespace engine::gfx

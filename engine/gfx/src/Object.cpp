@@ -2,6 +2,9 @@
 
 #include "GeometryGenerator.hpp"
 
+namespace engine::gfx
+{
+
 using namespace engine::gfx::rasterization;
 using namespace engine::gfx::render_descriptors;
 using namespace engine::gfx::RSBinding;
@@ -154,3 +157,5 @@ void Object::DecreaseDirtyCount()
 	m_dirtyCount--;
 	assert(m_dirtyCount >= 0);
 }
+
+}  // namespace engine::gfx

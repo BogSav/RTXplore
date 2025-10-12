@@ -4,6 +4,9 @@
 #include "ShadersManager.hpp"
 #include "RayTracingGraphics.hpp"
 
+namespace engine::gfx
+{
+
 #define GET_SHADER_DATA(name) shadersManager.GetBufferPointer(name), shadersManager.GetBufferSize(name)
 #define GET_RT_SHADER_DATA(name) (void*)shadersManager.GetBufferPointer(name), shadersManager.GetBufferSize(name)
 
@@ -481,3 +484,5 @@ RayTracingPSO::Ptr PipelineStateLoader::LoadDefaultRayTracingPipelineState(
 
 	return pso;
 }
+
+}  // namespace engine::gfx

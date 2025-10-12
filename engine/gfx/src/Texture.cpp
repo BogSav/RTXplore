@@ -2,6 +2,9 @@
 
 #include "GraphicsResources.hpp"
 
+namespace engine::gfx
+{
+
 ////////////////////////////////////////////////////////////////////////////////////////////
 // Creare Handleri si Descriptori
 void Texture::AllocateSrvHandle(DXGI_FORMAT srvFormat, D3D12_SHADER_RESOURCE_VIEW_DESC* srvDescriptor)
@@ -417,3 +420,5 @@ Texture::Texture(bool isNonPixelShaderResource, bool isCubeMap)
 	: m_isCubeMap(isCubeMap), m_isNonPixelShaderResource(isNonPixelShaderResource)
 {
 }
+
+}  // namespace engine::gfx

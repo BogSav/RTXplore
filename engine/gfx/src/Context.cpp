@@ -4,6 +4,9 @@
 #include "engine/core/DxgiInfoManager.hpp"
 #include "GraphicsResources.hpp"
 
+namespace engine::gfx
+{
+
 void ContextManager::Create()
 {
 	HRESULT hr;
@@ -355,3 +358,5 @@ void ContextManager::SwapContext()
 
 	GetGraphicsContext().IsReadyOrWait();
 }
+
+}  // namespace engine::gfx

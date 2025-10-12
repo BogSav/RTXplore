@@ -3,6 +3,9 @@
 #include "Utilities.hpp"
 #include "engine/math/Vector.hpp"
 
+namespace engine::gfx
+{
+
 class LightSource
 {
 public:
@@ -34,3 +37,5 @@ private:
 	Type m_type;
 	size_t m_id;
 };
+
+}  // namespace engine::gfx

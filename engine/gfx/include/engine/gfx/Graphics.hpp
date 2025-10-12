@@ -13,6 +13,9 @@
 #include "TextureRenderer.hpp"
 #include "WaterRenderer.hpp"
 
+namespace engine::gfx
+{
+
 class Graphics
 {
 public:
@@ -84,3 +87,5 @@ protected:
 
 	UINT m_renderMode = RenderMode::Everything;
 };
+
+}  // namespace engine::gfx

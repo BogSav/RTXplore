@@ -4,6 +4,9 @@
 #include "GeometryGenerator.hpp"
 #include "engine/math/SimplexNoise.hpp"
 
+namespace engine::gfx
+{
+
 using namespace engine::gfx::RSBinding;
 using namespace engine::gfx::rasterization;
 using namespace engine::gfx::render_descriptors;
@@ -177,3 +180,5 @@ void TerrainRenderer::FrustumCulling(const CameraController& cameraController)
 			&& cameraController.GetWorldSpaceFrustum().IntersectBoundingBox(chunk.GetAABB()));
 	}
 }
+
+}  // namespace engine::gfx

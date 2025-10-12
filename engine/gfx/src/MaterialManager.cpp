@@ -2,6 +2,9 @@
 
 #include "FrameResources.hpp"
 
+namespace engine::gfx
+{
+
 engine::math::Vector3 MaterialManager::ShlickCoefficients::Water = engine::math::Vector3(0.02, 0.02, 0.02);
 engine::math::Vector3 MaterialManager::ShlickCoefficients::Glass = engine::math::Vector3(0.08, 0.08, 0.08);
 engine::math::Vector3 MaterialManager::ShlickCoefficients::Plastic = engine::math::Vector3(0.05, 0.05, 0.05);
@@ -77,3 +80,5 @@ void MaterialManager::Material::SetMaterialProperties(const MaterialProperties& 
 {
 	m_materialProperties = materialProperties;
 }
+
+}  // namespace engine::gfx

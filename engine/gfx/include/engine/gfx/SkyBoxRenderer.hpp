@@ -3,6 +3,9 @@
 #include "GeometryRenderer.hpp"
 #include "Object.hpp"
 
+namespace engine::gfx
+{
+
 class SkyBoxRenderer : public GeometryRenderer, public Object
 {
 public:
@@ -29,3 +32,5 @@ private:
 	engine::math::Vector3 m_rotationAxis = {};
 	float m_rotationSpeed = 0.f;
 };
+
+}  // namespace engine::gfx

@@ -3,6 +3,9 @@
 #include "GPUBuffers.hpp"
 #include "Utilities.hpp"
 
+namespace engine::gfx
+{
+
 class ObjectRenderer;
 class Object;
 class WaterRenderer;
@@ -70,3 +73,5 @@ private:
 	static UINT objectCB_ID;
 	static UINT materialCB_ID;
 };
+
+}  // namespace engine::gfx

@@ -2,6 +2,9 @@
 
 #include "Camera.hpp"
 
+namespace engine::gfx
+{
+
 CameraController::CameraController(PerspectiveCamera& camera) : m_camera(camera)
 {
 	SetDirty();
@@ -148,3 +151,5 @@ void CubeMapCameraController::Update(const engine::math::Vector3 center)
 		m_worldSpaceFrustums[i] = m_viewSpaceFrustums[i].GetTransformedFrustum(m_cameras[i].m_invViewMatrix);
 	}
 }
+
+}  // namespace engine::gfx

@@ -2,6 +2,9 @@
 
 #include "GeometryGenerator.hpp"
 
+namespace engine::gfx
+{
+
 using namespace engine::gfx::rasterization;
 using namespace engine::gfx::RSBinding;
 using namespace engine::gfx::render_descriptors;
@@ -93,3 +96,5 @@ void SkyBoxRenderer::FrustumCulling(const CameraController& cameraController)
 {
 	return;
 }
+
+}  // namespace engine::gfx

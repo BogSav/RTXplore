@@ -1,9 +1,12 @@
-﻿#pragma once
+#pragma once
 
 #include "engine/math/AxisAllignedBBox.hpp"
 #include "engine/core/CustomException.hpp"
 
 #include <vector>
+
+namespace engine::gfx
+{
 
 class Mesh
 {
@@ -100,3 +103,5 @@ struct SubMesh
 	size_t startIndexLocation;
 	size_t baseVertexLocation;
 };
+
+}  // namespace engine::gfx

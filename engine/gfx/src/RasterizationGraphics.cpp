@@ -1,6 +1,9 @@
-﻿#include "RasterizationGraphics.hpp"
+#include "RasterizationGraphics.hpp"
 
 #include "engine/math/Frustum.hpp"
+
+namespace engine::gfx
+{
 
 using namespace Microsoft::WRL;
 using namespace engine::gfx::RSBinding;
@@ -368,3 +371,5 @@ void RasterizationGraphics::PopulateCommandList()
 
 	//m_textureRenderer->Render(RenderLayer::Base);
 }
+
+}  // namespace engine::gfx

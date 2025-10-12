@@ -3,6 +3,9 @@
 #include "Camera.hpp"
 #include "Context.hpp"
 
+namespace engine::gfx
+{
+
 class ShadowMap
 {
 public:
@@ -62,3 +65,5 @@ inline void ShadowMap::DecreaseDirtyCount()
 
 	m_framesDirty--;
 }
+
+}  // namespace engine::gfx

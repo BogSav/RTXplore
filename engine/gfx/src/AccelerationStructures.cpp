@@ -2,6 +2,9 @@
 
 #include "GraphicsResources.hpp"
 
+namespace engine::gfx
+{
+
 void BottomLevelAccelerationStructure::Build(
 	std::vector<D3D12_RAYTRACING_GEOMETRY_DESC>& geometryDescriptors,
 	D3D12_RAYTRACING_ACCELERATION_STRUCTURE_BUILD_FLAGS buildFlags)
@@ -102,3 +105,5 @@ void TopLevelAccelerationStructure::CreateSRV()
 {
 	m_SRVHandle = GpuResource::CreateAccelerationStructureSRV(*this);
 }
+
+}  // namespace engine::gfx

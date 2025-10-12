@@ -2,6 +2,9 @@
 
 #include "GeometryHelper.hpp"
 
+namespace engine::gfx
+{
+
 class GeometryGenerator
 {
 public:
@@ -35,3 +38,5 @@ public:
 		const int chunkKernelSize,
 		const int chunkCountPerSide);
 };
+
+}  // namespace engine::gfx

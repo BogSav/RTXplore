@@ -6,6 +6,9 @@
 #include "GPUBuffers.hpp"
 #include "engine/math/Color.hpp"
 
+namespace engine::gfx
+{
+
 class Texture : public GpuResource
 {
 public:
@@ -110,3 +113,5 @@ private:
 
 	engine::gfx::DescriptorHandle m_DsvHandle;
 };
+
+}  // namespace engine::gfx

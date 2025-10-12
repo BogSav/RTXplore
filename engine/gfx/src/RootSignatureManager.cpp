@@ -4,6 +4,9 @@
 #include "engine/core/CustomException.hpp"
 #include "engine/core/Settings.hpp"
 
+namespace engine::gfx
+{
+
 // Ocuparea registrilor:
 // t0, space0 - texture environmental (skybox/reflectii)
 // t1, space0 - textura de shadow (shadow map)
@@ -296,3 +299,5 @@ RootSignature::Ptr RootSignatureManager::CreateWavesRS(ID3D12Device10* pDevice)
 
 	return rs;
 }
+
+}  // namespace engine::gfx

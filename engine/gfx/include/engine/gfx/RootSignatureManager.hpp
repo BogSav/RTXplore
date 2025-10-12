@@ -5,6 +5,9 @@
 #include <unordered_map>
 #include <functional>
 
+namespace engine::gfx
+{
+
 class RootSignatureManager
 {
 public:
@@ -39,3 +42,5 @@ private:
 
 	bool firstLoad = true;
 };
+
+}  // namespace engine::gfx

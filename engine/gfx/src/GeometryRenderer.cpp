@@ -1,5 +1,8 @@
 #include "GeometryRenderer.hpp"
 
+namespace engine::gfx
+{
+
 void GeometryRenderer::ReleaseUploadBuffers()
 {
 	// m_vertexBuffer->ReleaseUploadBuffer();
@@ -34,3 +37,5 @@ void GeometryRenderer::CreateVertexAndIndexBuffer(bool allocateSRVs)
 GeometryRenderer::~GeometryRenderer()
 {
 }
+
+}  // namespace engine::gfx

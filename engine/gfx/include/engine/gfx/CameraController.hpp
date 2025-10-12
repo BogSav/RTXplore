@@ -6,6 +6,9 @@
 
 #include <array>
 
+namespace engine::gfx
+{
+
 class CameraController
 {
 public:
@@ -86,3 +89,5 @@ inline void CameraController::SetDirty()
 {
 	m_framesDirty = engine::core::Settings::GetFrameResourcesCount();
 }
+
+}  // namespace engine::gfx

@@ -3,6 +3,9 @@
 #include "engine/core/CustomException.hpp"
 #include "d3dx12.h"
 
+namespace engine::gfx
+{
+
 class RootSignature
 {
 public:
@@ -38,3 +41,5 @@ private:
 
 	Microsoft::WRL::ComPtr<ID3D12RootSignature> pRootSignature;
 };
+
+}  // namespace engine::gfx

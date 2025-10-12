@@ -5,6 +5,9 @@
 
 #include <map>
 
+namespace engine::gfx
+{
+
 using namespace engine::gfx::rasterization;
 using namespace engine::gfx::render_descriptors;
 
@@ -170,3 +173,5 @@ void ObjectRenderer::FrustumCulling(const CameraController& cameraController)
 		object->SetVisible(cameraController.GetWorldSpaceFrustum().IntersectBoundingBox(object->GetWorldSpaceAABB()));
 	}
 }
+
+}  // namespace engine::gfx

@@ -2,6 +2,9 @@
 
 #include "GPUBuffers.hpp"
 
+namespace engine::gfx
+{
+
 struct AccelerationStructureBuffers
 {
 	GpuResource scratch;
@@ -38,3 +41,5 @@ public:
 private:
 	engine::gfx::DescriptorHandle m_SRVHandle;
 };
+
+}  // namespace engine::gfx

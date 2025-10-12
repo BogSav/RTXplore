@@ -8,6 +8,9 @@
 #include <type_traits>
 #include <variant>
 
+namespace engine::gfx
+{
+
 class GpuResource
 {
 	friend class CommandContext;
@@ -253,3 +256,5 @@ private:
 
 	engine::gfx::DescriptorHandle m_SRVHandle;
 };
+
+}  // namespace engine::gfx

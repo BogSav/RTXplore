@@ -9,6 +9,9 @@
 
 #include "engine/core/Settings.hpp"
 
+namespace engine::gfx
+{
+
 class ComputeContext;
 class GraphicsContext;
 
@@ -345,3 +348,5 @@ inline void ComputeContext::DispatchRays(D3D12_DISPATCH_RAYS_DESC* desc)
 {
 	pCommandList->DispatchRays(desc);
 }
+
+}  // namespace engine::gfx

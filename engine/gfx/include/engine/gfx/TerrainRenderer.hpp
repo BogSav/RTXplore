@@ -3,6 +3,9 @@
 #include "GeometryRenderer.hpp"
 #include "Object.hpp"
 
+namespace engine::gfx
+{
+
 class TerrainRenderer : public GeometryRenderer, public Object
 {
 public:
@@ -23,3 +26,5 @@ private:
 
 	std::vector<Chunk> m_chunks;
 };
+
+}  // namespace engine::gfx

@@ -6,6 +6,9 @@
 
 #include <unordered_map>
 
+namespace engine::gfx
+{
+
 class ObjectRenderer : public GeometryRenderer
 {
 public:
@@ -38,3 +41,5 @@ private:
 
 	std::vector<Object::Ptr> m_objects;
 };
+
+}  // namespace engine::gfx

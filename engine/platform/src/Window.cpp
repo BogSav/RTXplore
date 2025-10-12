@@ -85,7 +85,7 @@ Window::Window(int width, int height, const wchar_t* name) : width(width), heigh
 		throw UPWND_LAST_EXCEPT();
 	}
 
-	GraphicsResources::GetInstance().LoadResources(hWnd);
+	engine::gfx::GraphicsResources::GetInstance().LoadResources(hWnd);
 
 	ShowWindow(hWnd, SW_SHOWDEFAULT);
 }
@@ -219,7 +219,7 @@ LRESULT Window::HandleMessage(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	case WM_SIZE:
 		RECT clientRect = {};
 		GetClientRect(hWnd, &clientRect);
-		GraphicsResources::GetInstance().OnSizeChanged(
+		engine::gfx::GraphicsResources::GetInstance().OnSizeChanged(
 			clientRect.right - clientRect.left, clientRect.bottom - clientRect.top);
 		width = engine::core::Settings::GetGraphicsSettings().GetWidth();
 		height = engine::core::Settings::GetGraphicsSettings().GetHeight();

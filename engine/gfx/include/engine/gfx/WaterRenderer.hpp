@@ -3,6 +3,9 @@
 #include "GeometryRenderer.hpp"
 #include "Object.hpp"
 
+namespace engine::gfx
+{
+
 class WaterRenderer : public GeometryRenderer, public Object
 {
 public:
@@ -42,3 +45,5 @@ private:
 	engine::math::Vector3 m_cubeMapCenter;
 	float m_cubeMapSphereRadius;
 };
+
+}  // namespace engine::gfx

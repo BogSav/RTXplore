@@ -42,7 +42,7 @@ int main()
 	delete window.release();
 	window = nullptr;
 
-	GraphicsResources::DestroyInstance();
+	engine::gfx::GraphicsResources::DestroyInstance();
 
 #ifdef _DEBUG
 	engine::core::DxgiInfoManager::DestroyInstance();

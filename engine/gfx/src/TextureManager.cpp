@@ -1,4 +1,4 @@
-﻿#include "TextureManager.hpp"
+#include "TextureManager.hpp"
 
 #include "engine/core/DxgiInfoManager.hpp"
 #include "engine/core/Utilities.hpp"
@@ -8,6 +8,9 @@
 #include <ResourceUploadBatch.h>
 
 #include <memory>
+
+namespace engine::gfx
+{
 
 using namespace DirectX;
 
@@ -107,3 +110,5 @@ const ColorTexture& TextureManager::GetTexture(std::wstring textureName) const
 		m_textures.end(),
 		[&textureName](const auto& texture) { return texture->GetName() == textureName; });
 }
+
+}  // namespace engine::gfx

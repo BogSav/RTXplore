@@ -2,6 +2,9 @@
 
 #include "GeometryRenderer.hpp"
 
+namespace engine::gfx
+{
+
 class TextureRenderer : public GeometryRenderer
 {
 public:
@@ -24,3 +27,5 @@ private:
 private:
 	engine::gfx::DescriptorHandle m_textureSRVHandle;
 };
+
+}  // namespace engine::gfx

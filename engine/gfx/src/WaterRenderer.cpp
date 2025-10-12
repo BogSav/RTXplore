@@ -2,6 +2,9 @@
 
 #include "GeometryGenerator.hpp"
 
+namespace engine::gfx
+{
+
 using namespace engine::gfx::rasterization;
 using namespace engine::gfx::render_descriptors;
 using namespace engine::gfx::RSBinding;
@@ -195,3 +198,5 @@ void WaterRenderer::BuildAccelerationStructures()
 	m_bottomLevelAccelerationStructure.Build(
 		geomDescs, D3D12_RAYTRACING_ACCELERATION_STRUCTURE_BUILD_FLAG_PREFER_FAST_TRACE);
 }
+
+}  // namespace engine::gfx

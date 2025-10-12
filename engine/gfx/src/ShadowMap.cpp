@@ -2,6 +2,9 @@
 
 #include "engine/core/DxgiInfoManager.hpp"
 
+namespace engine::gfx
+{
+
 ShadowMap::ShadowMap(UINT width, UINT height) : m_width(width), m_height(height)
 {
 	m_isRenderDirty = true;
@@ -59,3 +62,5 @@ void ShadowMap::Update()
 
 	m_isRenderDirty = true;
 }
+
+}  // namespace engine::gfx

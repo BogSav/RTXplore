@@ -10,11 +10,11 @@ App::App(Window& wnd) : window(wnd)
 {
 	if (engine::core::Settings::UseRayTracing())
 	{
-		pGraphics = std::make_unique<RayTracingGraphics>(GraphicsResources::GetInstance());
+		pGraphics = std::make_unique<engine::gfx::RayTracingGraphics>(engine::gfx::GraphicsResources::GetInstance());
 	}
 	else
 	{
-		pGraphics = std::make_unique<RasterizationGraphics>(GraphicsResources::GetInstance());
+		pGraphics = std::make_unique<engine::gfx::RasterizationGraphics>(engine::gfx::GraphicsResources::GetInstance());
 	}
 }
 
@@ -38,10 +38,10 @@ int App::Run()
 
 void App::Update()
 {
-	if (GraphicsResources::GetInstance().GetSizeChnaged())
+	if (engine::gfx::GraphicsResources::GetInstance().GetSizeChnaged())
 	{
 		pGraphics->GetCameraController().RefreshCamera();
-		GraphicsResources::GetInstance().SetSizeChnaged(false);
+		engine::gfx::GraphicsResources::GetInstance().SetSizeChnaged(false);
 	}
 
 	if (window.GetMouse().LeftIsPressed())

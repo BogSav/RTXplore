@@ -4,6 +4,9 @@
 #include "GraphicsResources.hpp"
 #include "Mesh.hpp"
 
+namespace engine::gfx
+{
+
 class Object
 {
 public:
@@ -68,3 +71,5 @@ private:
 	UINT m_objectCB_ID;
 	UINT m_materialCB_ID;
 };
+
+}  // namespace engine::gfx

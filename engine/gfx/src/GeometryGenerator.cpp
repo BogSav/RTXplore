@@ -1,5 +1,8 @@
 #include "GeometryGenerator.hpp"
 
+namespace engine::gfx
+{
+
 Mesh::Ptr GeometryGenerator::GenerateCylinder(
 	const float bottomRadius, const float topRadius, const float height, const int stackCount, const int sliceCount)
 {
@@ -532,3 +535,5 @@ Mesh::Ptr GeometryGenerator::GenerateChunks(
 
 	return mesh;
 }
+
+}  // namespace engine::gfx

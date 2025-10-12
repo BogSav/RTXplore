@@ -10,6 +10,9 @@
 
 #include <variant>
 
+namespace engine::gfx
+{
+
 class GeometryRenderer
 {
 public:
@@ -80,3 +83,5 @@ protected:
 
 	BottomLevelAccelerationStructure m_bottomLevelAccelerationStructure;
 };
+
+}  // namespace engine::gfx

@@ -18,7 +18,7 @@ private:
 
 private:
 	Window& window;
-	Graphics::Ptr pGraphics;
+	engine::gfx::Graphics::Ptr pGraphics;
 
 	engine::core::TickTimer<float> m_timer;
 };

@@ -3,6 +3,9 @@
 #include "ShaderTable.hpp"
 #include "Graphics.hpp"
 
+namespace engine::gfx
+{
+
 class RayTracingGraphics : public Graphics
 {
 public:
@@ -35,3 +38,5 @@ private:
 	UINT64 m_missShaderTableStride;
 	UINT64 m_hitGroupShaderTableStride;
 };
+
+}  // namespace engine::gfx

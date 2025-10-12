@@ -1,9 +1,13 @@
-﻿#pragma once
+#pragma once
 
 #include "Mesh.hpp"
 
 #include <unordered_map>
 #include <functional>
+#include <string>
+
+namespace engine::gfx
+{
 
 struct GeometryHelper
 {
@@ -25,3 +29,5 @@ private:
 		Mesh::Ptr mesh,
 		std::vector<Mesh::Vertex>& newVertices);
 };
+
+}  // namespace engine::gfx

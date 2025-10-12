@@ -2,6 +2,9 @@
 
 #include "PipelineState.hpp"
 
+namespace engine::gfx
+{
+
 class ShadersManager;
 class RootSignatureManager;
 
@@ -25,3 +28,5 @@ struct PipelineStateLoader
 	static RayTracingPSO::Ptr LoadDefaultRayTracingPipelineState(
 		ID3D12Device10* pDevice, const RootSignatureManager& rs_manager, const ShadersManager& shadersManageer);
 };
+
+}  // namespace engine::gfx

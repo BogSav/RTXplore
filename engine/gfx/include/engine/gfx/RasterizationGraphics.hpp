@@ -5,6 +5,9 @@
 #include "ShadowMap.hpp"
 #include "engine/core/TickTimer.hpp"
 
+namespace engine::gfx
+{
+
 class RasterizationGraphics : public Graphics
 {
 public:
@@ -38,3 +41,5 @@ private:
 	ShadowMap::Ptr m_shadowMap;
 	TextureRenderer::Ptr m_textureRenderer;
 };
+
+}  // namespace engine::gfx

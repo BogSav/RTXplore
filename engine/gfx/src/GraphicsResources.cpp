@@ -4,6 +4,9 @@
 #include "engine/core/DxgiInfoManager.hpp"
 #include "engine/core/Utilities.hpp"
 
+namespace engine::gfx
+{
+
 using namespace Microsoft::WRL;
 
 std::unique_ptr<GraphicsResources> GraphicsResources::instance = nullptr;
@@ -334,3 +337,5 @@ void GraphicsResources::UpdateViewportAndScissor(UINT width, UINT height)
 	m_scissorRect.right = width;
 	m_scissorRect.bottom = height;
 }
+
+}  // namespace engine::gfx

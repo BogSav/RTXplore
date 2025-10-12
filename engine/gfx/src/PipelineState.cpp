@@ -3,6 +3,9 @@
 #include "engine/core/DxgiInfoManager.hpp"
 #include "engine/core/Utilities.hpp"
 
+namespace engine::gfx
+{
+
 GraphicsPSO::Ptr GraphicsPSO::CreateEmptyPSO()
 {
 	return GraphicsPSO::Ptr(new GraphicsPSO());
@@ -163,3 +166,5 @@ void ComputePSO::Finalize(ID3D12Device10* pDevice)
 	m_PSODesc.pRootSignature = m_rootSignature->GetID3D12RootSignature();
 	GFX_THROW_INFO(pDevice->CreateComputePipelineState(&m_PSODesc, IID_PPV_ARGS(&m_pipelineState)));
 }
+
+}  // namespace engine::gfx

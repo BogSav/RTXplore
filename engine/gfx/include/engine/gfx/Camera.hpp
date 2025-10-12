@@ -6,6 +6,9 @@
 
 #include <memory>
 
+namespace engine::gfx
+{
+
 class BaseCamera
 {
 public:
@@ -249,3 +252,5 @@ private:
 	float m_bottomOrtho = -50.f;
 	float m_topOrtho = 50.f;
 };
+
+}  // namespace engine::gfx

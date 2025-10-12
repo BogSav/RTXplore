@@ -4,6 +4,9 @@
 #include "Context.hpp"
 #include "Texture.hpp"
 
+namespace engine::gfx
+{
+
 class DynamicCubeMap
 {
 public:
@@ -70,3 +73,5 @@ inline void DynamicCubeMap::SetDirty()
 {
 	m_framesDirty = engine::core::Settings::GetFrameResourcesCount();
 }
+
+}  // namespace engine::gfx

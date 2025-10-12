@@ -5,6 +5,9 @@
 #include <dxcapi.h>
 #include <unordered_map>
 
+namespace engine::gfx
+{
+
 class ShadersManager
 {
 public:
@@ -34,3 +37,5 @@ private:
 private:
 	mutable std::unordered_map<std::string, ShaderPtr> shaderMap;
 };
+
+}  // namespace engine::gfx

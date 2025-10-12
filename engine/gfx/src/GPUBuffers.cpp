@@ -3,6 +3,9 @@
 #include "Context.hpp"
 #include "GraphicsResources.hpp"
 
+namespace engine::gfx
+{
+
 void GpuResource::AllocateUAVBuffer(
 	UINT64 bufferSize, GpuResource& resource, D3D12_RESOURCE_STATES initialResourceState, std::wstring resourceName)
 {
@@ -219,3 +222,5 @@ void IndexBuffer::AllocateSRV()
 {
 	m_SRVHandle = GpuResource::CreateBufferSRV(*this, m_indexCount / 4, 0);
 }
+
+}  // namespace engine::gfx

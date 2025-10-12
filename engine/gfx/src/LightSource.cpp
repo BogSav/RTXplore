@@ -2,6 +2,9 @@
 
 #include "engine/core/Settings.hpp"
 
+namespace engine::gfx
+{
+
 size_t LightSource::nrOfDirectionalLights = 0;
 size_t LightSource::nrOfPointLights = 0;
 size_t LightSource::nrOfSpotLights = 0;
@@ -27,3 +30,5 @@ LightSource::LightSource(Type type) : m_type(type)
 	assert(nrOfPointLights <= engine::core::Settings::GetGameSettings().GetMaxNumberOfPointLights());
 	assert(m_id <= engine::core::Settings::GetMaxNrOfLightSources());
 }
+
+}  // namespace engine::gfx

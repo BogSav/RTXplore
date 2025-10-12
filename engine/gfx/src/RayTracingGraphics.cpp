@@ -5,6 +5,9 @@
 
 #include <algorithm>
 
+namespace engine::gfx
+{
+
 using namespace engine::gfx::render_descriptors;
 using namespace engine::gfx::RSBinding;
 
@@ -400,3 +403,5 @@ void RayTracingGraphics::CreateTopLevelAccelerationStructure()
 
 	// m_topLevelAccelerationStructure.CreateSRV();
 }
+
+}  // namespace engine::gfx

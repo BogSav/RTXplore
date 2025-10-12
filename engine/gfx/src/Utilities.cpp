@@ -10,6 +10,7 @@ using namespace Microsoft::WRL;
 
 namespace engine::gfx
 {
+
 void LogOutputDisplayModes(IDXGIOutput* output, DXGI_FORMAT format)
 {
 	UINT count = 0;
@@ -397,4 +398,4 @@ bool DescriptorHeap::ValidateHandle(const DescriptorHandle& DHandle) const
 }
 
 
-};  // namespace misc
+};  // namespace engine::gfx

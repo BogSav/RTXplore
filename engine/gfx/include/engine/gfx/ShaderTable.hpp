@@ -4,10 +4,12 @@
 #include "GPUBuffers.hpp"
 #include "Utilities.hpp"
 
-
 #include <cstdint>
 #include <string>
 #include <unordered_map>
+
+namespace engine::gfx
+{
 
 class ShaderRecord
 {
@@ -101,3 +103,5 @@ public:
 		OutputDebugStringW(wstr.str().c_str());
 	}*/
 };
+
+}  // namespace engine::gfx

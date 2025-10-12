@@ -7,6 +7,9 @@
 
 #include <unordered_map>
 
+namespace engine::gfx
+{
+
 template <class PipelineStateType>
 class PipelineStateManager
 {
@@ -153,3 +156,5 @@ inline void PipelineStateManager<ComputePSO>::LoadPipelineStates(
 
 	firstLoad = false;
 }
+
+}  // namespace engine::gfx

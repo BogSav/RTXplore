@@ -1,6 +1,9 @@
 #include "TextureRenderer.hpp"
 #include "GeometryGenerator.hpp"
 
+namespace engine::gfx
+{
+
 using namespace engine::gfx::RSBinding;
 using namespace engine::gfx::rasterization;
 
@@ -67,3 +70,5 @@ void TextureRenderer::SetTextureSRVHandle(const engine::gfx::DescriptorHandle& t
 {
 	m_textureSRVHandle = textureSRVHandle;
 }
+
+}  // namespace engine::gfx

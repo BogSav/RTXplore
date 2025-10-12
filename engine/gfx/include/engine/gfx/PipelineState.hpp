@@ -3,6 +3,9 @@
 #include "RootSignature.hpp"
 #include "d3dx12.h"
 
+namespace engine::gfx
+{
+
 class GraphicsPSO;
 class ComputePSO;
 class RayTracingPSO;
@@ -121,3 +124,5 @@ private:
 	RayTracingPSO(const GraphicsPSO&) = delete;
 	RayTracingPSO operator=(const RayTracingPSO&) = delete;
 };
+
+}  // namespace engine::gfx

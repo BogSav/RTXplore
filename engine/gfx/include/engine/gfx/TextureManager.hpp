@@ -3,6 +3,9 @@
 #include "Context.hpp"
 #include "Texture.hpp"
 
+namespace engine::gfx
+{
+
 class TextureManager
 {
 public:
@@ -17,3 +20,5 @@ public:
 private:
 	std::vector<ColorTexture::Ptr> m_textures;
 };
+
+}  // namespace engine::gfx

@@ -5,6 +5,9 @@
 
 #include <assert.h>
 
+namespace engine::gfx
+{
+
 using namespace Microsoft::WRL;
 
 RootSignature::Ptr RootSignature::CreateEmptyRootSignature(size_t nrOfRootParams, size_t nrOfStaticSamplers)
@@ -149,3 +152,5 @@ void RootSignature::Finalize(ID3D12Device5* pDevice)
 	m_rootParams.clear();
 	m_staticSamplers.clear();
 }
+
+}  // namespace engine::gfx

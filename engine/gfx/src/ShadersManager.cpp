@@ -1,7 +1,10 @@
-﻿#include "ShadersManager.hpp"
+#include "ShadersManager.hpp"
 
 #include "engine/core/DxgiInfoManager.hpp"
 #include "engine/core/Settings.hpp"
+
+namespace engine::gfx
+{
 
 using namespace Microsoft::WRL;
 
@@ -259,3 +262,5 @@ SIZE_T ShadersManager::GetBufferSize(std::string shaderName) const
 {
 	return shaderMap.at(shaderName).Get()->GetBufferSize();
 }
+
+}  // namespace engine::gfx

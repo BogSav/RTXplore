@@ -1,4 +1,4 @@
-﻿#include "FrameResources.hpp"
+#include "FrameResources.hpp"
 
 #include "Camera.hpp"
 #include "CameraController.hpp"
@@ -14,6 +14,9 @@
 #include "TerrainRenderer.hpp"
 #include "TextureManager.hpp"
 #include "WaterRenderer.hpp"
+
+namespace engine::gfx
+{
 
 using namespace DirectX;
 
@@ -168,3 +171,5 @@ void FrameResources::UpdateCameraAndTransferToGPUPassCB(const BaseCamera& camera
 
 	m_perPassCB.CopyStagingToGpu(i);
 }
+
+}  // namespace engine::gfx

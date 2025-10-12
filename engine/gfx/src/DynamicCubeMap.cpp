@@ -1,6 +1,9 @@
 #include "DynamicCubeMap.hpp"
 #include "engine/core/DxgiInfoManager.hpp"
 
+namespace engine::gfx
+{
+
 DynamicCubeMap::DynamicCubeMap(UINT width, UINT height) : m_width(width), m_height(height)
 {
 	if (engine::core::Settings::UseAdvancedReflections())
@@ -74,3 +77,5 @@ void DynamicCubeMap::SetCenter(engine::math::Vector3 center)
 
 	SetDirty();
 }
+
+}  // namespace engine::gfx

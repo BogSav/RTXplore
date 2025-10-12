@@ -3,6 +3,9 @@
 #include "HlslUtils.h"
 #include "engine/math/Vector.hpp"
 
+namespace engine::gfx
+{
+
 class MaterialManager
 {
 public:
@@ -45,3 +48,5 @@ public:
 private:
 	std::vector<Material> m_materials;
 };
+
+}  // namespace engine::gfx

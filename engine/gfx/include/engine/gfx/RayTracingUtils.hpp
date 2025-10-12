@@ -1,3 +1,6 @@
+namespace engine::gfx
+{
+
 #pragma once
 
 namespace RayTracingInstanceMasks
@@ -9,3 +12,5 @@ enum Value : int
 	Object = 0b00000100
 };
 }
+
+}  // namespace engine::gfx
