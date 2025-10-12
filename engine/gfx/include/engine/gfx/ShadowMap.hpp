@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Camera.hpp"
-#include "DX_Context.hpp"
+#include "Context.hpp"
 
 class ShadowMap
 {

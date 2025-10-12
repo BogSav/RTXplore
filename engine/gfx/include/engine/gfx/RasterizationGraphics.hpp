@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Graphics.hpp"
-#include "DX_DynamicCubeMap.hpp"
-#include "DX_ShadowMap.hpp"
+#include "DynamicCubeMap.hpp"
+#include "ShadowMap.hpp"
 #include "engine/core/winCPUTickTimer.hpp"
 
 class RasterizationGraphics : public Graphics

@@ -1,4 +1,4 @@
-#include "DX_Utilities.hpp"
+#include "Utilities.hpp"
 
 #include "engine/core/DxgiInfoManager.hpp"
 #include "engine/core/Settings.hpp"

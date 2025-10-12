@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CameraController.hpp"
-#include "DX_Context.hpp"
+#include "Context.hpp"
 #include "Texture.hpp"
 
 class DynamicCubeMap

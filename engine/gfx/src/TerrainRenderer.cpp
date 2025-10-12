@@ -1,6 +1,6 @@
 #include "TerrainRenderer.hpp"
 
-#include "DX_Utilities.hpp"
+#include "Utilities.hpp"
 #include "GeometryGenerator.hpp"
 #include "engine/math/SimplexNoise.hpp"
 

@@ -1,6 +1,6 @@
 #include "GraphicsResources.hpp"
 
-#include "DX_FrameResources.hpp"
+#include "FrameResources.hpp"
 #include "engine/core/DxgiInfoManager.hpp"
 #include "engine/core/Utilities.hpp"
 

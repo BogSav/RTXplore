@@ -1,6 +1,6 @@
-#include "DX_RS_Manager.hpp"
+#include "RS_Manager.hpp"
 
-#include "DX_Utilities.hpp"
+#include "Utilities.hpp"
 #include "engine/core/customException.hpp"
 #include "engine/core/Settings.hpp"
 

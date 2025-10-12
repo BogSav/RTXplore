@@ -1,6 +1,6 @@
 #include "ObjectRenderer.hpp"
 
-#include "DX_FrameResources.hpp"
+#include "FrameResources.hpp"
 #include "GeometryGenerator.hpp"
 
 #include <map>

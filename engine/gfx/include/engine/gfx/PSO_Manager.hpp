@@ -1,9 +1,9 @@
 #pragma once
 
-#include "DX_PSO.hpp"
-#include "DX_RS_Manager.hpp"
-#include "DX_ShadersManager.hpp"
-#include "DX_PSO_Loader.hpp"
+#include "PSO.hpp"
+#include "RS_Manager.hpp"
+#include "ShadersManager.hpp"
+#include "PSO_Loader.hpp"
 
 #include <unordered_map>
 

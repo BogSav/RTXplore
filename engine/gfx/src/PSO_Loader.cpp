@@ -1,7 +1,7 @@
-#include "DX_PSO_Loader.hpp"
+#include "PSO_Loader.hpp"
 
-#include "DX_RS_Manager.hpp"
-#include "DX_ShadersManager.hpp"
+#include "RS_Manager.hpp"
+#include "ShadersManager.hpp"
 #include "RayTracingGraphics.hpp"
 
 #define GET_SHADER_DATA(name) shadersManager.GetBufferPointer(name), shadersManager.GetBufferSize(name)

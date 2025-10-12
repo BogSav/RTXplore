@@ -1,4 +1,4 @@
-#include "DX_RS.hpp"
+#include "RS.hpp"
 
 #include "engine/core/DxgiInfoManager.hpp"
 #include "engine/core/Utilities.hpp"

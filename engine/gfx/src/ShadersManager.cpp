@@ -1,4 +1,4 @@
-﻿#include "DX_ShadersManager.hpp"
+﻿#include "ShadersManager.hpp"
 
 #include "engine/core/DxgiInfoManager.hpp"
 #include "engine/core/Settings.hpp"

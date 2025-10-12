@@ -1,9 +1,9 @@
 #pragma once
 
 #include "CameraController.hpp"
-#include "DX_AccelerationStructures.hpp"
-#include "DX_PSO.hpp"
-#include "DX_Utilities.hpp"
+#include "AccelerationStructures.hpp"
+#include "PSO.hpp"
+#include "Utilities.hpp"
 #include "GraphicsResources.hpp"
 #include "engine/math/Frustum.hpp"
 #include "Mesh.hpp"

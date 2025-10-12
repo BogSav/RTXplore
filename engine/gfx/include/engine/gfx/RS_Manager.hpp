@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DX_RS.hpp"
+#include "RS.hpp"
 
 #include <unordered_map>
 #include <functional>

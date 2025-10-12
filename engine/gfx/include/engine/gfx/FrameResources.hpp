@@ -1,7 +1,7 @@
 #pragma once
 
-#include "DX_GPUBuffers.hpp"
-#include "DX_Utilities.hpp"
+#include "GPUBuffers.hpp"
+#include "Utilities.hpp"
 
 class ObjectRenderer;
 class Object;

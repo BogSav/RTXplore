@@ -1,4 +1,4 @@
-#include "DX_AccelerationStructures.hpp"
+#include "AccelerationStructures.hpp"
 
 #include "GraphicsResources.hpp"
 

@@ -35,5 +35,5 @@ private:
 };
 #endif
 
-#include "DX_Exceptions.hpp"
+#include "Exceptions.hpp"
 #include "GraphicsThrowMacros.hpp"

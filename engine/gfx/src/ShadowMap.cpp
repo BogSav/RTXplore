@@ -1,4 +1,4 @@
-#include "DX_ShadowMap.hpp"
+#include "ShadowMap.hpp"
 
 #include "engine/core/DxgiInfoManager.hpp"
 

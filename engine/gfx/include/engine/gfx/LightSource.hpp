@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DX_Utilities.hpp"
+#include "Utilities.hpp"
 #include "engine/math/Vector.hpp"
 
 class LightSource

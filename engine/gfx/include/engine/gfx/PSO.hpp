@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DX_RS.hpp"
+#include "RS.hpp"
 #include "d3dx12.h"
 
 class GraphicsPSO;

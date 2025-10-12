@@ -1,4 +1,4 @@
-#include "DX_DynamicCubeMap.hpp"
+#include "DynamicCubeMap.hpp"
 #include "engine/core/DxgiInfoManager.hpp"
 
 DynamicCubeMap::DynamicCubeMap(UINT width, UINT height) : m_width(width), m_height(height)

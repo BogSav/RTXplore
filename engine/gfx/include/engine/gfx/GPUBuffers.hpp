@@ -1,7 +1,7 @@
 #pragma once
 
-#include "engine/core/DX_Exceptions.hpp"
-#include "DX_Utilities.hpp"
+#include "engine/core/Exceptions.hpp"
+#include "Utilities.hpp"
 #include "engine/core/DxgiInfoManager.hpp"
 #include "engine/core/GraphicsThrowMacros.hpp"
 

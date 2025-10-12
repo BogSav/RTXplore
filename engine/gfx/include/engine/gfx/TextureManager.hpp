@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DX_Context.hpp"
+#include "Context.hpp"
 #include "Texture.hpp"
 
 class TextureManager

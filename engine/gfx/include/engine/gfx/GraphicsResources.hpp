@@ -4,8 +4,8 @@
 #include <dxgi1_6.h>
 #include <wrl/client.h>
 
-#include "DX_Context.hpp"
-#include "DX_FrameResources.hpp"
+#include "Context.hpp"
+#include "FrameResources.hpp"
 #include "engine/core/DxgiInfoManager.hpp"
 #include "Texture.hpp"
 

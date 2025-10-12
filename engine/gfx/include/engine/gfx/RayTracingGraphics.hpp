@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DX_ShaderTable.hpp"
+#include "ShaderTable.hpp"
 #include "Graphics.hpp"
 
 class RayTracingGraphics : public Graphics

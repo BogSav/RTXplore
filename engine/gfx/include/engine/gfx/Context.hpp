@@ -1,9 +1,9 @@
 #pragma once
 
-#include "DX_FrameResources.hpp"
-#include "DX_GPUBuffers.hpp"
-#include "DX_PSO.hpp"
-#include "DX_RS.hpp"
+#include "FrameResources.hpp"
+#include "GPUBuffers.hpp"
+#include "PSO.hpp"
+#include "RS.hpp"
 #include "Texture.hpp"
 #include "d3dx12.h"
 

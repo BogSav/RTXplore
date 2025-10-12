@@ -3,7 +3,7 @@
 #include <d3d12.h>
 #include <dxgi1_6.h>
 
-#include "DX_GPUBuffers.hpp"
+#include "GPUBuffers.hpp"
 #include "engine/math/Color.hpp"
 
 class Texture : public GpuResource

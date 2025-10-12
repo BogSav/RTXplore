@@ -1,8 +1,8 @@
 #pragma once
 
 #include "d3d12.h"
-#include "DX_GPUBuffers.hpp"
-#include "DX_Utilities.hpp"
+#include "GPUBuffers.hpp"
+#include "Utilities.hpp"
 
 
 #include <cstdint>

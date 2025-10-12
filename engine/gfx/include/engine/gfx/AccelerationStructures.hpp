@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DX_GPUBuffers.hpp"
+#include "GPUBuffers.hpp"
 
 struct AccelerationStructureBuffers
 {

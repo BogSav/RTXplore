@@ -1,6 +1,6 @@
 #include "MaterialManager.hpp"
 
-#include "DX_FrameResources.hpp"
+#include "FrameResources.hpp"
 
 Math::Vector3 MaterialManager::ShlickCoefficients::Water = Math::Vector3(0.02, 0.02, 0.02);
 Math::Vector3 MaterialManager::ShlickCoefficients::Glass = Math::Vector3(0.08, 0.08, 0.08);

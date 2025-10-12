@@ -1,8 +1,8 @@
 #pragma once
 
 #include "CameraController.hpp"
-#include "DX_PSO_Manager.hpp"
-#include "DX_RS_Manager.hpp"
+#include "PSO_Manager.hpp"
+#include "RS_Manager.hpp"
 #include "GraphicsResources.hpp"
 #include "LightSource.hpp"
 #include "MaterialManager.hpp"

@@ -1,6 +1,6 @@
-#include "DX_GPUBuffers.hpp"
+#include "GPUBuffers.hpp"
 
-#include "DX_Context.hpp"
+#include "Context.hpp"
 #include "GraphicsResources.hpp"
 
 void GpuResource::AllocateUAVBuffer(

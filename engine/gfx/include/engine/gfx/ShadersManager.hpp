@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DX_Utilities.hpp"
+#include "Utilities.hpp"
 
 #include <dxcapi.h>
 #include <unordered_map>

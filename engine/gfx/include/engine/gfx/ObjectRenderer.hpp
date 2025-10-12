@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DX_FrameResources.hpp"
+#include "FrameResources.hpp"
 #include "GeometryRenderer.hpp"
 #include "Object.hpp"
 
