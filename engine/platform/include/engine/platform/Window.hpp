@@ -5,6 +5,9 @@
 #include "Mouse.hpp"
 #include "engine/core/CustomException.hpp"
 
+namespace engine::platform
+{
+
 class WindowClass
 {
 public:
@@ -90,3 +93,5 @@ private:
 	int height;
 	HWND hWnd;
 };
+
+}  // namespace engine::platform

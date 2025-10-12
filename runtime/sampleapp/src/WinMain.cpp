@@ -1,7 +1,7 @@
 #include "App.hpp"
 #include "engine/platform/Window.hpp"
 
-void DisplayMessageBox(Window* window, const char* what, const char* type)
+void DisplayMessageBox(engine::platform::Window* window, const char* what, const char* type)
 {
 	HWND hWnd = window == nullptr ? nullptr : window->GetWindowHandler();
 	OutputDebugStringA(what);
@@ -18,10 +18,10 @@ int main()
 	_CrtMemCheckpoint(&sOld);
 #endif
 
-	std::unique_ptr<Window> window;
+	std::unique_ptr<engine::platform::Window> window;
 	try
 	{
-		window = std::make_unique<Window>(1200, 600, L"Happy Window");
+		window = std::make_unique<engine::platform::Window>(1200, 600, L"Happy Window");
 		App app(*window);
 		app.Run();
 	}

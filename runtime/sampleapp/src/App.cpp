@@ -6,7 +6,7 @@
 
 #include <sstream>
 
-App::App(Window& wnd) : window(wnd)
+App::App(engine::platform::Window& wnd) : window(wnd)
 {
 	if (engine::core::Settings::UseRayTracing())
 	{
@@ -24,7 +24,7 @@ int App::Run()
 
 	while (true)
 	{
-		const auto msg = Window::ProcessMessage();
+		const auto msg = engine::platform::Window::ProcessMessage();
 		if (msg.has_value())
 		{
 			return *msg;
@@ -47,7 +47,7 @@ void App::Update()
 	if (window.GetMouse().LeftIsPressed())
 	{
 		const auto ok = window.GetMouse().Read();
-		if (ok.has_value() && ok->GetType() == Mouse::Event::Type::Move)
+		if (ok.has_value() && ok->GetType() == engine::platform::Mouse::Event::Type::Move)
 		{
 			pGraphics->GetCameraController().RotateFirstPerson_OY(
 				ok->GetDeltaX() * engine::core::Settings::GetGameSettings().GetMouseSensitivityOX());

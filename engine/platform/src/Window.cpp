@@ -5,6 +5,9 @@
 #include <functional>
 #include <sstream>
 
+namespace engine::platform
+{
+
 WindowClass WindowClass::wndClass;
 
 const wchar_t* WindowClass::GetName() noexcept
@@ -313,3 +316,5 @@ const char* Window::NoGfxException::GetType() const noexcept
 {
 	return "Chili Window Exception [No Graphics]";
 }
+
+}  // namespace engine::platform

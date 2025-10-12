@@ -1,5 +1,8 @@
 #include "Keyboard.hpp"
 
+namespace engine::platform
+{
+
 bool Keyboard::KeyIsPressed(unsigned char keycode) const
 {
 	return keystates[keycode];
@@ -107,3 +110,4 @@ void Keyboard::TrimBuffer(std::queue<T>& buffer)
 		buffer.pop();
 	}
 }
+}  // namespace engine::platform

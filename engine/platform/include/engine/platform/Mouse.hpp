@@ -3,6 +3,9 @@
 #include <optional>
 #include <queue>
 
+namespace engine::platform
+{
+
 class Mouse
 {
 	friend class Window;
@@ -118,3 +121,5 @@ private:
 	std::queue<Event> buffer;
 	std::queue<RawDelta> rawDeltaBuffer;
 };
+
+}  // namespace engine::platform

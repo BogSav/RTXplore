@@ -2,6 +2,8 @@
 
 #include "engine/core/WinInclude.hpp"
 
+namespace engine::platform
+{
 
 std::pair<int, int> Mouse::GetPos() const noexcept
 {
@@ -182,3 +184,5 @@ void Mouse::OnWheelDelta(int x, int y, int delta) noexcept
 		OnWheelDown(x, y);
 	}
 }
+
+}  // namespace engine::platform

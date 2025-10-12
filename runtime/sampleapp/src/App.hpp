@@ -9,7 +9,7 @@
 class App
 {
 public:
-	App(Window& wnd);
+	App(engine::platform::Window& wnd);
 	int Run();
 
 private:
@@ -17,7 +17,7 @@ private:
 	void Update();
 
 private:
-	Window& window;
+	engine::platform::Window& window;
 	engine::gfx::Graphics::Ptr pGraphics;
 
 	engine::core::TickTimer<float> m_timer;

@@ -3,6 +3,9 @@
 #include <queue>
 #include <optional>
 
+namespace engine::platform
+{
+
 class Keyboard
 {
 	friend class Window;
@@ -66,3 +69,4 @@ private:
 	std::queue<Event> keybuffer;
 	std::queue<char> charbuffer;
 };
+}  // namespace engine::platform
