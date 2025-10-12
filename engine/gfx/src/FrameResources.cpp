@@ -23,16 +23,16 @@ UINT FrameResources::materialCB_ID = 0;
 void FrameResources::Create()
 {
 	m_perMaterialCB.Create(
-		GraphicsResources::GetDevice(), Settings::GetGameSettings().GetMaxNumberOfMaterialCB(), L"PerMaterialCB");
+		GraphicsResources::GetDevice(), engine::core::Settings::GetGameSettings().GetMaxNumberOfMaterialCB(), L"PerMaterialCB");
 	m_perObjectCB.Create(
-		GraphicsResources::GetDevice(), Settings::GetGameSettings().GetMaxNumberOfObjectCB(), L"PerObjectCB");
+		GraphicsResources::GetDevice(), engine::core::Settings::GetGameSettings().GetMaxNumberOfObjectCB(), L"PerObjectCB");
 	m_waterCB.Create(GraphicsResources::GetDevice(), 1, L"WaterCB");
 
-	if (!Settings::UseRayTracing())
+	if (!engine::core::Settings::UseRayTracing())
 	{
 		m_perPassCB.Create(
 			GraphicsResources::GetDevice(),
-			8 /*1 + (Settings::UseAdvancedReflections() ? 6 : 0) + (Settings::UseShadows() ? 1 : 0)*/,
+			8 /*1 + (engine::core::Settings::UseAdvancedReflections() ? 6 : 0) + (engine::core::Settings::UseShadows() ? 1 : 0)*/,
 			L"PerPassCB");
 	}
 	else
@@ -76,7 +76,7 @@ void FrameResources::UpdateWaterCB(const WaterRenderer& water)
 	m_waterCB->cubeMapSphereRadius = water.GetCubeMapSphereRadius();
 	m_waterCB->waterColor = water.GetColor();
 
-	for (int i = 0; i < Settings::GetNumberOfWaveFunctions(); i++)
+	for (int i = 0; i < engine::core::Settings::GetNumberOfWaveFunctions(); i++)
 	{
 		m_waterCB->waveParameters[i] = water.GetWaveParameters(i);
 	}
@@ -108,9 +108,9 @@ void FrameResources::UpdateMainPassCB(
 {
 	// Doar provizorii, in realitate dimensiunea poate varia
 	m_perPassCB->renderTargetSize =
-		XMFLOAT2((float)Settings::GetGraphicsSettings().GetWidth(), (float)Settings::GetGraphicsSettings().GetHeight());
+		XMFLOAT2((float)engine::core::Settings::GetGraphicsSettings().GetWidth(), (float)engine::core::Settings::GetGraphicsSettings().GetHeight());
 	m_perPassCB->invRenderTargetSize =
-		XMFLOAT2(1.f / Settings::GetGraphicsSettings().GetWidth(), 1.f / Settings::GetGraphicsSettings().GetHeight());
+		XMFLOAT2(1.f / engine::core::Settings::GetGraphicsSettings().GetWidth(), 1.f / engine::core::Settings::GetGraphicsSettings().GetHeight());
 
 	// DeltaTime si totalTime
 	m_perPassCB->deltaTime = deltaTime;

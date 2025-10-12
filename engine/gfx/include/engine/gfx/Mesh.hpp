@@ -52,14 +52,14 @@ public:
 	const Vertex* GetVerticesData() const
 	{
 		if (m_vertices.empty())
-			throw misc::CustomException("Nu exista vertexi in mesh");
+			throw engine::core::CustomException("Nu exista vertexi in mesh");
 
 		return &m_vertices[0];
 	}
 	const Index* GetIndicesData() const
 	{
 		if (m_indices.empty())
-			throw misc::CustomException("Nu exista indecsi in mesh");
+			throw engine::core::CustomException("Nu exista indecsi in mesh");
 
 		return &m_indices[0];
 	}

@@ -9,7 +9,7 @@ CameraController::CameraController(PerspectiveCamera& camera) : m_camera(camera)
 
 void CameraController::RefreshCamera()
 {
-	m_camera.UpdateAspectRatio(Settings::GetGraphicsSettings().GetAspectRatio());
+	m_camera.UpdateAspectRatio(engine::core::Settings::GetGraphicsSettings().GetAspectRatio());
 	m_viewSpaceFrustum = PerspectiveCamera::ConstructFrustum(m_camera);
 
 	SetDirty();

@@ -5,6 +5,9 @@
 
 #define INLINE __forceinline
 
+namespace engine::core
+{
+
 class Settings
 {
 private:
@@ -178,3 +181,4 @@ public:
 	static INLINE GraphicsSettings& GetGraphicsSettings() { return *mgs.graphicsSettings; }
 	static INLINE GameSettings& GetGameSettings() { return *mgs.gameSettings; }
 };
+}  // namespace engine::core

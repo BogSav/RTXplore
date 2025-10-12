@@ -29,9 +29,9 @@ private:
 class Window
 {
 public:
-	class Exception : public misc::CustomException
+	class Exception : public engine::core::CustomException
 	{
-		using misc::CustomException::CustomException;
+		using engine::core::CustomException::CustomException;
 
 	public:
 		static std::string TranslateErrorCode(HRESULT hr) noexcept;

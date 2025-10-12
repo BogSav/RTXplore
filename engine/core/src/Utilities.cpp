@@ -1,6 +1,6 @@
 #include "Utilities.hpp"
 
-namespace misc
+namespace engine::core
 {
 
 void ConvertStringToWString(const std::string& s, std::wstring& ws)
@@ -35,4 +35,4 @@ std::string GetStringFromWString(const std::wstring& ws)
 	return s;
 }
 
-}  // namespace misc
+}  // namespace engine::core

@@ -3,7 +3,7 @@
 #include <sstream>
 #include <assert.h>
 
-namespace misc
+namespace engine::core
 {
 CustomException::CustomException(std::string what) noexcept : originalErrorMessage(what), type(Type::TEXT_ERROR)
 {
@@ -17,7 +17,7 @@ const char* CustomException::what() const noexcept
 	std::ostringstream oss;
 	switch (type)
 	{
-	case misc::CustomException::Type::LINE_FILE_ERROR:
+	case engine::core::CustomException::Type::LINE_FILE_ERROR:
 	{
 		assert(line && file);
 
@@ -25,7 +25,7 @@ const char* CustomException::what() const noexcept
 		whatBuffer = oss.str();
 		return whatBuffer.c_str();
 	}
-	case misc::CustomException::Type::TEXT_ERROR:
+	case engine::core::CustomException::Type::TEXT_ERROR:
 	{
 		assert(originalErrorMessage);
 
@@ -41,8 +41,8 @@ const char* CustomException::GetType() const noexcept
 {
 	switch (type)
 	{
-	case misc::CustomException::Type::LINE_FILE_ERROR: return "Line and file error";
-	case misc::CustomException::Type::TEXT_ERROR: return "Simple text error";
+	case engine::core::CustomException::Type::LINE_FILE_ERROR: return "Line and file error";
+	case engine::core::CustomException::Type::TEXT_ERROR: return "Simple text error";
 	default: break;
 	}
 	return "Chili Exception";
@@ -67,4 +67,4 @@ std::string CustomException::GetOriginString() const noexcept
 	return oss.str();
 }
 
-}  // namespace misc
+}  // namespace engine::core

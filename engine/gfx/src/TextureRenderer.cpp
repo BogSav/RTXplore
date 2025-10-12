@@ -1,10 +1,10 @@
 #include "TextureRenderer.hpp"
 #include "GeometryGenerator.hpp"
 
-using namespace misc::RSBinding;
-using namespace misc::rasterization;
+using namespace engine::gfx::RSBinding;
+using namespace engine::gfx::rasterization;
 
-TextureRenderer::Ptr TextureRenderer::CreateTextureRenderer(misc::render_descriptors::DX_TEXTURE_DESCRIPTOR& descriptor)
+TextureRenderer::Ptr TextureRenderer::CreateTextureRenderer(engine::gfx::render_descriptors::DX_TEXTURE_DESCRIPTOR& descriptor)
 {
 	TextureRenderer::Ptr textureRenderer = Ptr(new TextureRenderer());
 
@@ -26,7 +26,7 @@ TextureRenderer::Ptr TextureRenderer::CreateTextureRenderer(misc::render_descrip
 
 void TextureRenderer::LoadGeometry(DescriptorVariant descriptor)
 {
-	using namespace misc::render_descriptors;
+	using namespace engine::gfx::render_descriptors;
 
 	DX_TEXTURE_DESCRIPTOR& textureRenderereDescriptor = std::get<DX_TEXTURE_DESCRIPTOR>(descriptor);
 
@@ -35,7 +35,7 @@ void TextureRenderer::LoadGeometry(DescriptorVariant descriptor)
 	CreateVertexAndIndexBuffer();
 }
 
-void TextureRenderer::Render(misc::rasterization::RenderLayer::Value renderLayer) const
+void TextureRenderer::Render(engine::gfx::rasterization::RenderLayer::Value renderLayer) const
 {
 	GraphicsContext& graphicsContext = GraphicsResources::GetInstance().GetGraphicsContext();
 
@@ -63,7 +63,7 @@ void TextureRenderer::Update(float deltaTime)
 {
 }
 
-void TextureRenderer::SetTextureSRVHandle(const misc::DescriptorHandle& textureSRVHandle)
+void TextureRenderer::SetTextureSRVHandle(const engine::gfx::DescriptorHandle& textureSRVHandle)
 {
 	m_textureSRVHandle = textureSRVHandle;
 }

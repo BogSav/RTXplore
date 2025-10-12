@@ -8,9 +8,9 @@ class SkyBoxRenderer : public GeometryRenderer, public Object
 public:
 	using Ptr = std::unique_ptr<SkyBoxRenderer>;
 
-	static SkyBoxRenderer::Ptr CreateSkyBoxRenderer(misc::render_descriptors::DX_SKYBOX_DESCRIPTOR& descriptor);
+	static SkyBoxRenderer::Ptr CreateSkyBoxRenderer(engine::gfx::render_descriptors::DX_SKYBOX_DESCRIPTOR& descriptor);
 
-	void Render(misc::rasterization::RenderLayer::Value renderLayer) const override;
+	void Render(engine::gfx::rasterization::RenderLayer::Value renderLayer) const override;
 	void BuildAccelerationStructures() override;
 	void FrustumCulling(const CameraController& cameraController) override;
 	void Update(float delatTime) override;
@@ -21,7 +21,7 @@ public:
 
 private:
 	SkyBoxRenderer() = delete;
-	SkyBoxRenderer(misc::render_descriptors::DX_OBJECT_DESCRIPTOR&);
+	SkyBoxRenderer(engine::gfx::render_descriptors::DX_OBJECT_DESCRIPTOR&);
 
 	void LoadGeometry(DescriptorVariant descriptor) override;
 

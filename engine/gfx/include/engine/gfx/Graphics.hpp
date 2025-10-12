@@ -28,13 +28,13 @@ public:
 		//	engine::math::Vector3(0, 15, 0),
 		//	engine::math::Vector3(-1, 15, 0),
 		//	engine::math::Vector3{0.f, 1.f, 0.f},
-		//	Settings::GetGraphicsSettings().GetAspectRatios()
+		//	engine::core::Settings::GetGraphicsSettings().GetAspectRatios()
 		//	/*, DirectX::XMConvertToRadians(90)*/);
 		m_camera = PerspectiveCamera(
 			engine::math::Vector3(-40.247837, 7.752207, -21.161358),
 			engine::math::Vector3(-40.247837, 7.752207, -21.161358) + engine::math::Vector3(0.599414, -0.586723, -0.544481),
 			engine::math::Vector3(0.434299, 0.809788, -0.394497),
-			Settings::GetGraphicsSettings().GetAspectRatio()
+			engine::core::Settings::GetGraphicsSettings().GetAspectRatio()
 			/*, DirectX::XMConvertToRadians(90)*/);
 		m_cameraController.InstantiateFrustum();
 	};

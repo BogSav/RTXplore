@@ -84,5 +84,5 @@ inline void CameraController::DecreaseDirtyCount()
 
 inline void CameraController::SetDirty()
 {
-	m_framesDirty = Settings::GetFrameResourcesCount();
+	m_framesDirty = engine::core::Settings::GetFrameResourcesCount();
 }

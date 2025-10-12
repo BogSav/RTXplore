@@ -97,48 +97,48 @@ void GpuResource::AllocateDefaultBuffer(
 	GraphicsResources::GetContextManager().GetGraphicsContext().Reset();
 }
 
-misc::DescriptorHandle GpuResource::CreateTextureView(GpuResource& texture, D3D12_SHADER_RESOURCE_VIEW_DESC* descriptor)
+engine::gfx::DescriptorHandle GpuResource::CreateTextureView(GpuResource& texture, D3D12_SHADER_RESOURCE_VIEW_DESC* descriptor)
 {
 	assert(descriptor != nullptr);
 
-	misc::DescriptorHandle handle = GraphicsResources::AllocateDescriptor(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+	engine::gfx::DescriptorHandle handle = GraphicsResources::AllocateDescriptor(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 	GraphicsResources::GetDevice()->CreateShaderResourceView(texture.GetResource(), descriptor, handle);
 
 	return handle;
 }
 
-misc::DescriptorHandle GpuResource::CreateTextureView(
+engine::gfx::DescriptorHandle GpuResource::CreateTextureView(
 	GpuResource& texture, D3D12_UNORDERED_ACCESS_VIEW_DESC* descriptor)
 {
 	assert(descriptor != nullptr);
 
-	misc::DescriptorHandle handle = GraphicsResources::AllocateDescriptor(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+	engine::gfx::DescriptorHandle handle = GraphicsResources::AllocateDescriptor(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 	GraphicsResources::GetDevice()->CreateUnorderedAccessView(texture.GetResource(), nullptr, descriptor, handle);
 
 	return handle;
 }
 
-misc::DescriptorHandle GpuResource::CreateTextureView(GpuResource& texture, D3D12_RENDER_TARGET_VIEW_DESC* descriptor)
+engine::gfx::DescriptorHandle GpuResource::CreateTextureView(GpuResource& texture, D3D12_RENDER_TARGET_VIEW_DESC* descriptor)
 {
 	assert(descriptor != nullptr);
 
-	misc::DescriptorHandle handle = GraphicsResources::AllocateDescriptor(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+	engine::gfx::DescriptorHandle handle = GraphicsResources::AllocateDescriptor(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 	GraphicsResources::GetDevice()->CreateRenderTargetView(texture.GetResource(), descriptor, handle);
 
 	return handle;
 }
 
-misc::DescriptorHandle GpuResource::CreateTextureView(GpuResource& texture, D3D12_DEPTH_STENCIL_VIEW_DESC* descriptor)
+engine::gfx::DescriptorHandle GpuResource::CreateTextureView(GpuResource& texture, D3D12_DEPTH_STENCIL_VIEW_DESC* descriptor)
 {
 	assert(descriptor != nullptr);
 
-	misc::DescriptorHandle handle = GraphicsResources::AllocateDescriptor(D3D12_DESCRIPTOR_HEAP_TYPE_DSV);
+	engine::gfx::DescriptorHandle handle = GraphicsResources::AllocateDescriptor(D3D12_DESCRIPTOR_HEAP_TYPE_DSV);
 	GraphicsResources::GetDevice()->CreateDepthStencilView(texture.GetResource(), descriptor, handle);
 
 	return handle;
 }
 
-misc::DescriptorHandle GpuResource::CreateBufferSRV(GpuResource& buffer, UINT numElements, UINT elementSize)
+engine::gfx::DescriptorHandle GpuResource::CreateBufferSRV(GpuResource& buffer, UINT numElements, UINT elementSize)
 {
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_BUFFER;
@@ -157,20 +157,20 @@ misc::DescriptorHandle GpuResource::CreateBufferSRV(GpuResource& buffer, UINT nu
 		srvDesc.Buffer.StructureByteStride = elementSize;
 	}
 
-	misc::DescriptorHandle handle = GraphicsResources::AllocateDescriptor(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+	engine::gfx::DescriptorHandle handle = GraphicsResources::AllocateDescriptor(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 	GraphicsResources::GetDevice()->CreateShaderResourceView(buffer.GetResource(), &srvDesc, handle);
 
 	return handle;
 }
 
-misc::DescriptorHandle GpuResource::CreateAccelerationStructureSRV(GpuResource& accelerationStructure)
+engine::gfx::DescriptorHandle GpuResource::CreateAccelerationStructureSRV(GpuResource& accelerationStructure)
 {
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_RAYTRACING_ACCELERATION_STRUCTURE;
 	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
 	srvDesc.RaytracingAccelerationStructure.Location = accelerationStructure->GetGPUVirtualAddress();
 
-	misc::DescriptorHandle handle = GraphicsResources::AllocateDescriptor(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+	engine::gfx::DescriptorHandle handle = GraphicsResources::AllocateDescriptor(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 	GraphicsResources::GetDevice()->CreateShaderResourceView(nullptr, &srvDesc, handle);
 
 	return handle;

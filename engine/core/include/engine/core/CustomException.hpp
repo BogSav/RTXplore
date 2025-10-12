@@ -4,7 +4,7 @@
 #include <string>
 #include <memory>
 
-namespace misc
+namespace engine::core
 {
 
 class CustomException : public std::exception
@@ -36,4 +36,4 @@ private:
 	Type type;
 };
 
-}  // namespace misc
+}  // namespace engine::core

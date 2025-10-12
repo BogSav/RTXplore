@@ -2,11 +2,11 @@
 
 #include "GeometryGenerator.hpp"
 
-using namespace misc::rasterization;
-using namespace misc::RSBinding;
-using namespace misc::render_descriptors;
+using namespace engine::gfx::rasterization;
+using namespace engine::gfx::RSBinding;
+using namespace engine::gfx::render_descriptors;
 
-SkyBoxRenderer::Ptr SkyBoxRenderer::CreateSkyBoxRenderer(misc::render_descriptors::DX_SKYBOX_DESCRIPTOR& descriptor)
+SkyBoxRenderer::Ptr SkyBoxRenderer::CreateSkyBoxRenderer(engine::gfx::render_descriptors::DX_SKYBOX_DESCRIPTOR& descriptor)
 {
 	SkyBoxRenderer::Ptr skyBox = Ptr(new SkyBoxRenderer(descriptor.objectDescriptor));
 
@@ -26,7 +26,7 @@ SkyBoxRenderer::Ptr SkyBoxRenderer::CreateSkyBoxRenderer(misc::render_descriptor
 	return skyBox;
 }
 
-SkyBoxRenderer::SkyBoxRenderer(misc::render_descriptors::DX_OBJECT_DESCRIPTOR& objectDesc)
+SkyBoxRenderer::SkyBoxRenderer(engine::gfx::render_descriptors::DX_OBJECT_DESCRIPTOR& objectDesc)
 	: Object(objectDesc), GeometryRenderer()
 {
 }
@@ -38,7 +38,7 @@ void SkyBoxRenderer::LoadGeometry(DescriptorVariant descriptor)
 	CreateVertexAndIndexBuffer();
 }
 
-void SkyBoxRenderer::Render(misc::rasterization::RenderLayer::Value renderLayer) const
+void SkyBoxRenderer::Render(engine::gfx::rasterization::RenderLayer::Value renderLayer) const
 {
 	GraphicsContext& graphicsContext = GraphicsResources::GetInstance().GetGraphicsContext();
 	FrameResources& frameResources = GraphicsResources::GetInstance().GetFrameResources();
@@ -51,7 +51,7 @@ void SkyBoxRenderer::Render(misc::rasterization::RenderLayer::Value renderLayer)
 
 	switch (renderLayer)
 	{
-	case misc::rasterization::RenderLayer::Base:
+	case engine::gfx::rasterization::RenderLayer::Base:
 		graphicsContext.SetPipelineState(*m_basePSO);
 		graphicsContext.DrawIndexed((UINT)m_mesh->GetIndexCount());
 
@@ -61,9 +61,9 @@ void SkyBoxRenderer::Render(misc::rasterization::RenderLayer::Value renderLayer)
 		graphicsContext.DrawIndexed((UINT)m_mesh->GetIndexCount());
 
 		break;
-	case misc::rasterization::RenderLayer::ShadowMap:
-	case misc::rasterization::RenderLayer::DebugShadowMap:
-	default: throw misc::CustomException("Tip de randare inexistent!!");
+	case engine::gfx::rasterization::RenderLayer::ShadowMap:
+	case engine::gfx::rasterization::RenderLayer::DebugShadowMap:
+	default: throw engine::core::CustomException("Tip de randare inexistent!!");
 	}
 }
 

@@ -18,7 +18,7 @@ public:
 	void Setup(GraphicsContext& graphicsContext);
 	void Finish(GraphicsContext& graphicsContext);
 
-	inline const misc::DescriptorHandle& GetTextureSRVHandle() { return m_depthTexture->GetSrvHandle(); }
+	inline const engine::gfx::DescriptorHandle& GetTextureSRVHandle() { return m_depthTexture->GetSrvHandle(); }
 
 	inline const engine::math::Vector3& GetLightDirection() const { return m_lightDirection; }
 	inline const OrthograficCamera& GetCamera() const { return m_camera; }
@@ -48,7 +48,7 @@ private:
 
 inline void ShadowMap::SetDirty()
 {
-	m_framesDirty = Settings::GetFrameResourcesCount();
+	m_framesDirty = engine::core::Settings::GetFrameResourcesCount();
 }
 
 inline bool ShadowMap::IsDirty() const

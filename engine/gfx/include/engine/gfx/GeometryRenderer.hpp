@@ -13,7 +13,7 @@
 class GeometryRenderer
 {
 public:
-	virtual void Render(misc::rasterization::RenderLayer::Value renderLayer) const = 0;
+	virtual void Render(engine::gfx::rasterization::RenderLayer::Value renderLayer) const = 0;
 	virtual void BuildAccelerationStructures() = 0;
 	virtual void FrustumCulling(const CameraController& cameraController) = 0;
 	virtual void Update(float deltaTime) = 0;
@@ -49,11 +49,11 @@ protected:
 	};
 
 	using DescriptorVariant = std::variant<
-		misc::render_descriptors::DX_OBJECTS_RENDERER_DESCRIPTOR,
-		misc::render_descriptors::DX_SKYBOX_DESCRIPTOR,
-		misc::render_descriptors::DX_TERRAIN_DESCRIPTOR,
-		misc::render_descriptors::DX_WATER_DESCRIPTOR,
-		misc::render_descriptors::DX_TEXTURE_DESCRIPTOR>;
+		engine::gfx::render_descriptors::DX_OBJECTS_RENDERER_DESCRIPTOR,
+		engine::gfx::render_descriptors::DX_SKYBOX_DESCRIPTOR,
+		engine::gfx::render_descriptors::DX_TERRAIN_DESCRIPTOR,
+		engine::gfx::render_descriptors::DX_WATER_DESCRIPTOR,
+		engine::gfx::render_descriptors::DX_TEXTURE_DESCRIPTOR>;
 
 protected:
 	GeometryRenderer() = default;

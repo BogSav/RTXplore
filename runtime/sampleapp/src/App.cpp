@@ -8,7 +8,7 @@
 
 App::App(Window& wnd) : window(wnd)
 {
-	if (Settings::UseRayTracing())
+	if (engine::core::Settings::UseRayTracing())
 	{
 		pGraphics = std::make_unique<RayTracingGraphics>(GraphicsResources::GetInstance());
 	}
@@ -50,9 +50,9 @@ void App::Update()
 		if (ok.has_value() && ok->GetType() == Mouse::Event::Type::Move)
 		{
 			pGraphics->GetCameraController().RotateFirstPerson_OY(
-				ok->GetDeltaX() * Settings::GetGameSettings().GetMouseSensitivityOX());
+				ok->GetDeltaX() * engine::core::Settings::GetGameSettings().GetMouseSensitivityOX());
 			pGraphics->GetCameraController().RotateFirstPerson_OX(
-				ok->GetDeltaY() * -Settings::GetGameSettings().GetMouseSensitivityOY());
+				ok->GetDeltaY() * -engine::core::Settings::GetGameSettings().GetMouseSensitivityOY());
 		}
 	}
 	else

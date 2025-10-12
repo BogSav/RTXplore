@@ -69,8 +69,8 @@ GraphicsPSO::Ptr PSO_Loader::LoadDefaultPSO(const ShadersManager& shadersManager
 	// Setare multisampleing
 	{
 		DXGI_SAMPLE_DESC sampleDesc = {};
-		sampleDesc.Count = Settings::GetGraphicsSettings().GetMSAASampleCount();
-		sampleDesc.Quality = Settings::GetGraphicsSettings().GetMSAAQuality();
+		sampleDesc.Count = engine::core::Settings::GetGraphicsSettings().GetMSAASampleCount();
+		sampleDesc.Quality = engine::core::Settings::GetGraphicsSettings().GetMSAAQuality();
 
 		pso->SetSampleState(sampleDesc);
 	}
@@ -369,29 +369,29 @@ RayTracingPSO::Ptr PSO_Loader::LoadDefaultRTPSO(
 	D3D12_SHADER_BYTECODE libdxil = CD3DX12_SHADER_BYTECODE(GET_RT_SHADER_DATA("DefaultRT"));
 	lib->SetDXILLibrary(&libdxil);
 	{
-		lib->DefineExport(misc::rt::c_raygenShaderName);
+		lib->DefineExport(engine::gfx::rt::c_raygenShaderName);
 
-		lib->DefineExport(misc::rt::ClosestHit_TriangleGeometry);
-		lib->DefineExport(misc::rt::ClosestHit_AABBGeometry);
+		lib->DefineExport(engine::gfx::rt::ClosestHit_TriangleGeometry);
+		lib->DefineExport(engine::gfx::rt::ClosestHit_AABBGeometry);
 
-		lib->DefineExport(misc::rt::IntersectionShader);
+		lib->DefineExport(engine::gfx::rt::IntersectionShader);
 
-		lib->DefineExport(misc::rt::Miss_RadianceShader);
-		lib->DefineExport(misc::rt::Miss_ShadowShader);
+		lib->DefineExport(engine::gfx::rt::Miss_RadianceShader);
+		lib->DefineExport(engine::gfx::rt::Miss_ShadowShader);
 	}
 
 	{
 		auto hitGroup = pso->desc.CreateSubobject<CD3DX12_HIT_GROUP_SUBOBJECT>();
-		hitGroup->SetHitGroupExport(misc::rt::HitGroupName_TriangleGeometry);
-		hitGroup->SetClosestHitShaderImport(misc::rt::ClosestHit_TriangleGeometry);
+		hitGroup->SetHitGroupExport(engine::gfx::rt::HitGroupName_TriangleGeometry);
+		hitGroup->SetClosestHitShaderImport(engine::gfx::rt::ClosestHit_TriangleGeometry);
 		hitGroup->SetHitGroupType(D3D12_HIT_GROUP_TYPE_TRIANGLES);
 	}
 
 	{
 		auto hitGroup = pso->desc.CreateSubobject<CD3DX12_HIT_GROUP_SUBOBJECT>();
-		hitGroup->SetHitGroupExport(misc::rt::HitGroupName_AABBGeometry);
-		hitGroup->SetClosestHitShaderImport(misc::rt::ClosestHit_AABBGeometry);
-		hitGroup->SetIntersectionShaderImport(misc::rt::IntersectionShader);
+		hitGroup->SetHitGroupExport(engine::gfx::rt::HitGroupName_AABBGeometry);
+		hitGroup->SetClosestHitShaderImport(engine::gfx::rt::ClosestHit_AABBGeometry);
+		hitGroup->SetIntersectionShaderImport(engine::gfx::rt::IntersectionShader);
 		hitGroup->SetHitGroupType(D3D12_HIT_GROUP_TYPE_PROCEDURAL_PRIMITIVE);
 	}
 
@@ -409,7 +409,7 @@ RayTracingPSO::Ptr PSO_Loader::LoadDefaultRTPSO(
 		// Shader association
 		auto rootSignatureAssociation = pso->desc.CreateSubobject<CD3DX12_SUBOBJECT_TO_EXPORTS_ASSOCIATION_SUBOBJECT>();
 		rootSignatureAssociation->SetSubobjectToAssociate(*localRootSignature);
-		rootSignatureAssociation->AddExport(misc::rt::c_raygenShaderName);
+		rootSignatureAssociation->AddExport(engine::gfx::rt::c_raygenShaderName);
 	}
 
 	// HitGroup triangle geometry shader association
@@ -420,7 +420,7 @@ RayTracingPSO::Ptr PSO_Loader::LoadDefaultRTPSO(
 		// Shader association
 		auto rootSignatureAssociation = pso->desc.CreateSubobject<CD3DX12_SUBOBJECT_TO_EXPORTS_ASSOCIATION_SUBOBJECT>();
 		rootSignatureAssociation->SetSubobjectToAssociate(*localRootSignature);
-		rootSignatureAssociation->AddExport(misc::rt::HitGroupName_TriangleGeometry);
+		rootSignatureAssociation->AddExport(engine::gfx::rt::HitGroupName_TriangleGeometry);
 	}
 
 	// HitGroup AABB geometry shader association
@@ -431,7 +431,7 @@ RayTracingPSO::Ptr PSO_Loader::LoadDefaultRTPSO(
 		// Shader association
 		auto rootSignatureAssociation = pso->desc.CreateSubobject<CD3DX12_SUBOBJECT_TO_EXPORTS_ASSOCIATION_SUBOBJECT>();
 		rootSignatureAssociation->SetSubobjectToAssociate(*localRootSignature);
-		rootSignatureAssociation->AddExport(misc::rt::HitGroupName_AABBGeometry);
+		rootSignatureAssociation->AddExport(engine::gfx::rt::HitGroupName_AABBGeometry);
 	}
 
 	// Intersection shader association
@@ -442,7 +442,7 @@ RayTracingPSO::Ptr PSO_Loader::LoadDefaultRTPSO(
 	//	// Shader association
 	//	auto rootSignatureAssociation = pso->desc.CreateSubobject<CD3DX12_SUBOBJECT_TO_EXPORTS_ASSOCIATION_SUBOBJECT>();
 	//	rootSignatureAssociation->SetSubobjectToAssociate(*localRootSignature);
-	//	rootSignatureAssociation->AddExport(misc::rt::IntersectionShader);
+	//	rootSignatureAssociation->AddExport(engine::gfx::rt::IntersectionShader);
 	//}
 
 	// Default miss shader associtaion
@@ -453,7 +453,7 @@ RayTracingPSO::Ptr PSO_Loader::LoadDefaultRTPSO(
 		// Shader association
 		auto rootSignatureAssociation = pso->desc.CreateSubobject<CD3DX12_SUBOBJECT_TO_EXPORTS_ASSOCIATION_SUBOBJECT>();
 		rootSignatureAssociation->SetSubobjectToAssociate(*localRootSignature);
-		rootSignatureAssociation->AddExport(misc::rt::Miss_RadianceShader);
+		rootSignatureAssociation->AddExport(engine::gfx::rt::Miss_RadianceShader);
 	}
 
 	// Shadow miss shader association
@@ -466,7 +466,7 @@ RayTracingPSO::Ptr PSO_Loader::LoadDefaultRTPSO(
 		// Shader association
 		auto rootSignatureAssociation = pso->desc.CreateSubobject<CD3DX12_SUBOBJECT_TO_EXPORTS_ASSOCIATION_SUBOBJECT>();
 		rootSignatureAssociation->SetSubobjectToAssociate(*localRootSignature);
-		rootSignatureAssociation->AddExport(misc::rt::Miss_ShadowShader);
+		rootSignatureAssociation->AddExport(engine::gfx::rt::Miss_ShadowShader);
 	}
 
 	auto globalRootSignature = pso->desc.CreateSubobject<CD3DX12_GLOBAL_ROOT_SIGNATURE_SUBOBJECT>();

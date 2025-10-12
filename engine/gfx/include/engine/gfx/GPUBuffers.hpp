@@ -31,14 +31,14 @@ public:
 		std::wstring defaultResourceName = L"",
 		std::wstring uploadResourceName = L"");
 
-	static misc::DescriptorHandle CreateTextureView(GpuResource& texture, D3D12_SHADER_RESOURCE_VIEW_DESC* descriptor);
-	static misc::DescriptorHandle CreateTextureView(GpuResource& texture, D3D12_UNORDERED_ACCESS_VIEW_DESC* descriptor);
-	static misc::DescriptorHandle CreateTextureView(GpuResource& texture, D3D12_RENDER_TARGET_VIEW_DESC* descriptor);
-	static misc::DescriptorHandle CreateTextureView(GpuResource& texture, D3D12_DEPTH_STENCIL_VIEW_DESC* descriptor);
+	static engine::gfx::DescriptorHandle CreateTextureView(GpuResource& texture, D3D12_SHADER_RESOURCE_VIEW_DESC* descriptor);
+	static engine::gfx::DescriptorHandle CreateTextureView(GpuResource& texture, D3D12_UNORDERED_ACCESS_VIEW_DESC* descriptor);
+	static engine::gfx::DescriptorHandle CreateTextureView(GpuResource& texture, D3D12_RENDER_TARGET_VIEW_DESC* descriptor);
+	static engine::gfx::DescriptorHandle CreateTextureView(GpuResource& texture, D3D12_DEPTH_STENCIL_VIEW_DESC* descriptor);
 
-	static misc::DescriptorHandle CreateBufferSRV(GpuResource& buffer, UINT numElements, UINT elementSize);
+	static engine::gfx::DescriptorHandle CreateBufferSRV(GpuResource& buffer, UINT numElements, UINT elementSize);
 
-	static misc::DescriptorHandle CreateAccelerationStructureSRV(GpuResource& accelerationStructure);
+	static engine::gfx::DescriptorHandle CreateAccelerationStructureSRV(GpuResource& accelerationStructure);
 
 public:
 	GpuResource()
@@ -141,7 +141,7 @@ public:
 	void Create(ID3D12Device* device, UINT numInstances = 1, LPCWSTR resourceName = nullptr)
 	{
 		m_numInstances = numInstances;
-		m_alignedInstanceSize = misc::Align(sizeof(T), D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT);
+		m_alignedInstanceSize = engine::gfx::Align(sizeof(T), D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT);
 		UINT bufferSize = numInstances * m_alignedInstanceSize;
 		Allocate(device, bufferSize, resourceName);
 		m_mappedConstantData = MapCpuWriteOnly();
@@ -221,7 +221,7 @@ public:
 	inline const D3D12_VERTEX_BUFFER_VIEW& GetVertexBufferView() noexcept { return m_vertexBufferView; }
 
 	void AllocateSRV();
-	inline const misc::DescriptorHandle& GetSRVHandle() const { return m_SRVHandle; }
+	inline const engine::gfx::DescriptorHandle& GetSRVHandle() const { return m_SRVHandle; }
 
 private:
 	GpuResource m_uploadResource;
@@ -229,7 +229,7 @@ private:
 	UINT m_vertexBufferSize;
 	UINT m_vertexCount;
 
-	misc::DescriptorHandle m_SRVHandle;
+	engine::gfx::DescriptorHandle m_SRVHandle;
 };
 
 class IndexBuffer : public GpuResource
@@ -243,7 +243,7 @@ public:
 	inline const D3D12_INDEX_BUFFER_VIEW& GetIndexBufferView() noexcept { return m_indexBufferView; }
 
 	void AllocateSRV();
-	inline const misc::DescriptorHandle& GetSRVHandle() const { return m_SRVHandle; }
+	inline const engine::gfx::DescriptorHandle& GetSRVHandle() const { return m_SRVHandle; }
 
 private:
 	GpuResource m_uploadResource;
@@ -251,5 +251,5 @@ private:
 	UINT m_indexBufferSize;
 	UINT m_indexCount;
 
-	misc::DescriptorHandle m_SRVHandle;
+	engine::gfx::DescriptorHandle m_SRVHandle;
 };

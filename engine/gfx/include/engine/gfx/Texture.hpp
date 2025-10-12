@@ -24,7 +24,7 @@ public:
 	void AllocateSrvHandle(
 		DXGI_FORMAT srvFormat = DXGI_FORMAT_UNKNOWN, D3D12_SHADER_RESOURCE_VIEW_DESC* srvDescriptor = nullptr);
 
-	INLINE const misc::DescriptorHandle& GetSrvHandle() const { return m_SrvHandle; }
+	INLINE const engine::gfx::DescriptorHandle& GetSrvHandle() const { return m_SrvHandle; }
 
 protected:
 	Texture() = delete;
@@ -45,7 +45,7 @@ protected:
 		bool isCube = true);
 
 protected:
-	misc::DescriptorHandle m_SrvHandle;
+	engine::gfx::DescriptorHandle m_SrvHandle;
 	DXGI_FORMAT m_format;
 
 	bool m_isNonPixelShaderResource = false;
@@ -71,9 +71,9 @@ public:
 	void AllocateRtvHandle(
 		DXGI_FORMAT rtvFormat = DXGI_FORMAT_UNKNOWN, D3D12_RENDER_TARGET_VIEW_DESC* rtvDescriptor = nullptr);
 
-	INLINE const misc::DescriptorHandle& GetRtvHandle(size_t index) const { return m_RtvHandle[index]; };
-	INLINE const misc::DescriptorHandle& GetRtvHandle() const { return m_RtvHandle[0]; };
-	INLINE const misc::DescriptorHandle& GetUavHandle() const { return m_UavHandle; };
+	INLINE const engine::gfx::DescriptorHandle& GetRtvHandle(size_t index) const { return m_RtvHandle[index]; };
+	INLINE const engine::gfx::DescriptorHandle& GetRtvHandle() const { return m_RtvHandle[0]; };
+	INLINE const engine::gfx::DescriptorHandle& GetUavHandle() const { return m_UavHandle; };
 	INLINE const engine::math::Color& GetClearColor() const { return m_clearColor; }
 
 	friend class TextureManager;
@@ -81,8 +81,8 @@ public:
 private:
 	engine::math::Color m_clearColor;
 
-	misc::DescriptorHandle m_UavHandle;
-	misc::DescriptorHandle m_RtvHandle[6];
+	engine::gfx::DescriptorHandle m_UavHandle;
+	engine::gfx::DescriptorHandle m_RtvHandle[6];
 };
 
 
@@ -98,7 +98,7 @@ public:
 	void AllocateDsvHandle(
 		DXGI_FORMAT dsvFormat = DXGI_FORMAT_UNKNOWN, D3D12_DEPTH_STENCIL_VIEW_DESC* dsvDescriptor = nullptr);
 
-	INLINE const misc::DescriptorHandle& GetDsvHandle() const { return m_DsvHandle; }
+	INLINE const engine::gfx::DescriptorHandle& GetDsvHandle() const { return m_DsvHandle; }
 	INLINE const UINT8& GetClearStencil() const { return m_clearStencil; }
 	INLINE const float& GetClearDepth() const { return m_clearDepth; }
 
@@ -108,5 +108,5 @@ private:
 	float m_clearDepth;
 	UINT8 m_clearStencil;
 
-	misc::DescriptorHandle m_DsvHandle;
+	engine::gfx::DescriptorHandle m_DsvHandle;
 };

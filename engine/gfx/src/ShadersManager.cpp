@@ -23,7 +23,7 @@ inline std::wstring ShaderPath(const wchar_t* filename)
 
 void ShadersManager::CompileShaders()
 {
-	if constexpr (Settings::UseRayTracing())
+	if constexpr (engine::core::Settings::UseRayTracing())
 	{
 		CompileRayTracingShaders();
 	}
@@ -45,13 +45,13 @@ void ShadersManager::CompileRasterizationShaders()
 	///////////////////////////////////////////////////////////////////////
 	// Define-uri pentru shadere
 	std::vector<std::wstring> lightingDefines = {
-		L"MAX_NUMBER_OF_LIGHTS=" + std::to_wstring(Settings::GetMaxNrOfLightSources()),
-		L"POINT_LIGHTS_COUNT=" + std::to_wstring(Settings::GetGameSettings().GetMaxNumberOfPointLights()),
-		L"SPOT_LIGHT_COUNT=" + std::to_wstring(Settings::GetGameSettings().GetMaxNumberOfSpotLights()),
-		L"DIR_LIGHTS_COUNT=" + std::to_wstring(Settings::GetGameSettings().GetMaxNumberOfDirectionalLights())};
+		L"MAX_NUMBER_OF_LIGHTS=" + std::to_wstring(engine::core::Settings::GetMaxNrOfLightSources()),
+		L"POINT_LIGHTS_COUNT=" + std::to_wstring(engine::core::Settings::GetGameSettings().GetMaxNumberOfPointLights()),
+		L"SPOT_LIGHT_COUNT=" + std::to_wstring(engine::core::Settings::GetGameSettings().GetMaxNumberOfSpotLights()),
+		L"DIR_LIGHTS_COUNT=" + std::to_wstring(engine::core::Settings::GetGameSettings().GetMaxNumberOfDirectionalLights())};
 
 	std::vector<std::wstring> waterDefines = {
-		L"WAVE_PROPERTIES_COUNT=" + std::to_wstring(Settings::GetNumberOfWaveFunctions())};
+		L"WAVE_PROPERTIES_COUNT=" + std::to_wstring(engine::core::Settings::GetNumberOfWaveFunctions())};
 
 	std::vector<std::wstring> includeDirectories = {L"-I", L"Shaders"};
 	std::vector<std::wstring> shadowRenderSwitch = {L"SHADOW_RENDER"};
@@ -110,10 +110,10 @@ void ShadersManager::CompileRayTracingShaders()
 	///////////////////////////////////////////////////////////////////////
 	// Define-uri pentru shadere
 	std::vector<std::wstring> lightingDefines = {
-		L"MAX_NUMBER_OF_LIGHTS=" + std::to_wstring(Settings::GetMaxNrOfLightSources()),
-		L"POINT_LIGHTS_COUNT=" + std::to_wstring(Settings::GetGameSettings().GetMaxNumberOfPointLights()),
-		L"SPOT_LIGHT_COUNT=" + std::to_wstring(Settings::GetGameSettings().GetMaxNumberOfSpotLights()),
-		L"DIR_LIGHTS_COUNT=" + std::to_wstring(Settings::GetGameSettings().GetMaxNumberOfDirectionalLights())};
+		L"MAX_NUMBER_OF_LIGHTS=" + std::to_wstring(engine::core::Settings::GetMaxNrOfLightSources()),
+		L"POINT_LIGHTS_COUNT=" + std::to_wstring(engine::core::Settings::GetGameSettings().GetMaxNumberOfPointLights()),
+		L"SPOT_LIGHT_COUNT=" + std::to_wstring(engine::core::Settings::GetGameSettings().GetMaxNumberOfSpotLights()),
+		L"DIR_LIGHTS_COUNT=" + std::to_wstring(engine::core::Settings::GetGameSettings().GetMaxNumberOfDirectionalLights())};
 
 	std::vector<std::wstring> includeDirectories = {L"-I", SHADER_DIR_W};
 
@@ -151,14 +151,14 @@ ShadersManager::ShaderPtr ShadersManager::CompileShader(
 	const auto dxCompilerLib = LoadLibraryEx(L"dxcompiler.dll", nullptr, LOAD_LIBRARY_SEARCH_SYSTEM32);
 	if (dxCompilerLib == nullptr)
 	{
-		throw misc::CustomException("Nu a fost gasit fisierul .dll");
+		throw engine::core::CustomException("Nu a fost gasit fisierul .dll");
 	}
 
 	const auto DxcCreateInstance = reinterpret_cast<DxcCreateInstanceDefinition>(
 		reinterpret_cast<void*>(GetProcAddress(dxCompilerLib, "DxcCreateInstance")));
 	if (DxcCreateInstance == nullptr)
 	{
-		throw misc::CustomException("Nu a fost gasita functia DxcCreateInstance in .dll");
+		throw engine::core::CustomException("Nu a fost gasita functia DxcCreateInstance in .dll");
 	}
 
 	// Creem libraria (obiect ajutator) si creem si compilatorul
@@ -219,12 +219,12 @@ ShadersManager::ShaderPtr ShadersManager::CompileShader(
 	if (SUCCEEDED(pResult->GetOutput(DXC_OUT_ERRORS, IID_PPV_ARGS(&pErrors), nullptr)) && pErrors != nullptr
 		&& pErrors->GetStringLength() != 0)
 	{
-		throw misc::CustomException(pErrors->GetStringPointer());
+		throw engine::core::CustomException(pErrors->GetStringPointer());
 	}
 
 	if (FAILED(pResult->GetStatus(&hr)) || FAILED(hr))
 	{
-		throw misc::CustomException("Compilation failed");
+		throw engine::core::CustomException("Compilation failed");
 	}
 
 	// pResult->GetStatus(&hr);
@@ -236,7 +236,7 @@ ShadersManager::ShaderPtr ShadersManager::CompileShader(
 	//	{
 	//		std::wstring errorMessage = std::wstring(
 	//			static_cast<WCHAR*>(errorsBlob->GetBufferPointer()), errorsBlob->GetBufferSize() / sizeof(WCHAR));
-	//		throw std::runtime_error(misc::GetStringFromWString(errorMessage));
+	//		throw std::runtime_error(engine::core::GetStringFromWString(errorMessage));
 	//	}
 	//	else
 	//	{

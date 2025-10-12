@@ -4,7 +4,7 @@
 
 #include <sstream>
 
-namespace misc
+namespace engine::core
 {
 // Graphics exception stuff
 HrException::HrException(int line, const char* file, HRESULT hr, std::vector<std::string> infoMsgs) noexcept
@@ -122,4 +122,4 @@ std::string InfoException::GetErrorInfo() const noexcept
 	return info;
 }
 
-};  // namespace misc
+};  // namespace engine::core

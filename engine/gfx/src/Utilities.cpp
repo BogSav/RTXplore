@@ -8,7 +8,7 @@
 
 using namespace Microsoft::WRL;
 
-namespace misc
+namespace engine::gfx
 {
 void LogOutputDisplayModes(IDXGIOutput* output, DXGI_FORMAT format)
 {
@@ -127,7 +127,7 @@ void GetHardwareAdapter(
 	outMaxFeatureLevel = maxSupportedFeatureLevel;
 
 	if (outMaxFeatureLevel < minimalFeatureLevel)
-		throw misc::CustomException("Incomaptible feature level");
+		throw engine::core::CustomException("Incomaptible feature level");
 }
 
 void PrintStateObjectDesc(const D3D12_STATE_OBJECT_DESC* desc)
@@ -306,10 +306,10 @@ void SetOptimalMSAALevel(ID3D12Device10* pDevice, DXGI_FORMAT formmat)
 				maxQualityLevels = msQualityLevels.NumQualityLevels;
 			}
 
-			if (sampleCount <= Settings::GetGraphicsSettings().GetDesiredMSAASampleCount())
+			if (sampleCount <= engine::core::Settings::GetGraphicsSettings().GetDesiredMSAASampleCount())
 			{
-				Settings::GetGraphicsSettings().SetMSAAQuality(msQualityLevels.NumQualityLevels - 1);
-				Settings::GetGraphicsSettings().SetMSAASampleCount(sampleCount);
+				engine::core::Settings::GetGraphicsSettings().SetMSAAQuality(msQualityLevels.NumQualityLevels - 1);
+				engine::core::Settings::GetGraphicsSettings().SetMSAASampleCount(sampleCount);
 				break;
 			}
 		}
@@ -317,18 +317,18 @@ void SetOptimalMSAALevel(ID3D12Device10* pDevice, DXGI_FORMAT formmat)
 
 	if (maxSampleCountSupported > 1)
 	{
-		Settings::GetGraphicsSettings().SetIsMSAASupported(true);
-		Settings::GetGraphicsSettings().SetMSAAMaximumSampleCount(maxSampleCountSupported);
+		engine::core::Settings::GetGraphicsSettings().SetIsMSAASupported(true);
+		engine::core::Settings::GetGraphicsSettings().SetMSAAMaximumSampleCount(maxSampleCountSupported);
 	}
 	else
 	{
-		Settings::GetGraphicsSettings().SetIsMSAASupported(false);
+		engine::core::Settings::GetGraphicsSettings().SetIsMSAASupported(false);
 	}
 }
 
 void SetTearing(Microsoft::WRL::ComPtr<IDXGIFactory4> pFactory)
 {
-	if (!Settings::GetGraphicsSettings().IsTearingAllowed())
+	if (!engine::core::Settings::GetGraphicsSettings().IsTearingAllowed())
 		return;
 
 	HRESULT hr;
@@ -342,7 +342,7 @@ void SetTearing(Microsoft::WRL::ComPtr<IDXGIFactory4> pFactory)
 
 	if (FAILED(hr) || !allowTearing)
 	{
-		Settings::GetGraphicsSettings().SetTearingEnabled(false, 1);
+		engine::core::Settings::GetGraphicsSettings().SetTearingEnabled(false, 1);
 		OutputDebugStringA("WARNING: Variable refresh rate displays not supported");
 	}
 }

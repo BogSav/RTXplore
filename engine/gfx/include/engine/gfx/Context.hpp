@@ -76,9 +76,9 @@ public:
 
 	void SetRootSignature(const RootSignature& RootSig);
 
-	void SetRenderTargetAndDepthStencil(const misc::DescriptorHandle& RTV, const misc::DescriptorHandle& DSV);
-	void SetRenderTarget(const misc::DescriptorHandle& RTV);
-	void SetDepthStencil(const misc::DescriptorHandle& DSV);
+	void SetRenderTargetAndDepthStencil(const engine::gfx::DescriptorHandle& RTV, const engine::gfx::DescriptorHandle& DSV);
+	void SetRenderTarget(const engine::gfx::DescriptorHandle& RTV);
+	void SetDepthStencil(const engine::gfx::DescriptorHandle& DSV);
 
 	void ClearColor(const ColorTexture& colorTexture, D3D12_RECT* rect = nullptr);
 	void ClearCubeMapFace(const ColorTexture& cubeMap, UINT index, D3D12_RECT* rect = nullptr);
@@ -161,9 +161,9 @@ public:
 	void SwapContext();
 
 private:
-	std::array<GraphicsContext::Ptr, Settings::GetFrameResourcesCount()> m_graphicsContexts;
-	std::array<ComputeContext::Ptr, Settings::GetFrameResourcesCount()> m_computeContexts;
-	std::array<FrameResources::Ptr, Settings::GetFrameResourcesCount()> m_frameResources;
+	std::array<GraphicsContext::Ptr, engine::core::Settings::GetFrameResourcesCount()> m_graphicsContexts;
+	std::array<ComputeContext::Ptr, engine::core::Settings::GetFrameResourcesCount()> m_computeContexts;
+	std::array<FrameResources::Ptr, engine::core::Settings::GetFrameResourcesCount()> m_frameResources;
 
 	Microsoft::WRL::ComPtr<ID3D12CommandQueue> pCommandQueue;
 	UINT frameIndex;

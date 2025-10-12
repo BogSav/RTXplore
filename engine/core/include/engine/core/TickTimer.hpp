@@ -3,7 +3,7 @@
 
 #pragma once
 
-namespace misc
+namespace engine::core
 {
 
 // Ultra precision timer
@@ -26,4 +26,4 @@ private:
 	struct Data;
 	Data* pData;
 };
-}  // namespace misc
+}  // namespace engine::core

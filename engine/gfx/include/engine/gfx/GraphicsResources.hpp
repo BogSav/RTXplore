@@ -41,8 +41,8 @@ public:
 	static inline ContextManager& GetContextManager() { return *GetInstance().pContextManager; }
 	static inline ID3D12Device10* GetDevice() { return GetInstance().pDevice.Get(); }
 
-	static misc::DescriptorHandle AllocateDescriptor(D3D12_DESCRIPTOR_HEAP_TYPE heapType);
-	inline const misc::DescriptorHeap& GetDescriptorHeap(D3D12_DESCRIPTOR_HEAP_TYPE heapType);
+	static engine::gfx::DescriptorHandle AllocateDescriptor(D3D12_DESCRIPTOR_HEAP_TYPE heapType);
+	inline const engine::gfx::DescriptorHeap& GetDescriptorHeap(D3D12_DESCRIPTOR_HEAP_TYPE heapType);
 	inline UINT GetDescriptorIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE heapType);
 
 	void SetSizeChnaged(bool toSet) { m_sizeChanged = toSet; }
@@ -77,11 +77,11 @@ private:
 	Microsoft::WRL::ComPtr<ID3D12Device10> pDevice;
 
 	// Obiecte Swap-Chain, MSAA, RT
-	std::array<ColorTexture::Ptr, Settings::GetBackBufferCount()> m_renderTargetTextures;
+	std::array<ColorTexture::Ptr, engine::core::Settings::GetBackBufferCount()> m_renderTargetTextures;
 	ColorTexture::Ptr m_renderTexture;
 	DepthTexture::Ptr m_depthTexture;
 
-	std::array<misc::DescriptorHeap, D3D12_DESCRIPTOR_HEAP_TYPE_NUM_TYPES> m_descriptorHeaps;
+	std::array<engine::gfx::DescriptorHeap, D3D12_DESCRIPTOR_HEAP_TYPE_NUM_TYPES> m_descriptorHeaps;
 
 	UINT m_backBufferIndex;
 
@@ -93,7 +93,7 @@ inline UINT GraphicsResources::GetDescriptorIncrementSize(D3D12_DESCRIPTOR_HEAP_
 	return m_descriptorHeaps[heapType].GetDescriptorSize();
 }
 
-inline const misc::DescriptorHeap& GraphicsResources::GetDescriptorHeap(D3D12_DESCRIPTOR_HEAP_TYPE heapType)
+inline const engine::gfx::DescriptorHeap& GraphicsResources::GetDescriptorHeap(D3D12_DESCRIPTOR_HEAP_TYPE heapType)
 {
 	return m_descriptorHeaps[heapType];
 }

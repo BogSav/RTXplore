@@ -5,8 +5,8 @@
 
 #include <map>
 
-using namespace misc::rasterization;
-using namespace misc::render_descriptors;
+using namespace engine::gfx::rasterization;
+using namespace engine::gfx::render_descriptors;
 
 ObjectRenderer::Ptr ObjectRenderer::CreateObjectRenderer(DX_OBJECTS_RENDERER_DESCRIPTOR descriptor)
 {
@@ -106,7 +106,7 @@ void ObjectRenderer::Update(float deltaTime)
 	}
 }
 
-void ObjectRenderer::Render(misc::rasterization::RenderLayer::Value renderLayer) const
+void ObjectRenderer::Render(engine::gfx::rasterization::RenderLayer::Value renderLayer) const
 {
 	GraphicsContext& graphicsContext = GraphicsResources::GetInstance().GetGraphicsContext();
 	FrameResources& frameResources = GraphicsResources::GetInstance().GetFrameResources();
@@ -127,7 +127,7 @@ void ObjectRenderer::Render(misc::rasterization::RenderLayer::Value renderLayer)
 
 	switch (renderLayer)
 	{
-	case misc::rasterization::RenderLayer::Base:
+	case engine::gfx::rasterization::RenderLayer::Base:
 		graphicsContext.SetPipelineState(*m_basePSO);
 
 		renderObjects();
@@ -139,13 +139,13 @@ void ObjectRenderer::Render(misc::rasterization::RenderLayer::Value renderLayer)
 		renderObjects();
 
 		break;
-	case misc::rasterization::RenderLayer::ShadowMap:
+	case engine::gfx::rasterization::RenderLayer::ShadowMap:
 		graphicsContext.SetPipelineState(*m_shadowPSO);
 
 		renderObjects();
 
 		break;
-	// case misc::rasterization::RenderLayer::DebugShadowMap:
+	// case engine::gfx::rasterization::RenderLayer::DebugShadowMap:
 	//	pCommandList->SetGraphicsRootSignature(m_shadowDebugPSO->GetID3D12RootSignature());
 	//	pCommandList->SetPipelineState(m_shadowDebugPSO->GetD3D12PipelineState());
 
@@ -159,7 +159,7 @@ void ObjectRenderer::Render(misc::rasterization::RenderLayer::Value renderLayer)
 	//	(*std::prev(m_objects.end()))->Render(pGraphicsResources, renderLayer);
 
 	//	break;
-	default: throw misc::CustomException("Tip de randare inexistent!!");
+	default: throw engine::core::CustomException("Tip de randare inexistent!!");
 	}
 }
 

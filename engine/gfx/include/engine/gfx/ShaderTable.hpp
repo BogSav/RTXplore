@@ -62,7 +62,7 @@ public:
 	ShaderTable(ID3D12Device* device, UINT numShaderRecords, UINT shaderRecordSize, LPCWSTR resourceName = nullptr)
 		: m_name(resourceName)
 	{
-		m_shaderRecordSize = misc::Align(shaderRecordSize, D3D12_RAYTRACING_SHADER_RECORD_BYTE_ALIGNMENT);
+		m_shaderRecordSize = engine::gfx::Align(shaderRecordSize, D3D12_RAYTRACING_SHADER_RECORD_BYTE_ALIGNMENT);
 		m_shaderRecords.reserve(numShaderRecords);
 		UINT bufferSize = numShaderRecords * m_shaderRecordSize;
 		Allocate(device, bufferSize, resourceName);
@@ -72,7 +72,7 @@ public:
 	void push_back(const ShaderRecord& shaderRecord)
 	{
 		if (m_shaderRecords.size() >= m_shaderRecords.capacity())
-			throw misc::CustomException("Shader table capacity exceeded");
+			throw engine::core::CustomException("Shader table capacity exceeded");
 		
 		m_shaderRecords.push_back(shaderRecord);
 		shaderRecord.CopyTo(m_mappedShaderRecords);

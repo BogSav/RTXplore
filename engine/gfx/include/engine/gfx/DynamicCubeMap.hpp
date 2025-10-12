@@ -14,7 +14,7 @@ public:
 	void Create();
 	void Update();
 
-	inline const misc::DescriptorHandle& GetRtvHandle(size_t index) const
+	inline const engine::gfx::DescriptorHandle& GetRtvHandle(size_t index) const
 	{
 		return m_cubeMapTexture->GetRtvHandle(index);
 	}
@@ -68,5 +68,5 @@ inline bool DynamicCubeMap::IsDirty() const
 
 inline void DynamicCubeMap::SetDirty()
 {
-	m_framesDirty = Settings::GetFrameResourcesCount();
+	m_framesDirty = engine::core::Settings::GetFrameResourcesCount();
 }

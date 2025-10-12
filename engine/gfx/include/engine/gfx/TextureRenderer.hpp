@@ -7,14 +7,14 @@ class TextureRenderer : public GeometryRenderer
 public:
 	using Ptr = std::unique_ptr<TextureRenderer>;
 
-	static TextureRenderer::Ptr CreateTextureRenderer(misc::render_descriptors::DX_TEXTURE_DESCRIPTOR& descriptor);
+	static TextureRenderer::Ptr CreateTextureRenderer(engine::gfx::render_descriptors::DX_TEXTURE_DESCRIPTOR& descriptor);
 
-	void Render(misc::rasterization::RenderLayer::Value renderLayer) const override;
+	void Render(engine::gfx::rasterization::RenderLayer::Value renderLayer) const override;
 	void BuildAccelerationStructures() override;
 	void FrustumCulling(const CameraController& cameraController) override;
 	void Update(float deltaTime) override;
 
-	void SetTextureSRVHandle(const misc::DescriptorHandle& textureSRVHandle);
+	void SetTextureSRVHandle(const engine::gfx::DescriptorHandle& textureSRVHandle);
 
 private:
 	TextureRenderer () = default;
@@ -22,5 +22,5 @@ private:
 	void LoadGeometry(DescriptorVariant descriptor) override;
 
 private:
-	misc::DescriptorHandle m_textureSRVHandle;
+	engine::gfx::DescriptorHandle m_textureSRVHandle;
 };

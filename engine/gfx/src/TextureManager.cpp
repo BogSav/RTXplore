@@ -37,13 +37,13 @@ void TextureManager::LoadTexturesFormFiles(ID3D12Device10* pDevice, ID3D12Comman
 
 	// Create the textures first
 	m_textures.push_back(std::make_unique<ColorTexture>(
-		TexturePath(L"Terrain.Array.Diffuse.dds").c_str(), L"Terrain.Diffuse", false, Settings::UseRayTracing()));
+		TexturePath(L"Terrain.Array.Diffuse.dds").c_str(), L"Terrain.Diffuse", false, engine::core::Settings::UseRayTracing()));
 	m_textures.push_back(std::make_unique<ColorTexture>(
-		TexturePath(L"Terrain.Array.Normal.dds").c_str(), L"Terrain.Normal", false, Settings::UseRayTracing()));
+		TexturePath(L"Terrain.Array.Normal.dds").c_str(), L"Terrain.Normal", false, engine::core::Settings::UseRayTracing()));
 	m_textures.push_back(std::make_unique<ColorTexture>(
-		TexturePath(L"Water.Normal.dds").c_str(), L"Water.Normal", false, Settings::UseRayTracing()));
+		TexturePath(L"Water.Normal.dds").c_str(), L"Water.Normal", false, engine::core::Settings::UseRayTracing()));
 	m_textures.push_back(
-		std::make_unique<ColorTexture>(TexturePath(L"SkyBox.dds").c_str(), L"SkyBox", true, Settings::UseRayTracing()));
+		std::make_unique<ColorTexture>(TexturePath(L"SkyBox.dds").c_str(), L"SkyBox", true, engine::core::Settings::UseRayTracing()));
 
 	m_textures.push_back(
 		std::make_unique<ColorTexture>(TexturePath(L"Terrain.Array.Disp.dds").c_str(), L"Terrain.Displacement", false, true));

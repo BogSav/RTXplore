@@ -32,9 +32,9 @@ public:
 			D3D12_RAYTRACING_ACCELERATION_STRUCTURE_BUILD_FLAG_NONE);
 	void CreateSRV();
 
-	inline const misc::DescriptorHandle& GetSRVHandle() const { return m_SRVHandle; }
-	inline misc::DescriptorHandle& GetSRVHandle() { return m_SRVHandle; }
+	inline const engine::gfx::DescriptorHandle& GetSRVHandle() const { return m_SRVHandle; }
+	inline engine::gfx::DescriptorHandle& GetSRVHandle() { return m_SRVHandle; }
 
 private:
-	misc::DescriptorHandle m_SRVHandle;
+	engine::gfx::DescriptorHandle m_SRVHandle;
 };

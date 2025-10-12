@@ -20,5 +20,5 @@ private:
 	Window& window;
 	Graphics::Ptr pGraphics;
 
-	misc::TickTimer<float> m_timer;
+	engine::core::TickTimer<float> m_timer;
 };

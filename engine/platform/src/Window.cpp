@@ -50,8 +50,8 @@ WindowClass::~WindowClass()
 
 Window::Window(int width, int height, const wchar_t* name) : width(width), height(height)
 {
-	Settings::GetGraphicsSettings().SetWidth(width);
-	Settings::GetGraphicsSettings().SetHeight(height);
+	engine::core::Settings::GetGraphicsSettings().SetWidth(width);
+	engine::core::Settings::GetGraphicsSettings().SetHeight(height);
 
 	RECT uiSpace;
 	uiSpace.left = 100;
@@ -221,8 +221,8 @@ LRESULT Window::HandleMessage(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		GetClientRect(hWnd, &clientRect);
 		GraphicsResources::GetInstance().OnSizeChanged(
 			clientRect.right - clientRect.left, clientRect.bottom - clientRect.top);
-		width = Settings::GetGraphicsSettings().GetWidth();
-		height = Settings::GetGraphicsSettings().GetHeight();
+		width = engine::core::Settings::GetGraphicsSettings().GetWidth();
+		height = engine::core::Settings::GetGraphicsSettings().GetHeight();
 
 		break;
 	}

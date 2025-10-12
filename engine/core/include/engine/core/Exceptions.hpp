@@ -5,12 +5,12 @@
 
 #include <vector>
 
-namespace misc
+namespace engine::core
 {
 
-class Exception : public misc::CustomException
+class Exception : public engine::core::CustomException
 {
-	using misc::CustomException::CustomException;
+	using engine::core::CustomException::CustomException;
 };
 
 class HrException : public Exception
@@ -51,4 +51,4 @@ private:
 	std::string reason;
 };
 
-}  // namespace misc
+}  // namespace engine::core

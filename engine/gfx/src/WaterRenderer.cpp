@@ -2,11 +2,11 @@
 
 #include "GeometryGenerator.hpp"
 
-using namespace misc::rasterization;
-using namespace misc::render_descriptors;
-using namespace misc::RSBinding;
+using namespace engine::gfx::rasterization;
+using namespace engine::gfx::render_descriptors;
+using namespace engine::gfx::RSBinding;
 
-WaterRenderer::Ptr WaterRenderer::CreateWaterRenderer(misc::render_descriptors::DX_WATER_DESCRIPTOR& descriptor)
+WaterRenderer::Ptr WaterRenderer::CreateWaterRenderer(engine::gfx::render_descriptors::DX_WATER_DESCRIPTOR& descriptor)
 {
 	WaterRenderer::Ptr water = Ptr(new WaterRenderer(descriptor.objectDescriptor));
 
@@ -44,7 +44,7 @@ void WaterRenderer::LoadGeometry(DescriptorVariant descriptor)
 {
 	DX_WATER_DESCRIPTOR& waterDesc = std::get<DX_WATER_DESCRIPTOR>(descriptor);
 
-	if (!Settings::UseRayTracing())
+	if (!engine::core::Settings::UseRayTracing())
 	{
 		std::vector<engine::math::AABB> aabbs;
 		std::vector<SubMesh> submeshs;
@@ -65,7 +65,7 @@ void WaterRenderer::LoadGeometry(DescriptorVariant descriptor)
 
 		// GeometryHelper::ChnageColor(m_mesh, GetColor());
 
-		CreateVertexAndIndexBuffer(Settings::UseRayTracing());
+		CreateVertexAndIndexBuffer(engine::core::Settings::UseRayTracing());
 	}
 	else
 	{
@@ -119,7 +119,7 @@ void WaterRenderer::FrustumCulling(const CameraController& cameraController)
 	}
 }
 
-void WaterRenderer::Render(misc::rasterization::RenderLayer::Value renderLayer) const
+void WaterRenderer::Render(engine::gfx::rasterization::RenderLayer::Value renderLayer) const
 {
 	GraphicsContext& graphicsContext = GraphicsResources::GetInstance().GetGraphicsContext();
 	FrameResources& frameResources = GraphicsResources::GetInstance().GetFrameResources();
@@ -168,8 +168,8 @@ void WaterRenderer::Render(misc::rasterization::RenderLayer::Value renderLayer) 
 		break;
 	case RenderLayer::CubeMap:
 	case RenderLayer::ShadowMap:
-	case RenderLayer::DebugShadowMap: throw misc::CustomException("Tip de randare nesuportat");
-	default: throw misc::CustomException("Tip de randare inexistent!!");
+	case RenderLayer::DebugShadowMap: throw engine::core::CustomException("Tip de randare nesuportat");
+	default: throw engine::core::CustomException("Tip de randare inexistent!!");
 	}
 }
 

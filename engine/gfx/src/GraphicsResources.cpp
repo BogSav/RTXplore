@@ -26,11 +26,11 @@ void GraphicsResources::SetRenderTarget()
 {
 	GraphicsContext& graphicsContext = GetGraphicsContext();
 
-	if (Settings::UseRayTracing())
+	if (engine::core::Settings::UseRayTracing())
 	{
 		graphicsContext.TransitionResource(*m_renderTexture, D3D12_RESOURCE_STATE_UNORDERED_ACCESS, true);
 	}
-	else if (Settings::GetGraphicsSettings().GetIsMSAAEnabled())
+	else if (engine::core::Settings::GetGraphicsSettings().GetIsMSAAEnabled())
 	{
 		graphicsContext.TransitionResource(*m_renderTexture, D3D12_RESOURCE_STATE_RENDER_TARGET);
 	}
@@ -40,14 +40,14 @@ void GraphicsResources::SetRenderTarget()
 			*m_renderTargetTextures[m_backBufferIndex], D3D12_RESOURCE_STATE_RENDER_TARGET, true);
 	}
 
-	if (Settings::UseRayTracing())
+	if (engine::core::Settings::UseRayTracing())
 		return;
 
 	graphicsContext.SetViewportAndScissor(m_viewport, m_scissorRect);
 	graphicsContext.SetRenderTargetAndDepthStencil(
 		m_renderTargetTextures[m_backBufferIndex]->GetRtvHandle(), m_depthTexture->GetDsvHandle());
 
-	if (Settings::GetGraphicsSettings().GetIsMSAAEnabled())
+	if (engine::core::Settings::GetGraphicsSettings().GetIsMSAAEnabled())
 	{
 		graphicsContext.ClearColor(*m_renderTexture);
 	}
@@ -66,13 +66,13 @@ void GraphicsResources::EndFrame()
 	GraphicsContext& graphicsContext = GetGraphicsContext();
 	// ComputeContext& computeContext = GetComputeContext();
 
-	if (Settings::UseRayTracing())
+	if (engine::core::Settings::UseRayTracing())
 	{
 		graphicsContext.CopyBuffer(*m_renderTargetTextures[m_backBufferIndex], *m_renderTexture);
 		graphicsContext.TransitionResource(
 			*m_renderTargetTextures[m_backBufferIndex], D3D12_RESOURCE_STATE_PRESENT, true);
 	}
-	else if (Settings::GetGraphicsSettings().GetIsMSAAEnabled())
+	else if (engine::core::Settings::GetGraphicsSettings().GetIsMSAAEnabled())
 	{
 		/*ResourceBarriers(
 			m_renderTexture->GetResource(),
@@ -94,13 +94,13 @@ void GraphicsResources::EndFrame()
 	pContextManager->SwapContext();
 
 #if _DEBUG
-	DxgiInfoManager::GetInstance().Set();
+	engine::core::DxgiInfoManager::GetInstance().Set();
 #endif
 
 	if (FAILED(
 			hr = pSwapChain->Present(
-				Settings::GetGraphicsSettings().GetSyncInterval(),
-				Settings::GetGraphicsSettings().IsTearingAllowed() ? DXGI_PRESENT_ALLOW_TEARING : 0u)))
+				engine::core::Settings::GetGraphicsSettings().GetSyncInterval(),
+				engine::core::Settings::GetGraphicsSettings().IsTearingAllowed() ? DXGI_PRESENT_ALLOW_TEARING : 0u)))
 	{
 		if (hr == DXGI_ERROR_DEVICE_REMOVED)
 		{
@@ -146,9 +146,9 @@ void GraphicsResources::CreateDeviceResources()
 	// - creare device
 	// - verificare suport ray tracing
 	// - setare MSAA
-	misc::SetTearing(pFactory);
+	engine::gfx::SetTearing(pFactory);
 
-	if (Settings::GetGraphicsSettings().GetUseWarpAdapter())
+	if (engine::core::Settings::GetGraphicsSettings().GetUseWarpAdapter())
 	{
 		ComPtr<IDXGIAdapter1> warpAdapter;
 		GFX_THROW_INFO(pFactory->EnumWarpAdapter(IID_PPV_ARGS(&warpAdapter)));
@@ -157,15 +157,15 @@ void GraphicsResources::CreateDeviceResources()
 	else
 	{
 		ComPtr<IDXGIAdapter1> hardwareAdapter;
-		misc::GetHardwareAdapter(pFactory.Get(), &hardwareAdapter, m_featureLevel, m_minimalFeatureLevel);
+		engine::gfx::GetHardwareAdapter(pFactory.Get(), &hardwareAdapter, m_featureLevel, m_minimalFeatureLevel);
 
-		if (!misc::IsRayTracingSupported(hardwareAdapter.Get(), m_featureLevel) && Settings::UseRayTracing())
-			throw misc::CustomException("RayTracing is not supported");
+		if (!engine::gfx::IsRayTracingSupported(hardwareAdapter.Get(), m_featureLevel) && engine::core::Settings::UseRayTracing())
+			throw engine::core::CustomException("RayTracing is not supported");
 
 		GFX_THROW_INFO(D3D12CreateDevice(hardwareAdapter.Get(), m_featureLevel, IID_PPV_ARGS(&pDevice)));
 	}
 
-	misc::SetOptimalMSAALevel(pDevice.Get(), m_backBufferFormat);
+	engine::gfx::SetOptimalMSAALevel(pDevice.Get(), m_backBufferFormat);
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	// Creare descriptor heaps
@@ -187,9 +187,9 @@ void GraphicsResources::CreateWindowSizeDependentResources()
 
 	// CREARE SWAP CHAIN====================================================================
 	DXGI_SWAP_CHAIN_DESC1 swapChainDesc = {};
-	swapChainDesc.BufferCount = Settings::GetBackBufferCount();
-	swapChainDesc.Width = Settings::GetGraphicsSettings().GetWidth();
-	swapChainDesc.Height = Settings::GetGraphicsSettings().GetHeight();
+	swapChainDesc.BufferCount = engine::core::Settings::GetBackBufferCount();
+	swapChainDesc.Width = engine::core::Settings::GetGraphicsSettings().GetWidth();
+	swapChainDesc.Height = engine::core::Settings::GetGraphicsSettings().GetHeight();
 	swapChainDesc.Scaling = DXGI_SCALING_NONE;
 	swapChainDesc.Format = m_backBufferFormat;
 	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
@@ -198,7 +198,7 @@ void GraphicsResources::CreateWindowSizeDependentResources()
 	swapChainDesc.Stereo = FALSE;
 	swapChainDesc.SampleDesc.Count = 1;
 	swapChainDesc.SampleDesc.Quality = 0;
-	swapChainDesc.Flags = Settings::GetGraphicsSettings().IsTearingAllowed() ? DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING : 0u;
+	swapChainDesc.Flags = engine::core::Settings::GetGraphicsSettings().IsTearingAllowed() ? DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING : 0u;
 
 	ComPtr<IDXGISwapChain1> tmpSwapChain;
 	GFX_THROW_INFO(pFactory->CreateSwapChainForHwnd(
@@ -211,7 +211,7 @@ void GraphicsResources::CreateWindowSizeDependentResources()
 
 	GFX_THROW_INFO(pFactory->MakeWindowAssociation(m_hWnd, DXGI_MWA_NO_ALT_ENTER));
 
-	LoadSizeDependentResoruces(Settings::GetGraphicsSettings().GetWidth(), Settings::GetGraphicsSettings().GetHeight());
+	LoadSizeDependentResoruces(engine::core::Settings::GetGraphicsSettings().GetWidth(), engine::core::Settings::GetGraphicsSettings().GetHeight());
 }
 
 GraphicsResources& GraphicsResources::GetInstance()
@@ -236,7 +236,7 @@ void GraphicsResources::OnSizeChanged(UINT width, UINT height)
 {
 	HRESULT hr;
 
-	if (Settings::GetGraphicsSettings().GetWidth() == width && Settings::GetGraphicsSettings().GetHeight() == height)
+	if (engine::core::Settings::GetGraphicsSettings().GetWidth() == width && engine::core::Settings::GetGraphicsSettings().GetHeight() == height)
 		return;
 
 	pContextManager->Flush(true);
@@ -244,11 +244,11 @@ void GraphicsResources::OnSizeChanged(UINT width, UINT height)
 	DXGI_SWAP_CHAIN_DESC desc = {};
 	pSwapChain->GetDesc(&desc);
 	GFX_THROW_INFO(
-		pSwapChain->ResizeBuffers(Settings::GetBackBufferCount(), width, height, desc.BufferDesc.Format, desc.Flags));
+		pSwapChain->ResizeBuffers(engine::core::Settings::GetBackBufferCount(), width, height, desc.BufferDesc.Format, desc.Flags));
 
 	pContextManager->GetFrameIndex() = pSwapChain->GetCurrentBackBufferIndex();
 
-	Settings::GetGraphicsSettings().SetWidthAndHeight(width, height);
+	engine::core::Settings::GetGraphicsSettings().SetWidthAndHeight(width, height);
 
 	UpdateViewportAndScissor(width, height);
 	LoadSizeDependentResoruces(width, height);
@@ -260,14 +260,14 @@ void GraphicsResources::LoadSizeDependentResoruces(UINT width, UINT height)
 {
 	CD3DX12_HEAP_PROPERTIES heapProps(D3D12_HEAP_TYPE_DEFAULT);
 
-	for (UINT i = 0; i < Settings::GetBackBufferCount(); i++)
+	for (UINT i = 0; i < engine::core::Settings::GetBackBufferCount(); i++)
 	{
 		m_renderTargetTextures[i].reset(new ColorTexture());
 		m_renderTargetTextures[i]->CreateFromSwapChain(pSwapChain.Get(), i);
 		m_renderTargetTextures[i]->AllocateRtvHandle();
 	}
 
-	if (Settings::UseRayTracing())
+	if (engine::core::Settings::UseRayTracing())
 	{
 		engine::math::Color clearColor(0.25f, 0.25f, 0.25f, 1.f);
 
@@ -282,14 +282,14 @@ void GraphicsResources::LoadSizeDependentResoruces(UINT width, UINT height)
 	}
 	else
 	{
-		if (Settings::GetGraphicsSettings().GetIsZBufferingEnabled())
+		if (engine::core::Settings::GetGraphicsSettings().GetIsZBufferingEnabled())
 		{
 			m_depthTexture.reset(new DepthTexture(1.f, 0));
 			m_depthTexture->Create(width, height, m_depthBufferFormat, L"DepthTexture");
 			m_depthTexture->AllocateDsvHandle();
 		}
 
-		if (Settings::GetGraphicsSettings().GetIsMSAAEnabled())
+		if (engine::core::Settings::GetGraphicsSettings().GetIsMSAAEnabled())
 		{
 			engine::math::Color clearColor = engine::math::Color(0x87, 0xCE, 0xEB, 1.f);
 
@@ -301,7 +301,7 @@ void GraphicsResources::LoadSizeDependentResoruces(UINT width, UINT height)
 	}
 }
 
-misc::DescriptorHandle GraphicsResources::AllocateDescriptor(D3D12_DESCRIPTOR_HEAP_TYPE heapType)
+engine::gfx::DescriptorHandle GraphicsResources::AllocateDescriptor(D3D12_DESCRIPTOR_HEAP_TYPE heapType)
 {
 	return GetInstance().m_descriptorHeaps[heapType].Alloc();
 }
@@ -315,7 +315,7 @@ void GraphicsResources::LoadResources(
 	m_depthBufferFormat = depthBufferFormat;
 
 	this->UpdateViewportAndScissor(
-		Settings::GetGraphicsSettings().GetWidth(), Settings::GetGraphicsSettings().GetHeight());
+		engine::core::Settings::GetGraphicsSettings().GetWidth(), engine::core::Settings::GetGraphicsSettings().GetHeight());
 	this->CreateDeviceResources();
 	this->CreateWindowSizeDependentResources();
 }

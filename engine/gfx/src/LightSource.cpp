@@ -10,20 +10,20 @@ LightSource::LightSource(Type type) : m_type(type)
 {
 	switch (m_type)
 	{
-	case LightSource::Type::NONE: throw misc ::CustomException("Sursa de lumina nu trebuei sa fie None"); break;
+	case LightSource::Type::NONE: throw engine::core::CustomException("Sursa de lumina nu trebuei sa fie None"); break;
 	case LightSource::Type::DIRECTIONAL_LIGHT: m_id = nrOfDirectionalLights++; break;
 	case LightSource::Type::POINT_LIGHT:
-		m_id = Settings ::GetGameSettings().GetMaxNumberOfDirectionalLights() + nrOfPointLights++;
+		m_id = engine::core::Settings::GetGameSettings().GetMaxNumberOfDirectionalLights() + nrOfPointLights++;
 		break;
 	case LightSource::Type::SPOT_LIGHT:
-		m_id = Settings::GetGameSettings().GetMaxNumberOfDirectionalLights()
-			+ Settings::GetGameSettings().GetMaxNumberOfPointLights() + nrOfSpotLights++;
+		m_id = engine::core::Settings::GetGameSettings().GetMaxNumberOfDirectionalLights()
+			+ engine::core::Settings::GetGameSettings().GetMaxNumberOfPointLights() + nrOfSpotLights++;
 		break;
-	default: throw misc::CustomException("Type of LightSource not supported"); break;
+	default: throw engine::core::CustomException("Type of LightSource not supported"); break;
 	}
 
-	assert(nrOfDirectionalLights <= Settings::GetGameSettings().GetMaxNumberOfDirectionalLights());
-	assert(nrOfSpotLights <= Settings::GetGameSettings().GetMaxNumberOfSpotLights());
-	assert(nrOfPointLights <= Settings::GetGameSettings().GetMaxNumberOfPointLights());
-	assert(m_id <= Settings::GetMaxNrOfLightSources());
+	assert(nrOfDirectionalLights <= engine::core::Settings::GetGameSettings().GetMaxNumberOfDirectionalLights());
+	assert(nrOfSpotLights <= engine::core::Settings::GetGameSettings().GetMaxNumberOfSpotLights());
+	assert(nrOfPointLights <= engine::core::Settings::GetGameSettings().GetMaxNumberOfPointLights());
+	assert(m_id <= engine::core::Settings::GetMaxNrOfLightSources());
 }

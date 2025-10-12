@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-namespace misc
+namespace engine::core
 {
 
 void ConvertStringToWString(const std::string& s, std::wstring& ws);
@@ -20,4 +20,4 @@ static std::string convertBlobToString(BlotType* pBlob)
 	return std::string(infoLog.data());
 }
 
-};  // namespace misc
+};  // namespace engine::core

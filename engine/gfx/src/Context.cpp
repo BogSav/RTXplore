@@ -17,7 +17,7 @@ void ContextManager::Create()
 
 	frameIndex = 0;
 
-	for (size_t i = 0; i < Settings::GetFrameResourcesCount(); i++)
+	for (size_t i = 0; i < engine::core::Settings::GetFrameResourcesCount(); i++)
 	{
 		m_frameResources[i] = std::make_unique<FrameResources>();
 		m_frameResources[i]->Create();
@@ -208,17 +208,17 @@ void CommandContext::Reset()
 }
 
 void GraphicsContext::SetRenderTargetAndDepthStencil(
-	const misc::DescriptorHandle& RTV, const misc::DescriptorHandle& DSV)
+	const engine::gfx::DescriptorHandle& RTV, const engine::gfx::DescriptorHandle& DSV)
 {
 	pCommandList->OMSetRenderTargets(1, &RTV, TRUE, &DSV);
 }
 
-void GraphicsContext::SetRenderTarget(const misc::DescriptorHandle& RTV)
+void GraphicsContext::SetRenderTarget(const engine::gfx::DescriptorHandle& RTV)
 {
 	pCommandList->OMSetRenderTargets(1, &RTV, TRUE, nullptr);
 }
 
-void GraphicsContext::SetDepthStencil(const misc::DescriptorHandle& DSV)
+void GraphicsContext::SetDepthStencil(const engine::gfx::DescriptorHandle& DSV)
 {
 	pCommandList->OMSetRenderTargets(0, nullptr, TRUE, &DSV);
 }
@@ -341,7 +341,7 @@ void ContextManager::Flush(bool waitForCompletition)
 
 void ContextManager::End()
 {
-	for (size_t i = 0; i < Settings::GetFrameResourcesCount(); i++)
+	for (size_t i = 0; i < engine::core::Settings::GetFrameResourcesCount(); i++)
 	{
 		m_graphicsContexts[i]->End(pCommandQueue.Get());
 	}
@@ -351,7 +351,7 @@ void ContextManager::SwapContext()
 {
 	GetGraphicsContext().Finish(pCommandQueue.Get());
 
-	frameIndex = (frameIndex + 1) % Settings::GetFrameResourcesCount();
+	frameIndex = (frameIndex + 1) % engine::core::Settings::GetFrameResourcesCount();
 
 	GetGraphicsContext().IsReadyOrWait();
 }

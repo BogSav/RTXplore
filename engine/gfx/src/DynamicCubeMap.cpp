@@ -3,7 +3,7 @@
 
 DynamicCubeMap::DynamicCubeMap(UINT width, UINT height) : m_width(width), m_height(height)
 {
-	if (Settings::UseAdvancedReflections())
+	if (engine::core::Settings::UseAdvancedReflections())
 	{
 		m_isRenderDirty = true;
 		SetDirty();

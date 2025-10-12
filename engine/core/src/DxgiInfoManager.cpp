@@ -3,6 +3,8 @@
 #include "WindowsThrowMacros.hpp"
 
 #ifdef _DEBUG
+namespace engine::core
+{
 DxgiInfoManager::Ptr DxgiInfoManager::instance = nullptr;
 
 DxgiInfoManager::DxgiInfoManager()
@@ -74,4 +76,5 @@ std::vector<std::string> DxgiInfoManager::GetMessages() const
 	}
 	return messages;
 }
+}  // namespace engine::core
 #endif

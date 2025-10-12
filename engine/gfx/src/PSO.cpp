@@ -31,7 +31,7 @@ void GraphicsPSO::SetSampleMask(UINT SampleMask)
 void GraphicsPSO::SetPrimitiveTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE TopologyType)
 {
 	if (TopologyType == D3D12_PRIMITIVE_TOPOLOGY_TYPE_UNDEFINED)
-		throw misc::CustomException("Nu se poate crea PSO cu topologie undefined");
+		throw engine::core::CustomException("Nu se poate crea PSO cu topologie undefined");
 	m_PSODesc.PrimitiveTopologyType = TopologyType;
 }
 
@@ -130,7 +130,7 @@ void RayTracingPSO::Finalize(ID3D12Device10* pDevice)
 {
 	HRESULT hr;
 
-	// misc::PrintStateObjectDesc(desc);
+	// engine::core::PrintStateObjectDesc(desc);
 
 	GFX_THROW_INFO(pDevice->CreateStateObject(desc, IID_PPV_ARGS(&m_pipelineStateObject)));
 }
@@ -159,7 +159,7 @@ void ComputePSO::Finalize(ID3D12Device10* pDevice)
 {
 	HRESULT hr;
 
-	// misc::PrintStateObjectDesc(desc);
+	// engine::core::PrintStateObjectDesc(desc);
 	m_PSODesc.pRootSignature = m_rootSignature->GetID3D12RootSignature();
 	GFX_THROW_INFO(pDevice->CreateComputePipelineState(&m_PSODesc, IID_PPV_ARGS(&m_pipelineState)));
 }

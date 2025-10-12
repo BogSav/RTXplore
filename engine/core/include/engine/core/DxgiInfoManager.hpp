@@ -8,6 +8,9 @@
 
 // Singleton global, se creaza static direct in .cpp
 #ifdef _DEBUG
+namespace engine::core
+{
+
 class DxgiInfoManager
 {
 private:
@@ -33,6 +36,8 @@ private:
 
 	static Ptr instance;
 };
+}  // namespace engine::core
+
 #endif
 
 #include "Exceptions.hpp"

@@ -16,11 +16,11 @@
 // b2, space0 - material CB
 // b0, space1 - water CB
 
-using namespace misc::RSBinding;
+using namespace engine::gfx::RSBinding;
 
 RS_Manager::RS_Manager()
 {
-	if (Settings::UseRayTracing())
+	if (engine::core::Settings::UseRayTracing())
 	{
 		m_loadFunctions["Global"] = &RS_Manager::CreateGlobalRTRS;
 		m_loadFunctions["Triangle_Hit"] = &RS_Manager::CreateTriangleHitRS;
@@ -53,7 +53,7 @@ RootSignature::Ptr RS_Manager::GetRootSignature(std::string name) const
 {
 	auto it = m_rootSignatures.find(name);
 	if (it == m_rootSignatures.end())
-		throw misc::CustomException("Root siganture nu exista sau nu a fost creat inca");
+		throw engine::core::CustomException("Root siganture nu exista sau nu a fost creat inca");
 
 	return it->second;
 }

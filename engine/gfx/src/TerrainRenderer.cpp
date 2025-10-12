@@ -4,9 +4,9 @@
 #include "GeometryGenerator.hpp"
 #include "engine/math/SimplexNoise.hpp"
 
-using namespace misc::RSBinding;
-using namespace misc::rasterization;
-using namespace misc::render_descriptors;
+using namespace engine::gfx::RSBinding;
+using namespace engine::gfx::rasterization;
+using namespace engine::gfx::render_descriptors;
 
 TerrainRenderer::Ptr TerrainRenderer::CreateTerrainRenderer(DX_TERRAIN_DESCRIPTOR& descriptor)
 {
@@ -26,7 +26,7 @@ TerrainRenderer::Ptr TerrainRenderer::CreateTerrainRenderer(DX_TERRAIN_DESCRIPTO
 	return terrain;
 }
 
-TerrainRenderer::TerrainRenderer(const misc::render_descriptors::DX_OBJECT_DESCRIPTOR& objectDesc)
+TerrainRenderer::TerrainRenderer(const engine::gfx::render_descriptors::DX_OBJECT_DESCRIPTOR& objectDesc)
 	: Object(objectDesc), GeometryRenderer()
 {
 }
@@ -77,7 +77,7 @@ void TerrainRenderer::LoadGeometry(DescriptorVariant descriptor)
 		m_chunks.emplace_back(submeshs[i], aabbs[i]);
 	}
 
-	CreateVertexAndIndexBuffer(Settings::UseRayTracing());
+	CreateVertexAndIndexBuffer(engine::core::Settings::UseRayTracing());
 
 	/*D3D12_UNORDERED_ACCESS_VIEW_DESC desc;
 	pGraphicsResources->GetDevice()->CreateUnorderedAccessView(
@@ -87,7 +87,7 @@ void TerrainRenderer::LoadGeometry(DescriptorVariant descriptor)
 		pGraphicsResources->GetCbvSrvUavDescriptorHeap()->GetCPUDescriptorHandleForHeapStart());*/
 }
 
-void TerrainRenderer::Render(misc::rasterization::RenderLayer::Value renderLayer) const
+void TerrainRenderer::Render(engine::gfx::rasterization::RenderLayer::Value renderLayer) const
 {
 	GraphicsContext& graphicsContext = GraphicsResources::GetInstance().GetGraphicsContext();
 	FrameResources& frameResources = GraphicsResources::GetInstance().GetFrameResources();
@@ -135,7 +135,7 @@ void TerrainRenderer::Render(misc::rasterization::RenderLayer::Value renderLayer
 
 		break;
 	case RenderLayer::DebugShadowMap:
-	default: throw misc::CustomException("Tip de randare inexistent!!");
+	default: throw engine::core::CustomException("Tip de randare inexistent!!");
 	}
 }
 

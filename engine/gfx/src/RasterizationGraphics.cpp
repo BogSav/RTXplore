@@ -3,9 +3,9 @@
 #include "engine/math/Frustum.hpp"
 
 using namespace Microsoft::WRL;
-using namespace misc::RSBinding;
-using namespace misc::render_descriptors;
-using namespace misc::rasterization;
+using namespace engine::gfx::RSBinding;
+using namespace engine::gfx::render_descriptors;
+using namespace engine::gfx::rasterization;
 
 RasterizationGraphics::RasterizationGraphics(GraphicsResources& graphicsResorurces) : Graphics(graphicsResorurces)
 {
@@ -21,13 +21,13 @@ RasterizationGraphics::RasterizationGraphics(GraphicsResources& graphicsResorurc
 	m_textureManager.CreateSRVHandles();
 	m_textureManager.SwapNonPixelShaderTextures(graphicsContext);
 
-	if (Settings::UseAdvancedReflections())
+	if (engine::core::Settings::UseAdvancedReflections())
 	{
 		m_dynamicCubeMap.reset(new DynamicCubeMap(1024u, 1024u));
 		m_dynamicCubeMap->Create();
 	}
 
-	if (Settings::UseShadows())
+	if (engine::core::Settings::UseShadows())
 	{
 		m_shadowMap.reset(new ShadowMap(8192u, 8192u));
 		m_shadowMap->Create();
@@ -190,7 +190,7 @@ RasterizationGraphics::~RasterizationGraphics()
 void RasterizationGraphics::LoadAssets()
 {
 	// Setare CB static pentru obiectele static din scena: teren, apa
-	for (UINT i = 0; i < Settings::GetFrameResourcesCount(); i++)
+	for (UINT i = 0; i < engine::core::Settings::GetFrameResourcesCount(); i++)
 	{
 		m_graphicsResources.GetFrameResources(i).UpdateTerrainCB(*m_terrainRender);
 	}
@@ -268,14 +268,14 @@ void RasterizationGraphics::Update(float deltaTime, float totalTime)
 		m_cameraController.DecreaseDirtyCount();
 	}
 
-	if (Settings::UseAdvancedReflections() && m_dynamicCubeMap->IsDirty())
+	if (engine::core::Settings::UseAdvancedReflections() && m_dynamicCubeMap->IsDirty())
 	{
 		m_dynamicCubeMap->Update();
 
 		m_dynamicCubeMap->DecreaseDirtyCount();
 	}
 
-	if (Settings::UseShadows() && m_shadowMap->IsDirty())
+	if (engine::core::Settings::UseShadows() && m_shadowMap->IsDirty())
 	{
 		m_shadowMap->Update();
 

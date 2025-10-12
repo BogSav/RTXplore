@@ -11,7 +11,7 @@
 	template type TickTimer<type>::GetDeltaTime();         \
 	template type TickTimer<type>::GetTimeSinceStart()
 
-namespace misc
+namespace engine::core
 {
 template <typename T>
 struct TickTimer<T>::Data
@@ -87,4 +87,4 @@ void TickTimer<T>::UpdateDeltaTime()
 GENERATE_SPECIALIZED_TEMPLATE_DEFINITIONS(float);
 GENERATE_SPECIALIZED_TEMPLATE_DEFINITIONS(double);
 
-}  // namespace misc
+}  // namespace engine::core

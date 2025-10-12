@@ -2,12 +2,12 @@
 
 #include "GeometryGenerator.hpp"
 
-using namespace misc::rasterization;
-using namespace misc::render_descriptors;
-using namespace misc::RSBinding;
+using namespace engine::gfx::rasterization;
+using namespace engine::gfx::render_descriptors;
+using namespace engine::gfx::RSBinding;
 
 Object::Object(
-	const misc::render_descriptors::DX_OBJECT_DESCRIPTOR& descriptor, const SubMesh& subMesh, const engine::math::AABB& aabb)
+	const engine::gfx::render_descriptors::DX_OBJECT_DESCRIPTOR& descriptor, const SubMesh& subMesh, const engine::math::AABB& aabb)
 	: Object(descriptor)
 {
 	m_objectSpaceAABB = aabb;
@@ -46,7 +46,7 @@ Object::Object(const DX_OBJECT_DESCRIPTOR& descriptor)
 	m_textureTransform = descriptor.textureTransform;
 }
 
-void Object::Render(misc::rasterization::RenderLayer::Value renderLayer)
+void Object::Render(engine::gfx::rasterization::RenderLayer::Value renderLayer)
 {
 	GraphicsContext& graphicsContext = GraphicsResources::GetInstance().GetGraphicsContext();
 	FrameResources& frameResources = GraphicsResources::GetInstance().GetFrameResources();
@@ -146,7 +146,7 @@ void Object::SetObjectCB_ID(UINT toSet)
 
 void Object::SetDirty()
 {
-	m_dirtyCount = Settings::GetFrameResourcesCount();
+	m_dirtyCount = engine::core::Settings::GetFrameResourcesCount();
 }
 
 void Object::DecreaseDirtyCount()

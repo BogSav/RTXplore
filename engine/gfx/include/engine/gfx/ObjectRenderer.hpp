@@ -11,9 +11,9 @@ class ObjectRenderer : public GeometryRenderer
 public:
 	using Ptr = std::unique_ptr<ObjectRenderer>;
 
-	static ObjectRenderer::Ptr CreateObjectRenderer(misc::render_descriptors::DX_OBJECTS_RENDERER_DESCRIPTOR descriptor);
+	static ObjectRenderer::Ptr CreateObjectRenderer(engine::gfx::render_descriptors::DX_OBJECTS_RENDERER_DESCRIPTOR descriptor);
 
-	void Render(misc::rasterization::RenderLayer::Value renderLayer) const override;
+	void Render(engine::gfx::rasterization::RenderLayer::Value renderLayer) const override;
 	void BuildAccelerationStructures() override;
 	void FrustumCulling(const CameraController& cameraController) override;
 	void Update(float delatTime) override;
@@ -28,7 +28,7 @@ private:
 	ObjectRenderer() = default;
 
 	void LoadGeometry(DescriptorVariant descriptor) override;
-	void CreateObjects(const misc::render_descriptors::DX_OBJECTS_RENDERER_DESCRIPTOR&);
+	void CreateObjects(const engine::gfx::render_descriptors::DX_OBJECTS_RENDERER_DESCRIPTOR&);
 
 	GraphicsPSO::Ptr m_shadowDebugPSO;
 	Texture::Ptr m_shadowTexture;

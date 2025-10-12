@@ -8,9 +8,9 @@ class WaterRenderer : public GeometryRenderer, public Object
 public:
 	using Ptr = std::unique_ptr<WaterRenderer>;
 
-	static WaterRenderer::Ptr CreateWaterRenderer(misc::render_descriptors::DX_WATER_DESCRIPTOR& descriptor);
+	static WaterRenderer::Ptr CreateWaterRenderer(engine::gfx::render_descriptors::DX_WATER_DESCRIPTOR& descriptor);
 
-	void Render(misc::rasterization::RenderLayer::Value renderLayer) const override;
+	void Render(engine::gfx::rasterization::RenderLayer::Value renderLayer) const override;
 	void BuildAccelerationStructures() override;
 	void FrustumCulling(const CameraController& cameraController) override;
 	void Update(float delatTime) override;
@@ -24,7 +24,7 @@ public:
 
 private:
 	WaterRenderer() = delete;
-	WaterRenderer(const misc::render_descriptors::DX_OBJECT_DESCRIPTOR&);
+	WaterRenderer(const engine::gfx::render_descriptors::DX_OBJECT_DESCRIPTOR&);
 
 	void LoadGeometry(DescriptorVariant descriptor) override;
 

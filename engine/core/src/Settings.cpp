@@ -1,3 +1,3 @@
 #include "Settings.hpp"
 
-Settings Settings::mgs;
+engine::core::Settings engine::core::Settings::mgs;

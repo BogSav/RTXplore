@@ -28,7 +28,7 @@ private:
 private:
 	PSO_Manager<GraphicsPSO> m_graphicsPSOsManager;
 
-	misc::TickTimer<float> m_timer;
+	engine::core::TickTimer<float> m_timer;
 
 	Object::Vec m_dynamicGameComponents;
 

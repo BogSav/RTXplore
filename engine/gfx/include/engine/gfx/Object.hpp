@@ -10,11 +10,11 @@ public:
 	using Ptr = std::shared_ptr<Object>;
 	using Vec = std::vector<std::shared_ptr<Object>>;
 
-	Object(const misc::render_descriptors::DX_OBJECT_DESCRIPTOR&, const SubMesh& subMesh, const engine::math::AABB& aabb);
-	Object(const misc::render_descriptors::DX_OBJECT_DESCRIPTOR&);
+	Object(const engine::gfx::render_descriptors::DX_OBJECT_DESCRIPTOR&, const SubMesh& subMesh, const engine::math::AABB& aabb);
+	Object(const engine::gfx::render_descriptors::DX_OBJECT_DESCRIPTOR&);
 	Object() = delete;
 
-	virtual void Render(misc::rasterization::RenderLayer::Value renderLayer);
+	virtual void Render(engine::gfx::rasterization::RenderLayer::Value renderLayer);
 	virtual void Update(float delatTime);
 
 	const engine::math::Matrix4& GetTextureTransform() const { return m_textureTransform; }

@@ -174,8 +174,8 @@ void DepthTexture::Create(UINT width, UINT height, DXGI_FORMAT format, std::wstr
 
 	CD3DX12_HEAP_PROPERTIES heapProps(D3D12_HEAP_TYPE_DEFAULT);
 	DXGI_SAMPLE_DESC sampleDesc = {};
-	sampleDesc.Count = Settings::GetGraphicsSettings().GetMSAASampleCount();
-	sampleDesc.Quality = Settings::GetGraphicsSettings().GetMSAAQuality();
+	sampleDesc.Count = engine::core::Settings::GetGraphicsSettings().GetMSAASampleCount();
+	sampleDesc.Quality = engine::core::Settings::GetGraphicsSettings().GetMSAAQuality();
 
 	D3D12_RESOURCE_DESC textureDecs = Texture::CeeateTextureDescriptor(
 		width, height, format, sampleDesc, D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL, false);
@@ -205,8 +205,8 @@ void ColorTexture::Create(UINT width, UINT height, DXGI_FORMAT format, D3D12_RES
 
 	CD3DX12_HEAP_PROPERTIES heapProps(D3D12_HEAP_TYPE_DEFAULT);
 	DXGI_SAMPLE_DESC sampleDesc = {};
-	sampleDesc.Count = Settings::GetGraphicsSettings().GetMSAASampleCount();
-	sampleDesc.Quality = Settings::GetGraphicsSettings().GetMSAAQuality();
+	sampleDesc.Count = engine::core::Settings::GetGraphicsSettings().GetMSAASampleCount();
+	sampleDesc.Quality = engine::core::Settings::GetGraphicsSettings().GetMSAAQuality();
 
 	D3D12_RESOURCE_DESC textureDecs =
 		Texture::CeeateTextureDescriptor(width, height, format, sampleDesc, flags, m_isCubeMap);
@@ -308,7 +308,7 @@ DXGI_FORMAT Texture::GetUAVFormat(DXGI_FORMAT defaultFormat)
 	case DXGI_FORMAT_D24_UNORM_S8_UINT:
 	case DXGI_FORMAT_R24_UNORM_X8_TYPELESS:
 	case DXGI_FORMAT_X24_TYPELESS_G8_UINT:
-	case DXGI_FORMAT_D16_UNORM: throw misc::CustomException("Requested a UAV Format for a depth stencil Format.");
+	case DXGI_FORMAT_D16_UNORM: throw engine::core::CustomException("Requested a UAV Format for a depth stencil Format.");
 #endif
 
 	default: return defaultFormat;

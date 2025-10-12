@@ -8,16 +8,16 @@ class TerrainRenderer : public GeometryRenderer, public Object
 public:
 	using Ptr = std::unique_ptr<TerrainRenderer>;
 
-	static TerrainRenderer::Ptr CreateTerrainRenderer(misc::render_descriptors::DX_TERRAIN_DESCRIPTOR& descriptor);
+	static TerrainRenderer::Ptr CreateTerrainRenderer(engine::gfx::render_descriptors::DX_TERRAIN_DESCRIPTOR& descriptor);
 
-	void Render(misc::rasterization::RenderLayer::Value renderLayer) const override;
+	void Render(engine::gfx::rasterization::RenderLayer::Value renderLayer) const override;
 	void FrustumCulling(const CameraController& cameraController) override;
 	void BuildAccelerationStructures() override;
 	void Update(float delatTime) override;
 
 private:
 	TerrainRenderer() = delete;
-	TerrainRenderer(const misc::render_descriptors::DX_OBJECT_DESCRIPTOR&);
+	TerrainRenderer(const engine::gfx::render_descriptors::DX_OBJECT_DESCRIPTOR&);
 
 	void LoadGeometry(DescriptorVariant descriptor) override;
 

@@ -25,7 +25,7 @@ int main()
 		App app(*window);
 		app.Run();
 	}
-	catch (const misc::CustomException& e)
+	catch (const engine::core::CustomException& e)
 	{
 		OutputDebugStringA(e.what());
 		DisplayMessageBox(window.get(), e.what(), e.GetType());
@@ -45,7 +45,7 @@ int main()
 	GraphicsResources::DestroyInstance();
 
 #ifdef _DEBUG
-	DxgiInfoManager::DestroyInstance();
+	engine::core::DxgiInfoManager::DestroyInstance();
 
 	_CrtMemCheckpoint(&sNew);
 	if (_CrtMemDifference(&sDiff, &sOld, &sNew))

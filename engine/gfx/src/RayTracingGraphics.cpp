@@ -5,8 +5,8 @@
 
 #include <algorithm>
 
-using namespace misc::render_descriptors;
-using namespace misc::RSBinding;
+using namespace engine::gfx::render_descriptors;
+using namespace engine::gfx::RSBinding;
 
 RayTracingGraphics::RayTracingGraphics(GraphicsResources& resources) : Graphics(resources)
 {
@@ -150,7 +150,7 @@ RayTracingGraphics::RayTracingGraphics(GraphicsResources& resources) : Graphics(
 void RayTracingGraphics::LoadAssets()
 {
 	// Setare CB static pentru obiectele static din scena: teren, apa
-	for (UINT i = 0; i < Settings::GetFrameResourcesCount(); i++)
+	for (UINT i = 0; i < engine::core::Settings::GetFrameResourcesCount(); i++)
 	{
 		m_graphicsResources.GetFrameResources(i).UpdateTerrainCB(*m_terrainRender);
 	}
@@ -197,8 +197,8 @@ void RayTracingGraphics::PopulateCommandList()
 
 	D3D12_DISPATCH_RAYS_DESC raytraceDesc = {};
 	{
-		raytraceDesc.Width = Settings::GetGraphicsSettings().GetWidth();
-		raytraceDesc.Height = Settings::GetGraphicsSettings().GetHeight();
+		raytraceDesc.Width = engine::core::Settings::GetGraphicsSettings().GetWidth();
+		raytraceDesc.Height = engine::core::Settings::GetGraphicsSettings().GetHeight();
 		raytraceDesc.Depth = 1;
 
 		raytraceDesc.HitGroupTable.StartAddress = m_hitGroupShaderTable->GetGPUVirtualAddress();
@@ -244,16 +244,16 @@ void RayTracingGraphics::CreateShaderTable()
 
 	auto GetShaderIdentifiers = [&](auto* stateObjectProperties)
 	{
-		rayGenShaderIdentifier = stateObjectProperties->GetShaderIdentifier(misc::rt::c_raygenShaderName);
+		rayGenShaderIdentifier = stateObjectProperties->GetShaderIdentifier(engine::gfx::rt::c_raygenShaderName);
 
-		defaultMissIdentifier = stateObjectProperties->GetShaderIdentifier(misc::rt::Miss_RadianceShader);
-		shadowMissIdentifier = stateObjectProperties->GetShaderIdentifier(misc::rt::Miss_ShadowShader);
+		defaultMissIdentifier = stateObjectProperties->GetShaderIdentifier(engine::gfx::rt::Miss_RadianceShader);
+		shadowMissIdentifier = stateObjectProperties->GetShaderIdentifier(engine::gfx::rt::Miss_ShadowShader);
 
 
 		triangleGeometryHitGroupShaderIdentifier =
-			stateObjectProperties->GetShaderIdentifier(misc::rt::HitGroupName_TriangleGeometry);
+			stateObjectProperties->GetShaderIdentifier(engine::gfx::rt::HitGroupName_TriangleGeometry);
 		AABBGeometryHitGroupShaderIndentifier =
-			stateObjectProperties->GetShaderIdentifier(misc::rt::HitGroupName_AABBGeometry);
+			stateObjectProperties->GetShaderIdentifier(engine::gfx::rt::HitGroupName_AABBGeometry);
 	};
 
 	Microsoft::WRL::ComPtr<ID3D12StateObjectProperties> stateObjectProperties;

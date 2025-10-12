@@ -2,11 +2,14 @@
 
 #include <chrono>
 
+namespace engine::core
+{
+
 template <typename T>
-class ChronoBasedTimer
+class ChronoTimer
 {
 public:
-	ChronoBasedTimer() : lastMark(std::chrono::steady_clock::now()) {}
+	ChronoTimer() : lastMark(std::chrono::steady_clock::now()) {}
 
 	// Seteaza timpul curent si returneaza cat timp a trecut de la ultimul Mark
 	T Mark()
@@ -24,4 +27,5 @@ private:
 	std::chrono::steady_clock::time_point lastMark;
 };
 
-typedef ChronoBasedTimer<float> Timer;
+typedef ChronoTimer<float> Timer;
+}  // namespace engine::core
