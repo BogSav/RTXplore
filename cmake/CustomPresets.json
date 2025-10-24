@@ -37,7 +37,7 @@
 
     {
       "name": "ninja-msvc",
-      "displayName": "Ninja Multi-Config (MSVC cl) - VS 2022",
+      "displayName": "Ninja Multi-Config (MSVC cl) - VS 22/26",
       "description": "Ninja Multi-Config preset using MSVC (via VsDevCmd).",
       "inherits": ["base-msvc-runtime"],
       "generator": "Ninja Multi-Config",
