@@ -5,7 +5,7 @@
       "label": "CMake: Build (Debug)",
       "type": "shell",
       "command": "cmake",
-      "args": ["--build", "--preset", "ninja-clang-Debug"],
+      "args": ["--build", "--preset", "ninja-clangpp-Debug"],
       "options": {
         "cwd": "${workspaceFolder}"
       },
@@ -25,7 +25,7 @@
       "label": "CMake: Build (RelWithDebInfo)",
       "type": "shell",
       "command": "cmake",
-      "args": ["--build", "--preset", "ninja-clang-RelWithDebInfo"],
+      "args": ["--build", "--preset", "ninja-clangpp-RelWithDebInfo"],
       "options": {
         "cwd": "${workspaceFolder}"
       },
@@ -45,7 +45,7 @@
       "label": "CMake: Build (Release)",
       "type": "shell",
       "command": "cmake",
-      "args": ["--build", "--preset", "ninja-clang-Release"],
+      "args": ["--build", "--preset", "ninja-clangpp-Release"],
       "options": {
         "cwd": "${workspaceFolder}"
       },
