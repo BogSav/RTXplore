@@ -2,90 +2,23 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "CMake: Build (Debug)",
-      "type": "shell",
-      "command": "cmake",
-      "args": ["--build", "--preset", "ninja-clangpp-Debug"],
-      "options": {
-        "cwd": "${workspaceFolder}"
+      "label": "CMake: Build (active preset, selected target)",
+      "type": "cmake",
+      "command": "build",
+      "targets": ["${command:cmake.buildTargetName}"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
       },
-      "group": { "kind": "build", "isDefault": false },
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "problemMatcher": ["$msCompile"],
-      "dependsOn": "CMake: Configure (VSCode Ninja Clang)"
+      "problemMatcher": "$msCompile",
+      "detail": "Build the selected CMake target using the active Build Preset from CMake Tools UI"
     },
     {
-      "label": "CMake: Build (RelWithDebInfo)",
-      "type": "shell",
-      "command": "cmake",
-      "args": ["--build", "--preset", "ninja-clangpp-RelWithDebInfo"],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "group": { "kind": "build", "isDefault": true },
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "problemMatcher": ["$msCompile"],
-      "dependsOn": "CMake: Configure (VSCode Ninja Clang)"
-    },
-    {
-      "label": "CMake: Build (Release)",
-      "type": "shell",
-      "command": "cmake",
-      "args": ["--build", "--preset", "ninja-clangpp-Release"],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "group": "build",
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "problemMatcher": ["$msCompile"],
-      "dependsOn": "CMake: Configure (VSCode Ninja Clang)"
-    },
-
-    {
-      "label": "CMake: Clean Build Folders",
-      "type": "shell",
-      "command": "powershell",
-      "args": [
-        "-NoProfile",
-        "-ExecutionPolicy",
-        "Bypass",
-        "-Command",
-        "Remove-Item -Path 'build/ninja-clang','build/ninja-msvc','build/vs2022','build/*' -Recurse -Force -ErrorAction SilentlyContinue; Write-Host 'Build directories cleaned.' -ForegroundColor Green"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "group": "build",
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "problemMatcher": []
+      "label": "CMake: Clean (active preset)",
+      "type": "cmake",
+      "command": "clean",
+      "problemMatcher": [],
+      "detail": "Clean using the active Build Preset from CMake Tools UI"
     }
   ]
 }

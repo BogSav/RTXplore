@@ -3,9 +3,8 @@
 
   "configurePresets": [
     {
-      "name": "base-common",
+      "name": "BaseMultiConfigPreset",
       "hidden": true,
-      "description": "Base preset with multi-config defaults common to all toolchains.",
       "cacheVariables": {
         "CMAKE_CONFIGURATION_TYPES": "Debug;RelWithDebInfo;Release",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
@@ -13,175 +12,49 @@
     },
 
     {
-      "name": "base-msvc-runtime",
-      "hidden": true,
-      "description": "MSVC runtime defaults (MT/MTd) for MSVC-compatible toolchains (cl.exe / clang-cl).",
-      "inherits": [ "base-common" ],
+      "name": "MSVCPreset",
+      "displayName": "MSVC Preset",
+      "inherits": ["BaseMultiConfigPreset"],
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64",
+      "binaryDir": "build/msvc",
       "cacheVariables": {
         "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded$<IF:$<CONFIG:Debug>,Debug,>"
       }
     },
-
     {
-      "name": "base-unix",
-      "hidden": true,
-      "description": "GNU-like defaults for clang/clang++ on Unix-like environments.",
-      "inherits": [ "base-common" ]
-    },
-
-    {
-      "name": "vs2022-sln",
-      "displayName": "Visual Studio 2022 Solution",
-      "description": "MSBuild/MSVC toolchain, per-config switching, native VS experience. Output: build/vs2022.",
-      "inherits": [ "base-msvc-runtime" ],
-      "generator": "Visual Studio 17 2022",
-      "architecture": "x64",
-      "binaryDir": "build/vs2022"
-    },
-
-    {
-      "name": "ninja-clangcl-msvc",
-      "displayName": "Ninja (clang-cl, MSVC-compatible)",
-      "description": "Ninja Multi-Config folosind clang-cl (driver MSVC). PDB-uri, ABI MSVC, integrare vcpkg/DirectX/PIX. Output: build/ninja-clangcl.",
-      "inherits": [ "base-msvc-runtime" ],
+      "name": "NinjaClangCLPreset",
+      "displayName": "Ninja Multi-Config (clang-cl)",
+      "inherits": ["BaseMultiConfigPreset"],
       "generator": "Ninja Multi-Config",
-      "binaryDir": "build/ninja-clangcl",
+      "binaryDir": "build/ninja",
       "cacheVariables": {
         "CMAKE_CXX_COMPILER": "clang-cl",
         "CMAKE_CXX_FLAGS_DEBUG": "/Od /Z7",
         "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "/O2 /Zi",
         "CMAKE_CXX_FLAGS_RELEASE": "/O2"
       }
-    },
-
-    {
-      "name": "ninja-clangpp-unix",
-      "displayName": "Ninja (clang++, GNU-like)",
-      "description": "Ninja Multi-Config cu clang/clang++ (stil Unix). Ideal pt. Linux/macOS și preseturi identice între platforme. Output: build/ninja-clangpp.",
-      "inherits": [ "base-unix" ],
-      "generator": "Ninja Multi-Config",
-      "binaryDir": "build/ninja-clangpp",
-      "cacheVariables": {
-        "CMAKE_CXX_COMPILER": "clang++",
-        "CMAKE_CXX_FLAGS_DEBUG": "-O0 -g",
-        "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-O2 -g",
-        "CMAKE_CXX_FLAGS_RELEASE": "-O3"
-      }
     }
   ],
 
   "buildPresets": [
     {
-      "name": "vs2022-Debug",
-      "description": "Build Debug (VS 2022).",
-      "configurePreset": "vs2022-sln",
-      "configuration": "Debug",
-      "jobs": 12
+      "name": "NinjaDebug",
+      "displayName": "Ninja - Debug",
+      "configurePreset": "NinjaClangCLPreset",
+      "configuration": "Debug"
     },
     {
-      "name": "vs2022-RelWithDebInfo",
-      "description": "Build RelWithDebInfo (VS 2022).",
-      "configurePreset": "vs2022-sln",
-      "configuration": "RelWithDebInfo",
-      "jobs": 12
+      "name": "NinjaRelease",
+      "displayName": "Ninja - Release",
+      "configurePreset": "NinjaClangCLPreset",
+      "configuration": "Release"
     },
     {
-      "name": "vs2022-Release",
-      "description": "Build Release (VS 2022).",
-      "configurePreset": "vs2022-sln",
-      "configuration": "Release",
-      "jobs": 12
-    },
-
-    {
-      "name": "ninja-clangcl-Debug",
-      "description": "Build Debug (Ninja, clang-cl, MSVC ABI).",
-      "configurePreset": "ninja-clangcl-msvc",
-      "configuration": "Debug",
-      "jobs": 12
-    },
-    {
-      "name": "ninja-clangcl-RelWithDebInfo",
-      "description": "Build RelWithDebInfo (Ninja, clang-cl).",
-      "configurePreset": "ninja-clangcl-msvc",
-      "configuration": "RelWithDebInfo",
-      "jobs": 12
-    },
-    {
-      "name": "ninja-clangcl-Release",
-      "description": "Build Release (Ninja, clang-cl).",
-      "configurePreset": "ninja-clangcl-msvc",
-      "configuration": "Release",
-      "jobs": 12
-    },
-
-    {
-      "name": "ninja-clangpp-Debug",
-      "description": "Build Debug (Ninja, clang++ GNU-like).",
-      "configurePreset": "ninja-clangpp-unix",
-      "configuration": "Debug",
-      "jobs": 12
-    },
-    {
-      "name": "ninja-clangpp-RelWithDebInfo",
-      "description": "Build RelWithDebInfo (Ninja, clang++ GNU-like).",
-      "configurePreset": "ninja-clangpp-unix",
-      "configuration": "RelWithDebInfo",
-      "jobs": 12
-    },
-    {
-      "name": "ninja-clangpp-Release",
-      "description": "Build Release (Ninja, clang++ GNU-like).",
-      "configurePreset": "ninja-clangpp-unix",
-      "configuration": "Release",
-      "jobs": 12
-    }
-  ],
-
-  "testPresets": [
-    {
-      "name": "test-vs2022-Debug",
-      "description": "CTest Debug (VS).",
-      "configurePreset": "vs2022-sln",
-      "configuration": "Debug",
-      "output": { "outputOnFailure": true }
-    },
-    {
-      "name": "test-vs2022-Release",
-      "description": "CTest Release (VS).",
-      "configurePreset": "vs2022-sln",
-      "configuration": "Release",
-      "output": { "outputOnFailure": true }
-    },
-
-    {
-      "name": "test-ninja-clangcl-Debug",
-      "description": "CTest Debug (Ninja, clang-cl).",
-      "configurePreset": "ninja-clangcl-msvc",
-      "configuration": "Debug",
-      "output": { "outputOnFailure": true }
-    },
-    {
-      "name": "test-ninja-clangcl-Release",
-      "description": "CTest Release (Ninja, clang-cl).",
-      "configurePreset": "ninja-clangcl-msvc",
-      "configuration": "Release",
-      "output": { "outputOnFailure": true }
-    },
-
-    {
-      "name": "test-ninja-clangpp-Debug",
-      "description": "CTest Debug (Ninja, clang++).",
-      "configurePreset": "ninja-clangpp-unix",
-      "configuration": "Debug",
-      "output": { "outputOnFailure": true }
-    },
-    {
-      "name": "test-ninja-clangpp-Release",
-      "description": "CTest Release (Ninja, clang++).",
-      "configurePreset": "ninja-clangpp-unix",
-      "configuration": "Release",
-      "output": { "outputOnFailure": true }
+      "name": "NinjaRelWithDebInfo",
+      "displayName": "Ninja - RelWithDebInfo",
+      "configurePreset": "NinjaClangCLPreset",
+      "configuration": "RelWithDebInfo"
     }
   ]
 }
